@@ -1,8 +1,8 @@
 <!-- 
 ================================================================================
-GOLFIN Predict - NEXT GEN UI (Dark/Neon Sport Tech Theme)
-目的: 没入感のあるダークモードとグラスモーフィズムを採用し、
-      「かっこいい」「最先端」な体験を提供するMVPデザイン。
+GOLFIN Predict - GLOBAL EDITION (Multi-Language Support)
+目的: 英語(Cool/Global) と 日本語(Friendly/Local) を
+      ワンタップで切り替えられる機能を搭載した最終形態プロトタイプ。
 ================================================================================
 -->
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ GOLFIN Predict - NEXT GEN UI (Dark/Neon Sport Tech Theme)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GOLFIN Predict | Next Gen</title>
+    <title>GOLFIN | Global</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,37 +20,29 @@ GOLFIN Predict - NEXT GEN UI (Dark/Neon Sport Tech Theme)
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Orbitron', 'sans-serif'], // For numbers/headers
+                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'], // 日本語フォント追加
+                        display: ['Orbitron', 'sans-serif'],
                     },
                     colors: {
-                        bg: '#050b14',      // Deep Dark
-                        surface: '#111827', // Card Bg
+                        bg: '#020617',      
+                        surface: '#0f172a', 
                         primary: '#00FFA3', // Neon Green
-                        secondary: '#10B981', // Emerald
+                        secondary: '#10B981', 
                         accent: '#FACC15',  // Gold
-                        glass: 'rgba(255, 255, 255, 0.05)',
+                        danger: '#ef4444',
                     },
                     boxShadow: {
                         'neon': '0 0 15px rgba(0, 255, 163, 0.3)',
-                        'neon-gold': '0 0 15px rgba(250, 204, 21, 0.3)',
                     },
                     animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'slide-up': 'slideUp 0.4s ease-out forwards',
-                    },
-                    keyframes: {
-                        slideUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        }
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     }
                 }
             }
@@ -59,146 +51,114 @@ GOLFIN Predict - NEXT GEN UI (Dark/Neon Sport Tech Theme)
 
     <style>
         body {
-            background-color: #020617; /* Slate-950 base */
+            background-color: #020617;
             color: #e2e8f0;
-            /* モバイルアプリ風のスクロールバー非表示 */
             -ms-overflow-style: none;  
             scrollbar-width: none;  
+            padding-bottom: 90px;
         }
-        body::-webkit-scrollbar { 
-            display: none; 
-        }
+        body::-webkit-scrollbar { display: none; }
 
-        /* グラスモーフィズム（すりガラス） */
         .glass-panel {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.6) 100%);
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        /* ハイライトボーダー */
-        .border-gradient {
-            border: 1px solid transparent;
-            background-image: linear-gradient(#111827, #111827), linear-gradient(to bottom right, #00FFA3, #10B981);
-            background-origin: border-box;
-            background-clip: content-box, border-box;
-        }
-
-        .container-mobile {
-            max-width: 480px;
-            margin: 0 auto;
-            min-height: 100vh;
-            background: radial-gradient(circle at top right, #102a20 0%, #050b14 40%);
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* ナビゲーションアイテム */
-        .nav-item {
-            position: relative;
-            color: #64748b;
+        .input-tech {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
             transition: all 0.3s;
         }
+        .input-tech:focus {
+            border-color: #00FFA3;
+            box-shadow: 0 0 15px rgba(0, 255, 163, 0.2);
+            outline: none;
+        }
+
         .nav-item.active {
             color: #00FFA3;
             text-shadow: 0 0 10px rgba(0, 255, 163, 0.5);
-            transform: translateY(-4px);
         }
-        .nav-item.active::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 4px;
-            background: #00FFA3;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #00FFA3;
-        }
+        .nav-item.active i { transform: scale(1.1); transition: transform 0.2s; }
 
-        /* ボタンエフェクト */
         .btn-neon {
             background: linear-gradient(90deg, #00FFA3 0%, #10B981 100%);
-            color: #022c22;
-            box-shadow: 0 4px 15px rgba(0, 255, 163, 0.25);
-            transition: all 0.2s;
-        }
-        .btn-neon:active {
-            transform: scale(0.98);
-            box-shadow: 0 2px 8px rgba(0, 255, 163, 0.15);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 163, 0.4);
         }
         
-        .btn-glass {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            backdrop-filter: blur(4px);
+        .tab-active { border-bottom: 2px solid #00FFA3; color: white; }
+        .tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }
+        
+        /* Lang Switcher */
+        .lang-switch {
+            font-size: 10px;
+            font-weight: 800;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 4px 8px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-
-        /* 入力フォーム */
-        .input-dark {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-        .input-dark:focus {
-            border-color: #00FFA3;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(0, 255, 163, 0.2);
-        }
-
-        /* アニメーション用 */
-        .fade-in { animation: slideUp 0.4s ease-out forwards; }
+        .lang-switch:hover { background: rgba(255,255,255,0.2); }
     </style>
 </head>
 <body>
-    <!-- アプリコンテナ -->
-    <div id="app" class="container-mobile shadow-2xl">
+    <div id="app" class="max-w-[480px] mx-auto min-h-screen relative overflow-x-hidden bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
         
-        <!-- ヘッダー (Glassmorphism) -->
-        <header class="sticky top-0 z-50 glass-panel border-b-0 border-white/5 px-5 py-4 flex justify-between items-center">
+        <!-- ヘッダー -->
+        <header class="sticky top-0 z-50 glass-panel border-b-0 border-white/5 px-5 py-3 flex justify-between items-center">
             <div class="flex items-center gap-2" onclick="window.navigate('home')">
-                <div class="w-8 h-8 bg-gradient-to-br from-primary to-emerald-600 rounded-lg flex items-center justify-center text-black font-black font-display transform -rotate-6 shadow-neon">G</div>
-                <h1 class="text-xl font-bold tracking-tight text-white font-display italic">GOLFIN <span class="text-primary font-normal text-sm not-italic">Predict</span></h1>
+                <div class="w-8 h-8 bg-gradient-to-br from-primary to-emerald-600 rounded flex items-center justify-center text-black font-black font-display shadow-neon transform skew-x-[-10deg]">G</div>
+                <h1 class="text-xl font-bold tracking-tight text-white font-display italic">GOLFIN</h1>
             </div>
-            <div class="flex items-center space-x-4">
-                <div class="flex flex-col items-end" data-view="mypage">
-                    <span class="text-[10px] text-gray-400 font-mono">BALANCE</span>
-                    <span class="text-sm font-bold font-display text-primary tabular-nums">1,500<span class="text-[10px] ml-1">PT</span></span>
-                </div>
-                <button data-view="mypage" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-white/10 overflow-hidden">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Avatar" class="w-full h-full">
+            <div class="flex items-center space-x-3">
+                <!-- 言語切り替えボタン -->
+                <button class="lang-switch text-primary font-display tracking-widest" onclick="toggleLanguage()" id="lang-btn">
+                    JP
                 </button>
+                
+                <div class="flex flex-col items-end cursor-pointer" onclick="window.navigate('reward-store')">
+                    <span class="text-[10px] text-primary font-mono tracking-widest" id="lbl-header-pt">POINTS</span>
+                    <span class="text-sm font-bold font-display text-white" id="header-points">1,500</span>
+                </div>
             </div>
         </header>
         
-        <!-- メインコンテンツエリア -->
-        <div id="content" class="relative min-h-screen">
-            <!-- ビューコンテナ -->
-            <div id="view-container" class="p-5 pb-32">
-                <!-- コンテンツがここに描画されます -->
-            </div>
-        </div>
+        <!-- メインコンテンツ -->
+        <div id="view-container" class="p-5"></div>
 
-        <!-- フローティングナビゲーションバー -->
-        <footer id="nav-footer" class="fixed bottom-6 left-4 right-4 z-50 container-mobile mx-auto !bg-transparent !min-h-0 !overflow-visible pointer-events-none">
-            <div class="glass-panel rounded-2xl p-3 flex justify-around items-center pointer-events-auto shadow-2xl border border-white/10">
-                <button class="nav-item active flex flex-col items-center gap-1 w-16" data-view="home">
+        <!-- ナビゲーションフッター -->
+        <footer class="fixed bottom-6 left-4 right-4 z-50 pointer-events-none">
+            <div class="glass-panel rounded-2xl p-3 flex justify-around items-center pointer-events-auto shadow-2xl border border-white/10 mx-auto max-w-[440px]">
+                <button class="nav-item flex flex-col items-center gap-1 w-12 text-gray-500 active" data-view="home" onclick="window.navigate('home')">
                     <i data-lucide="home" class="h-5 w-5"></i>
-                    <span class="text-[10px] font-bold tracking-wider">HOME</span>
+                    <span class="text-[9px] font-bold tracking-wider font-display" id="nav-home">HOME</span>
                 </button>
                 
-                <!-- 中央の強調ボタン -->
-                <button class="nav-item -mt-8 bg-gradient-to-r from-primary to-emerald-500 rounded-full w-14 h-14 flex items-center justify-center text-black shadow-neon transform hover:scale-110 transition" onclick="window.navigate('home')">
-                    <i data-lucide="zap" class="h-7 w-7 fill-current"></i>
+                <button class="nav-item flex flex-col items-center gap-1 w-12 text-gray-500" data-view="matching" onclick="window.navigate('matching')">
+                    <i data-lucide="users" class="h-5 w-5"></i>
+                    <span class="text-[9px] font-bold tracking-wider font-display" id="nav-match">MATCH</span>
+                </button>
+                
+                <!-- Center Play Button -->
+                <button class="nav-item -mt-10 bg-black border-2 border-primary rounded-full w-16 h-16 flex flex-col items-center justify-center text-primary shadow-neon transform transition active:scale-95 group" onclick="window.navigate('create-match')">
+                    <i data-lucide="plus" class="h-8 w-8 group-hover:rotate-90 transition duration-300"></i>
+                    <span class="text-[9px] font-black font-display" id="nav-play">PLAY</span>
                 </button>
 
-                <button class="nav-item flex flex-col items-center gap-1 w-16" data-view="mypage">
-                    <i data-lucide="layout-dashboard" class="h-5 w-5"></i>
-                    <span class="text-[10px] font-bold tracking-wider">MYPAGE</span>
+                <button class="nav-item flex flex-col items-center gap-1 w-12 text-gray-500" data-view="reward-store" onclick="window.navigate('reward-store')">
+                    <i data-lucide="shopping-bag" class="h-5 w-5"></i>
+                    <span class="text-[9px] font-bold tracking-wider font-display" id="nav-shop">SHOP</span>
+                </button>
+                <button class="nav-item flex flex-col items-center gap-1 w-12 text-gray-500" data-view="mypage" onclick="window.navigate('mypage')">
+                    <i data-lucide="user" class="h-5 w-5"></i>
+                    <span class="text-[9px] font-bold tracking-wider font-display" id="nav-me">ME</span>
                 </button>
             </div>
         </footer>
@@ -206,117 +166,275 @@ GOLFIN Predict - NEXT GEN UI (Dark/Neon Sport Tech Theme)
 
 <script>
     // ------------------------------------------------------------------------
-    // LOGIC SECTION (データ構造は変更なし、レンダリングHTMLのみ変更)
+    // TRANSLATION DICTIONARY (多言語辞書)
     // ------------------------------------------------------------------------
-
-    const VIEWS = {
-        'home': renderHomeView,
-        'tournament-detail': renderTournamentPage,
-        'mypage': renderMyPageView,
-        'reward-store': renderRewardStore,
-        'item-store': renderItemStore,
-        'sponsor-page': renderSponsorPage,
-        'user-profile': renderUserProfilePage,
-        'admin': renderAdminPage
-    };
-
-    let currentView = 'home';
-    const viewContainer = document.getElementById('view-container');
-
-    // モックデータ
-    const MOCK_DATA = {
-        userId: 'ui_mock_user_123',
-        userName: 'Felix Golfer',
-        userPoints: 1500,
-        userHitRate: 45,
-        tournamentId: 't1',
-        tournaments: [
-            { id: 't1', title: 'GOLFIN CHAMPIONSHIP 2025', sponsorName: 'GolfGear Pro', prizePool: 50000, status: 'voting', taskType: 'quiz_answer', players: [{ id: 'p1', name: 'T. Tanaka', odds: 2.4 }, { id: 'p2', name: 'H. Sato', odds: 3.1 }, { id: 'p3', name: 'K. Yamamoto', odds: 5.8 }] },
-            { id: 't2', title: 'WINTER OPEN', sponsorName: 'Travel Golf', prizePool: 20000, status: 'upcoming', taskType: 'video_watch', players: [{ id: 'p4', name: 'M. Matsumoto', odds: 4.2 }, { id: 'p5', name: 'Y. Kobayashi', odds: 6.0 }] },
-        ],
-        posts: [
-            { id: 'post1', userId: 'ui_mock_user_2', userName: 'Victory Goddess', text: '田中選手のスイング改造がハマってる。今週は堅い！🔥', player: 'T. Tanaka', likes: 152, isPrediction: true },
-            { id: 'post2', userId: 'ui_mock_user_3', userName: 'Golf Lover', text: '新しいドライバー買いました！飛距離+20y🚀', player: null, likes: 43, isPrediction: false },
-        ],
-        rewards: [
-            { id: 'r1', name: 'Amazon Gift Card', cost: 500, imageUrl: 'https://placehold.co/100x100/1e293b/ffffff?text=AMAZON' },
-            { id: 'r2', name: 'Pro V1 (1 Dozen)', cost: 1200, imageUrl: 'https://placehold.co/100x100/1e293b/ffffff?text=BALLS' },
-        ],
-        items: [
-            { id: 'item1', name: 'Rose', cost: 10, icon: '🌹' },
-            { id: 'item2', name: 'Gold Trophy', cost: 100, icon: '🏆' },
-            { id: 'item3', name: 'Rocket', cost: 300, icon: '🚀' },
-        ],
-    };
-
-    window.navigate = (viewName, params = {}) => {
-        currentView = viewName;
-        
-        // アイコンの状態更新
-        document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-        if (viewName === 'home') document.querySelector('[data-view="home"]').classList.add('active');
-        if (viewName === 'mypage') document.querySelector('[data-view="mypage"]').classList.add('active');
-
-        if (VIEWS[viewName]) {
-            // フェードアウト/イン効果のためにHTMLを入れ替え
-            viewContainer.style.opacity = '0';
-            setTimeout(() => {
-                viewContainer.innerHTML = VIEWS[viewName](params);
-                viewContainer.style.opacity = '1';
-                if (window.lucide) lucide.createIcons();
-                window.scrollTo(0, 0);
-            }, 100);
-        } else {
-            viewContainer.innerHTML = `<div class="p-8 text-center text-red-500">View not found</div>`;
+    const TRANSLATIONS = {
+        ja: {
+            // Nav & Header
+            nav_home: "ホーム",
+            nav_match: "マッチ",
+            nav_play: "プレイ",
+            nav_shop: "ショップ",
+            nav_me: "マイページ",
+            header_pt: "ポイント",
+            btn_admin: "管理",
+            back: "戻る",
+            cancel: "キャンセル",
+            
+            // Home
+            next_match: "次回のマッチ",
+            btn_entry: "エントリー",
+            tab_all: "全イベント",
+            tab_near: "近隣",
+            lbl_participate: "参加受付中",
+            lbl_predict: "予想のみ",
+            
+            // Matching
+            title_rival: "ライバルを探す",
+            desc_rival: "実力の近いプレイヤーや近隣のゴルファーとマッチング。",
+            btn_skill: "実力重視",
+            btn_near: "距離重視",
+            scanning: "プレイヤーを検索中...",
+            
+            // Event Detail
+            lbl_sponsor_mission: "スポンサーミッション",
+            lbl_bonus: "動画視聴でポイント",
+            lbl_bonus_val: "2倍",
+            title_join: "選手として参加",
+            desc_join: "スコアを登録して競い合います。参加費は無料。",
+            btn_join_now: "今すぐ参加",
+            title_predict: "優勝者を予想",
+            desc_predict: "勝利するプレイヤーに投票してポイントGET。",
+            btn_submit_pred: "予想を投票する",
+            lbl_timeline: "タイムライン",
+            btn_send_gift: "ギフトを贈る",
+            
+            // Shop
+            tab_rewards: "景品交換",
+            tab_items: "アイテム",
+            balance: "残高",
+            btn_exchange: "交換する",
+            note_legal: "※ポイントの現金化はできません。",
+            title_items: "応援アイテム",
+            desc_items: "選手やスポンサーに贈るデジタルギフト。",
+            
+            // Create Match
+            title_create: "マッチ作成",
+            lbl_m_title: "マッチ名",
+            lbl_m_date: "開催日",
+            btn_publish: "公開する",
+            
+            // MyPage
+            hit_rate: "的中率",
+            history: "履歴",
+            hist_win: "的中",
+            hist_pending: "開催前",
+            
+            // Misc
+            alert_exchange: "交換申請を受け付けました。",
+            alert_bought: "購入しました！",
+            alert_entry: "エントリーしました！",
+        },
+        en: {
+            // Nav & Header
+            nav_home: "HOME",
+            nav_match: "MATCH",
+            nav_play: "PLAY",
+            nav_shop: "SHOP",
+            nav_me: "ME",
+            header_pt: "POINTS",
+            btn_admin: "ADMIN",
+            back: "BACK",
+            cancel: "CANCEL",
+            
+            // Home
+            next_match: "NEXT MATCH",
+            btn_entry: "ENTRY",
+            tab_all: "ALL EVENTS",
+            tab_near: "NEARBY",
+            lbl_participate: "PARTICIPATE",
+            lbl_predict: "PREDICT ONLY",
+            
+            // Matching
+            title_rival: "RIVAL FINDER",
+            desc_rival: "Find golfers with similar skill levels for a match.",
+            btn_skill: "Skill Match",
+            btn_near: "Near Me",
+            scanning: "Scanning for players...",
+            
+            // Event Detail
+            lbl_sponsor_mission: "SPONSOR MISSION",
+            lbl_bonus: "Watch video for",
+            lbl_bonus_val: "2x Boost",
+            title_join: "JOIN AS PLAYER",
+            desc_join: "Register your score and compete. Free entry.",
+            btn_join_now: "ENTRY NOW",
+            title_predict: "PREDICT WINNER",
+            desc_predict: "Vote for the winner and earn points.",
+            btn_submit_pred: "SUBMIT PREDICTION",
+            lbl_timeline: "TIMELINE",
+            btn_send_gift: "Send Gift",
+            
+            // Shop
+            tab_rewards: "REWARDS",
+            tab_items: "ITEM SHOP",
+            balance: "BALANCE",
+            btn_exchange: "EXCHANGE",
+            note_legal: "*Points cannot be exchanged for cash.",
+            title_items: "SUPPORT ITEMS",
+            desc_items: "Purchase items to tip players and sponsors.",
+            
+            // Create Match
+            title_create: "CREATE MATCH",
+            lbl_m_title: "TITLE",
+            lbl_m_date: "DATE",
+            btn_publish: "PUBLISH",
+            
+            // MyPage
+            hit_rate: "HIT RATE",
+            history: "HISTORY",
+            hist_win: "Win",
+            hist_pending: "Pending",
+            
+            // Misc
+            alert_exchange: "Request sent successfully.",
+            alert_bought: "Item purchased!",
+            alert_entry: "Entry confirmed!",
         }
     };
 
     // ------------------------------------------------------------------------
-    // NEW RENDER FUNCTIONS (STYLED)
+    // GLOBAL STATE
+    // ------------------------------------------------------------------------
+    let currentLang = 'ja'; // デフォルトは日本語
+    let currentView = 'home';
+    let currentParams = {};
+    
+    // 翻訳ヘルパー関数
+    const t = (key) => TRANSLATIONS[currentLang][key] || key;
+
+    // 言語切り替え関数
+    function toggleLanguage() {
+        currentLang = currentLang === 'ja' ? 'en' : 'ja';
+        
+        // ボタンの表示更新
+        const btn = document.getElementById('lang-btn');
+        btn.innerText = currentLang === 'ja' ? 'JP' : 'EN';
+        
+        // フッターナビの更新（静的要素）
+        document.getElementById('nav-home').innerText = t('nav_home');
+        document.getElementById('nav-match').innerText = t('nav_match');
+        document.getElementById('nav-play').innerText = t('nav_play');
+        document.getElementById('nav-shop').innerText = t('nav_shop');
+        document.getElementById('nav-me').innerText = t('nav_me');
+        document.getElementById('lbl-header-pt').innerText = t('header_pt');
+
+        // 現在のビューを再描画
+        window.navigate(currentView, currentParams, false);
+    }
+
+    const currentUser = {
+        name: "Golf Lover",
+        id: "U001",
+        points: 1500,
+        handicap: 18,
+    };
+
+    // MOCK DATA
+    const TOURNAMENTS = [
+        { id: 't1', title: 'WEEKEND OPEN', host: 'Narita G.C.', date: '2025-11-25', type: 'COMPETITION' },
+        { id: 't2', title: 'PRO TOUR FINAL', host: 'Official', date: '2025-12-01', type: 'PREDICT_ONLY' },
+    ];
+    const RIVALS = [
+        { id: 'r1', name: 'T. Suzuki', handicap: 15, location: 'Tokyo', similarity: 92 },
+        { id: 'r2', name: 'M. Sato', handicap: 20, location: 'Chiba', similarity: 88 },
+    ];
+    const REWARDS = [
+        { id: 'rew1', name: 'Amazon Gift Card (¥1,000)', cost: 1000, img: 'https://placehold.co/100?text=AMZN' },
+        { id: 'rew2', name: 'Pro V1 Balls (1 Dozen)', cost: 5000, img: 'https://placehold.co/100?text=BALLS' },
+    ];
+    const ITEMS = [
+        { id: 'itm1', name: 'Rose', cost: 100, icon: '🌹', desc: 'Cheer' },
+        { id: 'itm2', name: 'Beer', cost: 300, icon: '🍺', desc: 'Nice Shot' },
+        { id: 'itm3', name: 'Trophy', cost: 1000, icon: '🏆', desc: 'Congrats' },
+    ];
+
+    // ------------------------------------------------------------------------
+    // NAVIGATION LOGIC
+    // ------------------------------------------------------------------------
+    const container = document.getElementById('view-container');
+    const headerPoints = document.getElementById('header-points');
+
+    window.navigate = (viewName, params = {}, scrollToTop = true) => {
+        currentView = viewName;
+        currentParams = params;
+
+        // Footer Active State
+        document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.querySelector(`[data-view="${viewName}"]`);
+        if (activeBtn) activeBtn.classList.add('active');
+
+        // Render View
+        let html = '';
+        switch(viewName) {
+            case 'home': html = renderHomeView(); break;
+            case 'event-detail': html = renderEventDetail(params.id); break;
+            case 'sponsor-page': html = renderSponsorPage(); break;
+            case 'mypage': html = renderMyPage(); break;
+            case 'matching': html = renderMatchingView(); break;
+            case 'reward-store': html = renderRewardStore(); break;
+            case 'item-store': html = renderItemStore(); break;
+            case 'create-match': html = renderCreateMatch(); break;
+            default: html = renderHomeView();
+        }
+        
+        container.innerHTML = html;
+        if(window.lucide) window.lucide.createIcons();
+        if(scrollToTop) window.scrollTo(0,0);
+        updatePointsDisplay();
+    };
+
+    function updatePointsDisplay() {
+        headerPoints.innerText = currentUser.points.toLocaleString();
+    }
+
+    // ------------------------------------------------------------------------
+    // VIEW FUNCTIONS (With Translations)
     // ------------------------------------------------------------------------
 
     function renderHomeView() {
         return `
-            <div class="fade-in">
-                <div class="flex justify-between items-end mb-6">
-                    <h2 class="text-2xl font-display font-bold text-white italic tracking-wide">LIVE <span class="text-primary not-italic">EVENTS</span></h2>
-                    <span class="text-xs text-gray-400 font-mono bg-white/5 px-2 py-1 rounded">SEASON 2025</span>
-                </div>
-
-                <!-- バナー -->
-                <div class="bg-gradient-to-r from-yellow-600/20 to-yellow-900/20 border border-yellow-500/30 p-3 rounded-xl mb-8 flex items-start gap-3">
-                    <i data-lucide="zap" class="h-5 w-5 text-yellow-400 flex-shrink-0 mt-0.5"></i>
+            <div class="animate-pulse-fast mb-6">
+                <div class="bg-gradient-to-r from-primary/20 to-transparent p-4 rounded-xl border border-primary/30 flex justify-between items-center">
                     <div>
-                        <p class="text-yellow-200 text-sm font-bold">BOOST ACTIVE</p>
-                        <p class="text-xs text-gray-400 leading-relaxed">スポンサータスク完了で獲得ポイントが<span class="text-white font-bold">2倍</span>になります。</p>
+                        <p class="text-primary font-bold text-xs tracking-widest">${t('next_match')}</p>
+                        <p class="text-white font-bold text-lg">Saturday Cup @ Chiba</p>
                     </div>
+                    <button class="bg-primary text-black font-bold px-4 py-2 rounded-lg text-xs hover:scale-105 transition" onclick="window.navigate('create-match')">
+                        ${t('btn_entry')}
+                    </button>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <div class="flex gap-4 border-b border-white/10 pb-2 mb-4">
+                    <button class="text-sm font-bold tab-active">${t('tab_all')}</button>
+                    <button class="text-sm font-bold tab-inactive">${t('tab_near')}</button>
                 </div>
 
-                ${MOCK_DATA.tournaments.map(t => `
-                    <div class="glass-panel rounded-2xl p-0 mb-6 overflow-hidden group active:scale-95 transition-transform duration-200" onclick="window.navigate('tournament-detail', { id: '${t.id}' })">
-                        <!-- カードヘッダー画像エリア -->
-                        <div class="h-32 bg-gray-800 relative">
-                            <img src="https://placehold.co/600x300/064e3b/00ffa3?text=GOLF+EVENT" class="w-full h-full object-cover opacity-60 mix-blend-overlay">
-                            <div class="absolute top-3 right-3 bg-black/60 backdrop-blur px-3 py-1 rounded-full border border-primary/30">
-                                <span class="text-primary text-xs font-bold font-display flex items-center gap-1">
-                                    <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span> ${t.status === 'voting' ? 'VOTING NOW' : 'COMING SOON'}
+                ${TOURNAMENTS.map(tr => `
+                    <div class="glass-panel p-4 rounded-xl mb-4 cursor-pointer hover:border-primary/50 transition relative overflow-hidden" onclick="window.navigate('event-detail', {id: '${tr.id}'})">
+                        <div class="flex justify-between items-start relative z-10">
+                            <div>
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-white/10 text-gray-300 mb-2 inline-block">
+                                    ${tr.type === 'COMPETITION' ? t('lbl_participate') : t('lbl_predict')}
                                 </span>
+                                <h3 class="text-lg font-bold text-white">${tr.title}</h3>
+                                <p class="text-xs text-gray-400"><i data-lucide="map-pin" class="inline w-3 h-3"></i> ${tr.host}</p>
                             </div>
-                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-surface to-transparent h-20"></div>
-                        </div>
-                        
-                        <div class="p-5 -mt-4 relative z-10">
-                            <h3 class="text-xl font-bold text-white mb-1 leading-tight">${t.title}</h3>
-                            <p class="text-xs text-gray-400 mb-4 font-mono tracking-wide uppercase">SPONSORED BY ${t.sponsorName}</p>
-                            
-                            <div class="flex justify-between items-end border-t border-white/10 pt-4">
-                                <div>
-                                    <p class="text-[10px] text-gray-500 font-mono mb-1">PRIZE POOL</p>
-                                    <p class="text-2xl font-display font-bold text-accent">${t.prizePool.toLocaleString()} <span class="text-sm text-gray-400">PT</span></p>
-                                </div>
-                                <button class="bg-white/5 hover:bg-white/10 border border-white/20 text-primary font-bold py-2 px-4 rounded-full text-sm flex items-center gap-2 transition">
-                                    Play <i data-lucide="arrow-right" class="h-4 w-4"></i>
-                                </button>
+                            <div class="text-center">
+                                <span class="block text-2xl font-display font-bold text-primary">${tr.date.split('-')[2]}</span>
+                                <span class="block text-[10px] text-gray-500 uppercase">NOV</span>
                             </div>
                         </div>
                     </div>
@@ -325,247 +443,269 @@ GOLFIN Predict - NEXT GEN UI (Dark/Neon Sport Tech Theme)
         `;
     }
 
-    function renderTournamentPage(params) {
-        const t = MOCK_DATA.tournaments.find(t => t.id === params.id) || MOCK_DATA.tournaments[0];
-        
+    function renderMatchingView() {
         return `
-            <div class="fade-in">
-                <!-- Header Action -->
-                <button class="text-gray-400 hover:text-white mb-4 flex items-center text-sm font-mono transition" onclick="window.navigate('home')">
-                    <i data-lucide="chevron-left" class="h-4 w-4 mr-1"></i> BACK
-                </button>
+            <h2 class="text-2xl font-display font-black text-white mb-2">${t('title_rival')}</h2>
+            <p class="text-xs text-gray-400 mb-6">${t('desc_rival')}</p>
 
-                <h2 class="text-3xl font-display font-black text-white mb-2 italic uppercase leading-none">${t.title}</h2>
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="px-2 py-1 bg-primary/10 border border-primary/20 rounded text-[10px] text-primary font-bold font-mono">OFFICIAL</span>
-                    <span class="text-xs text-gray-400">by ${t.sponsorName}</span>
-                </div>
+            <div class="flex gap-2 mb-6 overflow-x-auto">
+                <button class="px-4 py-2 rounded-full bg-primary/20 border border-primary text-primary text-xs font-bold whitespace-nowrap">${t('btn_skill')}</button>
+                <button class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-400 text-xs font-bold whitespace-nowrap">${t('btn_near')}</button>
+            </div>
 
-                <!-- Task Incentive Card -->
-                <div class="bg-gradient-to-r from-indigo-900/40 to-purple-900/40 border border-indigo-500/30 rounded-xl p-4 mb-8 relative overflow-hidden" onclick="window.navigate('sponsor-page', { id: '${t.id}' })">
-                    <div class="absolute -right-4 -top-4 bg-indigo-500/20 w-24 h-24 rounded-full blur-xl"></div>
-                    <div class="flex justify-between items-center relative z-10">
-                        <div>
-                            <p class="text-indigo-300 text-xs font-bold mb-1 tracking-wider">MISSION BONUS</p>
-                            <p class="text-white font-bold text-sm">タスク完了で配当<span class="text-accent text-lg mx-1">x2倍</span>ブースト</p>
+            <div class="space-y-4">
+                ${RIVALS.map(r => `
+                    <div class="glass-panel p-4 rounded-xl flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center border-2 border-primary relative">
+                                <span class="font-bold text-white">${r.name.charAt(0)}</span>
+                                <div class="absolute -bottom-1 -right-1 bg-black text-primary text-[9px] font-bold px-1 rounded border border-primary">${r.similarity}%</div>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-sm">${r.name}</h3>
+                                <p class="text-xs text-gray-400">HDCP: ${r.handicap} | ${r.location}</p>
+                            </div>
                         </div>
-                        <div class="h-10 w-10 rounded-full bg-indigo-500/20 flex items-center justify-center border border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.3)]">
-                            <i data-lucide="rocket" class="h-5 w-5 text-indigo-300"></i>
+                        <div class="flex gap-2">
+                            <button class="p-2 rounded-lg bg-white/5 hover:bg-white/10"><i data-lucide="message-square" class="w-4 h-4 text-gray-300"></i></button>
+                            <button class="p-2 rounded-lg bg-primary/20 hover:bg-primary/30 text-primary" onclick="alert('Challenge sent!')"><i data-lucide="sword" class="w-4 h-4"></i></button>
                         </div>
                     </div>
-                </div>
-
-                <!-- Voting Section -->
-                <div class="glass-panel rounded-2xl p-5 mb-8 border-t-2 border-t-primary/50">
-                    <h3 class="text-lg font-bold text-white mb-4 flex items-center">
-                        <i data-lucide="target" class="h-5 w-5 text-primary mr-2"></i> 優勝予想
-                    </h3>
-                    
-                    <div class="space-y-3">
-                        ${t.players.map(p => `
-                            <label class="block relative cursor-pointer group">
-                                <input type="radio" name="player" value="${p.id}" class="peer hidden" />
-                                <div class="p-4 bg-black/40 border border-white/10 rounded-xl flex justify-between items-center transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:shadow-neon">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 rounded-full bg-gray-700 border border-gray-600 flex items-center justify-center text-xs font-bold text-gray-300">${p.name.charAt(0)}</div>
-                                        <div>
-                                            <span class="block text-white font-bold text-sm">${p.name}</span>
-                                            <span class="text-[10px] text-gray-500">RANK #0${Math.floor(Math.random() * 10) + 1}</span>
-                                        </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <span class="text-[10px] text-gray-500 font-mono block">ODDS</span>
-                                        <span class="text-xl font-display font-bold text-primary">${p.odds}</span>
-                                    </div>
-                                </div>
-                            </label>
-                        `).join('')}
-                    </div>
-
-                    <textarea placeholder="Add a comment (Optional)" rows="2" class="input-dark w-full p-3 rounded-lg mt-4 text-sm placeholder-gray-600"></textarea>
-                    
-                    <button class="btn-neon w-full py-4 rounded-xl font-bold text-lg mt-4 flex items-center justify-center gap-2 shadow-neon">
-                        BET NOW <i data-lucide="zap" class="h-5 w-5"></i>
-                    </button>
-                </div>
-
-                <!-- Feed -->
-                <h3 class="text-sm font-mono text-gray-500 mb-4 ml-1">LIVE FEED</h3>
-                <div class="space-y-4">
-                    ${MOCK_DATA.posts.map(p => `
-                        <div class="glass-panel p-4 rounded-xl border border-white/5">
-                            <div class="flex items-center mb-2">
-                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 border border-gray-600 mr-3"></div>
-                                <div>
-                                    <p class="text-xs font-bold text-white">${p.userName}</p>
-                                    <p class="text-[10px] text-gray-500">2m ago</p>
-                                </div>
-                            </div>
-                            <div class="bg-black/30 p-3 rounded-lg mb-2 border border-white/5">
-                                ${p.isPrediction ? `<div class="flex items-center gap-2 mb-2 pb-2 border-b border-white/5"><i data-lucide="crosshair" class="h-3 w-3 text-primary"></i> <span class="text-xs text-primary font-bold">BET: ${p.player}</span></div>` : ''}
-                                <p class="text-sm text-gray-300 leading-relaxed">${p.text}</p>
-                            </div>
-                            <div class="flex justify-end gap-4">
-                                <button class="text-gray-500 hover:text-pink-500 transition flex items-center text-xs gap-1"><i data-lucide="heart" class="h-3 w-3"></i> ${p.likes}</button>
-                                <button class="text-gray-500 hover:text-accent transition flex items-center text-xs gap-1"><i data-lucide="gift" class="h-3 w-3"></i> GIFT</button>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
+                `).join('')}
+            </div>
+            
+            <div class="mt-8 p-6 text-center border border-dashed border-gray-700 rounded-xl">
+                <i data-lucide="radar" class="w-8 h-8 text-gray-500 mx-auto mb-2"></i>
+                <p class="text-gray-500 text-xs">${t('scanning')}</p>
             </div>
         `;
     }
-    
-    function renderSponsorPage(params) {
-        const t = MOCK_DATA.tournaments.find(t => t.id === params.id) || MOCK_DATA.tournaments[0];
+
+    function renderEventDetail(id) {
+        const tr = TOURNAMENTS.find(ev => ev.id === id) || TOURNAMENTS[0];
         
         return `
-            <div class="fade-in">
-                <div class="h-48 bg-cover bg-center relative -mx-5 -mt-5 mb-6" style="background-image: url('https://placehold.co/600x400/111827/333?text=BRAND+MOVIE');">
-                    <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent"></div>
-                    <div class="absolute bottom-4 left-5">
-                        <h2 class="text-3xl font-display font-black text-white italic">${t.sponsorName}</h2>
-                        <p class="text-xs text-gray-300">OFFICIAL SPONSOR</p>
-                    </div>
-                    <button class="absolute top-5 left-5 p-2 bg-black/30 backdrop-blur rounded-full" onclick="window.navigate('tournament-detail', { id: '${t.id}' })">
-                        <i data-lucide="arrow-left" class="h-5 w-5 text-white"></i>
-                    </button>
+            <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
+                <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> ${t('back')}
+            </button>
+
+            <div class="relative h-48 rounded-2xl overflow-hidden mb-6 bg-gray-800">
+                <div class="absolute inset-0 bg-black/40 flex flex-col justify-end p-5">
+                    <span class="bg-primary text-black text-[10px] font-bold px-2 py-1 rounded w-fit mb-2">${tr.type}</span>
+                    <h2 class="text-2xl font-black text-white italic leading-none">${tr.title}</h2>
+                    <p class="text-xs text-gray-300 mt-1">Sponsor: GolfGear Pro</p>
                 </div>
+            </div>
+
+            <div class="mb-6 p-4 rounded-xl bg-gradient-to-r from-blue-900/40 to-indigo-900/40 border border-blue-500/30 flex justify-between items-center cursor-pointer" onclick="window.navigate('sponsor-page')">
+                <div>
+                    <p class="text-blue-300 text-xs font-bold">${t('lbl_sponsor_mission')}</p>
+                    <p class="text-white font-bold text-sm">${t('lbl_bonus')} <span class="text-accent text-lg">${t('lbl_bonus_val')}</span></p>
+                </div>
+                <i data-lucide="play-circle" class="w-6 h-6 text-blue-400"></i>
+            </div>
+
+            <div class="glass-panel p-5 rounded-xl mb-6">
+                ${tr.type === 'COMPETITION' ? `
+                    <h3 class="text-lg font-bold text-white mb-2">${t('title_join')}</h3>
+                    <p class="text-xs text-gray-400 mb-4">${t('desc_join')}</p>
+                    <button class="btn-neon w-full py-3 rounded-lg font-bold text-sm flex justify-center items-center gap-2 mb-4" onclick="alert('${t('alert_entry')}')">
+                        <i data-lucide="user-plus" class="w-4 h-4"></i> ${t('btn_join_now')}
+                    </button>
+                    <div class="text-center text-xs text-gray-500 border-t border-white/5 pt-4 mt-2"></div>
+                ` : ''}
                 
-                <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-primary mb-8 relative overflow-hidden">
-                    <div class="absolute right-0 top-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
-                    <h3 class="text-xl font-bold text-white mb-2">SPECIAL MISSION</h3>
-                    <p class="text-sm text-gray-400 mb-6">以下のタスクを完了して、的中時のポイント倍率を<span class="text-primary font-bold">2.0x</span>にアップグレード。</p>
-                    
-                    <div class="bg-black/40 rounded-xl p-4 border border-white/10 mb-4">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="bg-primary/20 p-2 rounded-lg text-primary"><i data-lucide="play-circle" class="h-5 w-5"></i></div>
-                            <p class="font-bold text-sm">ブランドムービーを視聴 (30s)</p>
+                <h3 class="text-lg font-bold text-white mb-2 mt-2">${t('title_predict')}</h3>
+                <p class="text-xs text-gray-400 mb-4">${t('desc_predict')}</p>
+                
+                <div class="space-y-2 mb-4">
+                    <label class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10 cursor-pointer hover:border-primary">
+                        <div class="flex items-center gap-3">
+                            <input type="radio" name="pred" class="accent-primary">
+                            <span class="text-sm font-bold">Player A</span>
                         </div>
-                        <div class="w-full bg-gray-800 h-1 rounded-full overflow-hidden">
-                            <div class="bg-primary h-full w-0"></div>
+                        <span class="text-primary font-mono">3.5x</span>
+                    </label>
+                    <label class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10 cursor-pointer hover:border-primary">
+                        <div class="flex items-center gap-3">
+                            <input type="radio" name="pred" class="accent-primary">
+                            <span class="text-sm font-bold">Player B</span>
                         </div>
-                    </div>
-
-                    <button class="w-full py-3 rounded-xl border border-primary text-primary font-bold text-sm hover:bg-primary hover:text-black transition shadow-[0_0_15px_rgba(0,255,163,0.1)]">
-                        START MISSION
-                    </button>
+                        <span class="text-primary font-mono">2.1x</span>
+                    </label>
                 </div>
+                <button class="w-full py-3 rounded-lg border border-primary text-primary font-bold text-sm hover:bg-primary hover:text-black transition" onclick="alert('${t('btn_submit_pred')}')">
+                    ${t('btn_submit_pred')}
+                </button>
+            </div>
 
-                <h3 class="text-sm font-mono text-gray-500 mb-4">SUPPORT THE BRAND</h3>
-                <div class="grid grid-cols-3 gap-3">
-                    <button class="glass-panel p-4 rounded-xl flex flex-col items-center gap-2 hover:border-accent/50 transition">
-                        <span class="text-2xl">👏</span>
-                        <span class="text-[10px] font-bold text-gray-300">CLAP</span>
-                    </button>
-                     <button class="glass-panel p-4 rounded-xl flex flex-col items-center gap-2 hover:border-accent/50 transition">
-                        <span class="text-2xl">🌹</span>
-                        <span class="text-[10px] font-bold text-gray-300">ROSE</span>
-                    </button>
-                     <button class="glass-panel p-4 rounded-xl flex flex-col items-center gap-2 hover:border-accent/50 transition">
-                        <span class="text-2xl">🚀</span>
-                        <span class="text-[10px] font-bold text-gray-300">BOOST</span>
-                    </button>
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-white">${t('lbl_timeline')}</h3>
+                <button class="text-xs text-primary" onclick="window.navigate('item-store')">${t('btn_send_gift')}</button>
+            </div>
+            <div class="glass-panel p-4 rounded-xl">
+                <div class="flex gap-3 mb-2">
+                    <div class="w-8 h-8 rounded-full bg-gray-600"></div>
+                    <div>
+                        <p class="text-xs font-bold text-white">User123 <span class="text-gray-500 font-normal">sent 🌹</span></p>
+                        <p class="text-xs text-gray-300">Player A, good luck!</p>
+                    </div>
                 </div>
             </div>
         `;
     }
 
-    function renderMyPageView() {
-        return `
-            <div class="fade-in">
-                <h2 class="text-2xl font-display font-bold text-white mb-6">DASHBOARD</h2>
-
-                <!-- Stat Card -->
-                <div class="bg-gradient-to-br from-gray-800 to-black rounded-3xl p-6 mb-8 border border-white/10 relative overflow-hidden shadow-2xl">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16"></div>
-                    
-                    <div class="flex items-center gap-4 mb-6 relative z-10">
-                         <div class="w-14 h-14 rounded-full p-1 border-2 border-primary shadow-[0_0_15px_rgba(0,255,163,0.3)]">
-                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full rounded-full bg-gray-700">
-                         </div>
-                         <div>
-                             <p class="text-gray-400 text-xs font-mono">PLAYER ID: #8823</p>
-                             <p class="text-xl font-bold text-white">${MOCK_DATA.userName}</p>
-                         </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4 relative z-10">
-                        <div class="bg-white/5 rounded-2xl p-4 backdrop-blur border border-white/5">
-                            <p class="text-[10px] text-gray-500 font-mono mb-1">TOTAL ASSETS</p>
-                            <p class="text-2xl font-display font-bold text-white">${MOCK_DATA.userPoints.toLocaleString()} <span class="text-xs text-primary">PT</span></p>
-                        </div>
-                        <div class="bg-white/5 rounded-2xl p-4 backdrop-blur border border-white/5">
-                            <p class="text-[10px] text-gray-500 font-mono mb-1">WIN RATE</p>
-                            <p class="text-2xl font-display font-bold text-accent">${MOCK_DATA.userHitRate}%</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Menu Grid -->
-                <h3 class="text-sm font-mono text-gray-500 mb-4">MARKETPLACE</h3>
-                <div class="grid grid-cols-2 gap-4 mb-8">
-                    <button class="glass-panel p-5 rounded-2xl flex flex-col items-center gap-3 group hover:border-accent/50 transition" onclick="window.navigate('reward-store')">
-                        <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center group-hover:scale-110 transition">
-                            <i data-lucide="gift" class="h-6 w-6 text-accent"></i>
-                        </div>
-                        <span class="text-sm font-bold text-white">REWARDS</span>
-                    </button>
-                    <button class="glass-panel p-5 rounded-2xl flex flex-col items-center gap-3 group hover:border-indigo-500/50 transition" onclick="window.navigate('item-store')">
-                        <div class="w-12 h-12 rounded-full bg-indigo-500/10 flex items-center justify-center group-hover:scale-110 transition">
-                            <i data-lucide="shopping-bag" class="h-6 w-6 text-indigo-400"></i>
-                        </div>
-                        <span class="text-sm font-bold text-white">ITEMS</span>
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-    
     function renderRewardStore() {
         return `
-            <div class="fade-in">
-                <button class="text-gray-400 hover:text-white mb-4 flex items-center text-sm font-mono" onclick="window.navigate('mypage')">
-                    <i data-lucide="chevron-left" class="h-4 w-4 mr-1"></i> DASHBOARD
-                </button>
-                <h2 class="text-2xl font-display font-bold text-white mb-6">EXCHANGE</h2>
+            <div class="flex gap-4 border-b border-white/10 pb-2 mb-6">
+                <button class="text-sm font-bold tab-active" onclick="window.navigate('reward-store')">${t('tab_rewards')}</button>
+                <button class="text-sm font-bold tab-inactive" onclick="window.navigate('item-store')">${t('tab_items')}</button>
+            </div>
 
-                <div class="space-y-4">
-                    ${MOCK_DATA.rewards.map(r => `
-                        <div class="glass-panel p-4 rounded-xl flex items-center gap-4 border border-white/5">
-                            <div class="w-20 h-20 rounded-lg bg-gray-800 flex-shrink-0 overflow-hidden">
-                                <img src="${r.imageUrl}" class="w-full h-full object-cover opacity-80">
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-bold text-white mb-1">${r.name}</p>
-                                <p class="text-accent font-display font-bold">${r.cost.toLocaleString()} PT</p>
-                            </div>
-                            <button class="bg-white/10 hover:bg-white/20 p-2 rounded-lg text-white transition">
-                                <i data-lucide="arrow-right-circle" class="h-6 w-6"></i>
+            <div class="flex justify-between items-center mb-6 px-2">
+                <h2 class="text-xl font-display font-bold text-white">${t('tab_rewards')}</h2>
+                <div class="text-right">
+                    <span class="text-[10px] text-gray-400">${t('balance')}</span>
+                    <p class="text-xl font-bold text-primary">${currentUser.points.toLocaleString()} <span class="text-xs">pt</span></p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                ${REWARDS.map(r => `
+                    <div class="glass-panel p-3 rounded-xl flex flex-col h-full">
+                        <img src="${r.img}" class="w-full h-24 object-cover rounded-lg mb-3 bg-gray-800">
+                        <h3 class="text-sm font-bold text-white mb-1 leading-tight">${r.name}</h3>
+                        <div class="mt-auto pt-2">
+                            <p class="text-accent font-bold font-display mb-2">${r.cost.toLocaleString()} pt</p>
+                            <button class="w-full py-2 rounded bg-white/10 border border-white/10 text-xs font-bold hover:bg-primary hover:text-black transition" onclick="exchangeReward('${r.name}', ${r.cost})">
+                                ${t('btn_exchange')}
                             </button>
                         </div>
-                    `).join('')}
+                    </div>
+                `).join('')}
+            </div>
+            
+            <p class="mt-8 text-[10px] text-gray-600 text-center">
+                ${t('note_legal')}
+            </p>
+        `;
+    }
+
+    function renderItemStore() {
+        return `
+            <div class="flex gap-4 border-b border-white/10 pb-2 mb-6">
+                <button class="text-sm font-bold tab-inactive" onclick="window.navigate('reward-store')">${t('tab_rewards')}</button>
+                <button class="text-sm font-bold tab-active" onclick="window.navigate('item-store')">${t('tab_items')}</button>
+            </div>
+
+            <h2 class="text-xl font-display font-bold text-white mb-4">${t('title_items')}</h2>
+            <p class="text-xs text-gray-400 mb-6">${t('desc_items')}</p>
+
+            <div class="space-y-3">
+                ${ITEMS.map(i => `
+                    <div class="glass-panel p-3 rounded-xl flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="text-2xl w-10 h-10 flex items-center justify-center bg-white/5 rounded-lg">${i.icon}</div>
+                            <div>
+                                <h3 class="font-bold text-white text-sm">${i.name}</h3>
+                                <p class="text-[10px] text-gray-400">${i.desc}</p>
+                            </div>
+                        </div>
+                        <button class="px-4 py-2 rounded bg-primary/20 text-primary font-bold text-xs hover:bg-primary hover:text-black transition" onclick="buyItem('${i.name}', ${i.cost})">
+                            ${i.cost} pt
+                        </button>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    function renderCreateMatch() {
+        return `
+            <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
+                <i data-lucide="x" class="w-4 h-4 mr-1"></i> ${t('cancel')}
+            </button>
+            <h2 class="text-2xl font-display font-black text-white mb-6">${t('title_create')}</h2>
+            <div class="glass-panel p-5 rounded-xl space-y-4">
+                <div>
+                    <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_m_title')}</label>
+                    <input type="text" class="input-tech w-full p-3 rounded-lg" placeholder="ex: Sunday Challenge">
+                </div>
+                <div>
+                    <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_m_date')}</label>
+                    <input type="date" class="input-tech w-full p-3 rounded-lg">
+                </div>
+                <button class="btn-neon w-full py-3 rounded-xl font-bold mt-4" onclick="alert('Match Created!'); window.navigate('home')">
+                    ${t('btn_publish')}
+                </button>
+            </div>
+        `;
+    }
+    
+    function renderMyPage() {
+        return `
+            <div class="text-center mb-6">
+                <div class="w-24 h-24 mx-auto rounded-full border-2 border-primary p-1 mb-3">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Golfer1" class="w-full h-full rounded-full bg-gray-700">
+                </div>
+                <h2 class="text-xl font-bold text-white">${currentUser.name}</h2>
+                <p class="text-xs text-gray-400">ID: ${currentUser.id} | HDCP: ${currentUser.handicap}</p>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="glass-panel p-4 rounded-xl text-center">
+                    <p class="text-[10px] text-gray-400">${t('header_pt')}</p>
+                    <p class="text-xl font-bold text-primary">${currentUser.points.toLocaleString()}</p>
+                </div>
+                <div class="glass-panel p-4 rounded-xl text-center">
+                    <p class="text-[10px] text-gray-400">${t('hit_rate')}</p>
+                    <p class="text-xl font-bold text-accent">42%</p>
+                </div>
+            </div>
+
+            <h3 class="font-bold text-white text-sm mb-3">${t('history')}</h3>
+            <div class="space-y-2">
+                <div class="glass-panel p-3 rounded-lg flex justify-between">
+                    <span class="text-xs text-white">Prediction: Player A (${t('hist_win')})</span>
+                    <span class="text-xs text-primary">+500 pt</span>
+                </div>
+                <div class="glass-panel p-3 rounded-lg flex justify-between">
+                    <span class="text-xs text-white">Entered: Weekend Open</span>
+                    <span class="text-xs text-gray-400">${t('hist_pending')}</span>
                 </div>
             </div>
         `;
     }
     
-    function renderItemStore() {
-        return renderRewardStore(); // 簡易化のため同じ構造を使用
+    // Placeholder functions
+    function renderSponsorPage() { return renderEventDetail('t1'); }
+    function exchangeReward(name, cost) {
+        if(currentUser.points >= cost) {
+            currentUser.points -= cost;
+            alert(t('alert_exchange'));
+            window.navigate('reward-store');
+        } else alert("Not enough points");
     }
-
-    function renderUserProfilePage(params) { return renderMyPageView(); } // 簡易化
-    function renderAdminPage() { return `<div class="p-10 text-center text-gray-500 font-mono">ADMIN CONSOLE LOCKED</div>`; }
+    function buyItem(name, cost) {
+        if(currentUser.points >= cost) {
+            currentUser.points -= cost;
+            alert(t('alert_bought'));
+            updatePointsDisplay();
+        } else alert("Not enough points");
+    }
 
     // Init
     document.addEventListener('DOMContentLoaded', () => {
+        // デフォルトを日本語で初期化
+        document.getElementById('nav-home').innerText = t('nav_home');
+        document.getElementById('nav-match').innerText = t('nav_match');
+        document.getElementById('nav-play').innerText = t('nav_play');
+        document.getElementById('nav-shop').innerText = t('nav_shop');
+        document.getElementById('nav-me').innerText = t('nav_me');
+        document.getElementById('lbl-header-pt').innerText = t('header_pt');
+        
         window.navigate('home');
     });
-    
-    // Prevent default zooming on double tap
-    document.addEventListener('dblclick', function(event) {
-        event.preventDefault();
-    }, { passive: false });
 
 </script>
 </body>
