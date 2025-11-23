@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GOLFIN | Play & Support</title>
+    <title>GOLFIN | Play, Predict, Earn</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,11 +29,13 @@
                         primary: '#00FFA3', // Neon Green
                         secondary: '#10B981', 
                         accent: '#FACC15',  // Gold
-                        pink: '#ec4899',    // Neon Pink for Gifts
+                        pink: '#ec4899',
+                        purple: '#8b5cf6',
                     },
                     boxShadow: {
                         'neon': '0 0 15px rgba(0, 255, 163, 0.3)',
                         'neon-pink': '0 0 15px rgba(236, 72, 153, 0.4)',
+                        'neon-purple': '0 0 20px rgba(139, 92, 246, 0.4)',
                     },
                     animation: {
                         'pulse-slow': 'pulse 3s infinite',
@@ -79,9 +81,6 @@
         }
         .nav-item.active i { transform: scale(1.1); transition: transform 0.2s; }
 
-        .tab-active { border-bottom: 2px solid #00FFA3; color: white; }
-        .tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }
-
         .lang-switch {
             font-size: 10px;
             font-weight: 800;
@@ -92,7 +91,17 @@
             cursor: pointer;
         }
 
-        /* ランクバッジ */
+        .tab-active { border-bottom: 2px solid #00FFA3; color: white; }
+        .tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }
+        
+        /* Boost Effect */
+        .boost-active {
+            border: 1px solid #FACC15;
+            box-shadow: 0 0 20px rgba(250, 204, 21, 0.3);
+            animation: pulse-slow;
+        }
+
+        /* Rank Badges */
         .rank-1 { background: linear-gradient(135deg, #FFD700, #FDB931); color: black; border: 1px solid #fff; }
         .rank-2 { background: linear-gradient(135deg, #E0E0E0, #BDBDBD); color: black; border: 1px solid #fff; }
         .rank-3 { background: linear-gradient(135deg, #CD7F32, #A0522D); color: white; border: 1px solid #fff; }
@@ -162,33 +171,51 @@
             nav_shop: "ショップ",
             nav_me: "マイページ",
             header_pt: "ポイント",
+            // Home
+            btn_host_match: "コンペを主催・登録する",
+            // Event Detail (Vote)
+            title_predict: "優勝予想",
+            lbl_sponsor_task: "スポンサーミッション (任意)",
+            task_desc: "CM動画(30秒)を見ると、的中時の配当が2倍になります！",
+            btn_watch_ad: "動画を見て 2倍ブースト",
+            boost_active: "2倍ブースト適用中！",
+            btn_submit_vote: "投票を確定する",
+            // Create Match
+            title_create: "コンペ作成",
+            desc_create: "あなたのコンペを登録して、参加者を募集したり予想を楽しもう。",
+            lbl_c_title: "コンペ名",
+            lbl_c_course: "ゴルフ場",
+            lbl_c_date: "開催日",
+            lbl_c_tags: "特徴 (タグ)",
+            btn_publish: "コンペを公開する",
+            // Rank
+            title_rank: "スタープレイヤー",
+            desc_rank: "コンペ勝利数と応援獲得数のランキング",
+            col_wins: "勝",
             // Shop
             tab_items: "応援アイテム",
             tab_rewards: "景品交換",
             shop_item_desc: "選手やコンペ主催者を応援しよう！",
-            shop_reward_desc: "ポイントを素敵な景品と交換。",
             btn_buy: "購入する",
             btn_exchange: "交換申請",
             item_rose: "応援のバラ",
             item_beer: "お疲れビール",
             item_trophy: "勝利のトロフィー",
-            // Rank
-            title_rank: "スタープレイヤー",
-            desc_rank: "コンペ勝利数と応援獲得数のランキング",
-            col_wins: "勝",
-            btn_support: "応援する",
-            // Event Detail
-            lbl_entry: "参加者募集中！",
-            btn_entry_form: "このコンペに参加登録する",
-            msg_host: "初参加の方も大歓迎です！一緒に楽しみましょう。",
-            title_entry_form: "コンペ参加登録",
-            lbl_name: "参加者名",
+            // MyPage
+            title_me: "マイプロフィール",
+            lbl_home_course: "ホームコース",
             lbl_avg: "平均スコア",
-            lbl_msg: "主催者へのメッセージ",
-            btn_confirm_entry: "登録を送信する",
+            lbl_best: "ベストスコア",
+            lbl_hdcp: "ハンディキャップ",
+            lbl_gear_driver: "ドライバー",
+            lbl_gear_putter: "パター",
+            lbl_gear_ball: "使用ボール",
+            btn_save: "プロフィールを保存",
             // Misc
+            alert_boost: "ブーストが適用されました！配当2倍チャンス！",
+            alert_created: "コンペを作成しました！ホーム画面に表示されます。",
+            alert_saved: "プロフィールを更新しました。",
             alert_bought: "アイテムを購入しました！",
-            alert_entry: "参加登録を送信しました！主催者からの連絡をお待ちください。",
         },
         en: {
             nav_home: "HOME",
@@ -197,66 +224,92 @@
             nav_shop: "SHOP",
             nav_me: "ME",
             header_pt: "POINTS",
+            // Home
+            btn_host_match: "HOST A MATCH",
+            // Event Detail
+            title_predict: "PREDICTION",
+            lbl_sponsor_task: "SPONSOR MISSION (Optional)",
+            task_desc: "Watch a 30s ad to DOUBLE your winning payout!",
+            btn_watch_ad: "WATCH & BOOST 2x",
+            boost_active: "2x BOOST ACTIVE!",
+            btn_submit_vote: "CONFIRM VOTE",
+            // Create Match
+            title_create: "HOST MATCH",
+            desc_create: "Create your competition and recruit players.",
+            lbl_c_title: "Title",
+            lbl_c_course: "Course",
+            lbl_c_date: "Date",
+            lbl_c_tags: "Tags",
+            btn_publish: "PUBLISH MATCH",
+            // Rank
+            title_rank: "STAR PLAYERS",
+            desc_rank: "Ranking by wins and support received.",
+            col_wins: "Wins",
             // Shop
             tab_items: "SUPPORT ITEMS",
             tab_rewards: "REWARDS",
             shop_item_desc: "Purchase items to support players!",
-            shop_reward_desc: "Exchange points for prizes.",
             btn_buy: "BUY",
             btn_exchange: "EXCHANGE",
             item_rose: "Rose",
             item_beer: "Beer",
             item_trophy: "Trophy",
-            // Rank
-            title_rank: "STAR PLAYERS",
-            desc_rank: "Ranking by wins and support received.",
-            col_wins: "Wins",
-            btn_support: "Support",
-            // Event Detail
-            lbl_entry: "RECRUITING PLAYERS!",
-            btn_entry_form: "JOIN THIS COMPETITION",
-            msg_host: "Newcomers welcome! Let's have fun.",
-            title_entry_form: "COMPETITION ENTRY",
-            lbl_name: "Player Name",
+            // MyPage
+            title_me: "MY PROFILE",
+            lbl_home_course: "Home Course",
             lbl_avg: "Avg Score",
-            lbl_msg: "Message to Host",
-            btn_confirm_entry: "SUBMIT ENTRY",
+            lbl_best: "Best Score",
+            lbl_hdcp: "Handicap",
+            lbl_gear_driver: "Driver",
+            lbl_gear_putter: "Putter",
+            lbl_gear_ball: "Ball",
+            btn_save: "SAVE PROFILE",
             // Misc
+            alert_boost: "BOOST ACTIVATED! 2x Payout Chance!",
+            alert_created: "Match Created!",
+            alert_saved: "Profile Saved.",
             alert_bought: "Item purchased!",
-            alert_entry: "Entry submitted! Please wait for host approval.",
         }
     };
 
     // ------------------------------------------------------------------------
     // MOCK DATA
     // ------------------------------------------------------------------------
-    // Events
     const TOURNAMENTS = [
         { 
             id: 't1', category: 'pro', title: 'マスターズ 2025', host: 'Augusta National', date: 'NOV 25', status: 'live', 
             img: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&w=600&q=80',
-            players: ['松山 英樹', 'S. Scheffler']
+            players: ['松山 英樹', 'S. Scheffler'],
+            sponsor: 'LEXUS'
         },
         { 
             id: 't2', category: 'amateur', title: 'GOLFIN 月例杯 @成田', host: 'GOLFIN運営事務局', date: 'DEC 01', status: 'soon', 
             img: 'https://images.unsplash.com/photo-1592919505780-30395071b483?auto=format&fit=crop&w=600&q=80',
             players: ['T. Tanaka', 'K. Suzuki'],
-            canJoin: true 
-        },
-        { 
-            id: 't3', category: 'event', title: 'ドラコン日本選手権', host: 'JPDA', date: 'DEC 05', status: 'soon', 
-            img: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=600&q=80',
-            players: ['飛ばし屋ケン', 'MAX鈴木']
-        },
-        { 
-            id: 't4', category: 'amateur', title: '第5回 企業対抗ゴルフ', host: '(株)SportsTech', date: 'DEC 15', status: 'soon', 
-            img: 'https://images.unsplash.com/photo-1560155016-015842858546?auto=format&fit=crop&w=600&q=80',
-            players: ['Team A', 'Team B'],
-            canJoin: true 
+            canJoin: true,
+            sponsor: 'Golf5'
         }
     ];
 
-    // Shop Items
+    let userProfile = {
+        name: "Golf Lover",
+        avg: 92,
+        best: 85,
+        hdcp: 18,
+        homeCourse: "成田ゴルフ倶楽部",
+        driver: "TaylorMade Qi10",
+        putter: "Scotty Cameron",
+        ball: "Titleist Pro V1",
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=GolfLover"
+    };
+
+    const PLAYER_RANKING = [
+        { rank: 1, name: "T. Tanaka", wins: 5, gifts: 12500, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tanaka" },
+        { rank: 2, name: "Golf_Queen", wins: 4, gifts: 8900, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Queen" },
+        { rank: 3, name: "PowerHitter", wins: 4, gifts: 6200, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Power" },
+        { rank: 4, name: "S. Suzuki", wins: 3, gifts: 4500, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Suzuki" },
+    ];
+
     const SHOP_ITEMS = [
         { id: 'i1', nameKey: 'item_rose', cost: 100, icon: '🌹', color: 'text-red-500' },
         { id: 'i2', nameKey: 'item_beer', cost: 300, icon: '🍺', color: 'text-yellow-500' },
@@ -268,37 +321,21 @@
         { id: 'r2', name: 'Pro V1 Balls (1 Dozen)', cost: 5000, img: 'https://placehold.co/100?text=BALLS' },
     ];
 
-    // Ranking Data (Players)
-    const PLAYER_RANKING = [
-        { rank: 1, name: "T. Tanaka", wins: 5, gifts: 12500, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tanaka" },
-        { rank: 2, name: "Golf_Queen", wins: 4, gifts: 8900, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Queen" },
-        { rank: 3, name: "PowerHitter", wins: 4, gifts: 6200, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Power" },
-        { rank: 4, name: "S. Suzuki", wins: 3, gifts: 4500, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Suzuki" },
-        { rank: 5, name: "(株)GOLFIN", wins: 2, gifts: 12000, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Corp" },
-    ];
-
     // ------------------------------------------------------------------------
-    // LOGIC
+    // STATE & LOGIC
     // ------------------------------------------------------------------------
     let currentLang = 'ja';
     let currentView = 'home';
     let userPoints = 1500;
-    const container = document.getElementById('view-container');
+    let isBoosted = false; // タスク完了状態
 
+    const container = document.getElementById('view-container');
     const t = (key) => TRANSLATIONS[currentLang][key] || key;
 
     function toggleLanguage() {
         currentLang = currentLang === 'ja' ? 'en' : 'ja';
         document.getElementById('lang-btn').innerText = currentLang === 'ja' ? 'JP' : 'EN';
-        
-        // Static Nav Update
-        document.getElementById('nav-home').innerText = t('nav_home');
-        document.getElementById('nav-rank').innerText = t('nav_rank');
-        document.getElementById('nav-vote').innerText = t('nav_vote');
-        document.getElementById('nav-shop').innerText = t('nav_shop');
-        document.getElementById('nav-me').innerText = t('nav_me');
-        document.getElementById('lbl-header-pt').innerText = t('header_pt');
-
+        updateStaticText();
         window.navigate(currentView, {}, false);
     }
 
@@ -307,8 +344,19 @@
         document.getElementById('header-points').innerText = userPoints.toLocaleString();
     }
 
+    function updateStaticText() {
+        document.getElementById('nav-home').innerText = t('nav_home');
+        document.getElementById('nav-rank').innerText = t('nav_rank');
+        document.getElementById('nav-vote').innerText = t('nav_vote');
+        document.getElementById('nav-shop').innerText = t('nav_shop');
+        document.getElementById('nav-me').innerText = t('nav_me');
+        document.getElementById('lbl-header-pt').innerText = t('header_pt');
+    }
+
     window.navigate = (viewName, params = {}, scrollToTop = true) => {
         currentView = viewName;
+        isBoosted = false; // Reset boost
+        
         document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
         if(viewName === 'home') document.getElementById('nav-vote').parentElement.classList.add('text-primary'); 
         const activeBtn = document.querySelector(`[data-view="${viewName}"]`);
@@ -317,9 +365,10 @@
         let html = '';
         if (viewName === 'home') html = renderHome();
         else if (viewName === 'event-detail') html = renderEventDetail(params.id);
-        else if (viewName === 'entry-form') html = renderEntryForm(params.id);
-        else if (viewName === 'shop') html = renderShop();
+        else if (viewName === 'create-comp') html = renderCreateComp();
+        else if (viewName === 'mypage') html = renderMyPage();
         else if (viewName === 'rank') html = renderRank();
+        else if (viewName === 'shop') html = renderShop();
         else html = `<div class="text-center p-10 text-gray-500">Page: ${viewName}</div>`;
 
         container.innerHTML = html;
@@ -330,15 +379,26 @@
     // ------------------------------------------------------------------------
     // RENDERERS
     // ------------------------------------------------------------------------
+
+    // 1. HOME SCREEN
     function renderHome() {
         return `
+            <!-- HOST MATCH BUTTON -->
             <div class="mb-6">
-                <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
-                    <button class="px-3 py-1 rounded-full bg-primary text-black text-xs font-bold border border-primary whitespace-nowrap">ALL</button>
-                    <button class="px-3 py-1 rounded-full bg-white/5 text-gray-400 text-xs font-bold border border-white/10 whitespace-nowrap">PRO TOUR</button>
-                    <button class="px-3 py-1 rounded-full bg-white/5 text-gray-400 text-xs font-bold border border-white/10 whitespace-nowrap">AMATEUR</button>
-                </div>
+                <button class="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-900 to-indigo-900 border border-purple-500/50 shadow-neon-purple flex items-center justify-center gap-3 group relative overflow-hidden" onclick="window.navigate('create-comp')">
+                    <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition"></div>
+                    <div class="p-2 bg-purple-500 rounded-full text-white">
+                        <i data-lucide="plus" class="w-6 h-6"></i>
+                    </div>
+                    <div class="text-left">
+                        <span class="block text-sm font-bold text-white tracking-wider">${t('btn_host_match')}</span>
+                        <span class="block text-[10px] text-purple-300">Create your own event</span>
+                    </div>
+                </button>
+            </div>
 
+            <div class="mb-6">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center"><i data-lucide="zap" class="w-4 h-4 text-primary mr-2"></i> LIVE EVENTS</h2>
                 <div class="space-y-4">
                     ${TOURNAMENTS.map(ev => `
                         <div class="glass-panel p-0 rounded-xl overflow-hidden cursor-pointer group hover:border-primary/50 transition" onclick="window.navigate('event-detail', {id: '${ev.id}'})">
@@ -347,10 +407,14 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent"></div>
                                 <div class="absolute top-3 right-3 flex gap-2">
                                     <span class="px-2 py-1 rounded text-[10px] font-bold uppercase backdrop-blur-md bg-black/40 border border-white/20">${ev.category}</span>
-                                    ${ev.canJoin ? `<span class="px-2 py-1 rounded bg-accent text-black text-[10px] font-bold animate-pulse">ENTRY OPEN</span>` : ''}
+                                </div>
+                                <div class="absolute bottom-3 left-3">
+                                    <span class="text-[10px] bg-accent text-black px-2 py-0.5 rounded font-bold flex items-center gap-1">
+                                        SPONSOR: ${ev.sponsor}
+                                    </span>
                                 </div>
                             </div>
-                            <div class="p-4 -mt-6 relative z-10">
+                            <div class="p-4 relative z-10">
                                 <h3 class="text-lg font-bold text-white leading-tight mb-1">${ev.title}</h3>
                                 <p class="text-xs text-gray-400 mb-3"><i data-lucide="map-pin" class="inline w-3 h-3"></i> ${ev.host}</p>
                                 <div class="flex justify-between items-center border-t border-white/10 pt-3">
@@ -365,14 +429,117 @@
         `;
     }
 
-    // New Ranking View (Support Focus)
+    // 2. EVENT DETAIL
+    function renderEventDetail(id) {
+        const ev = TOURNAMENTS.find(e => e.id === id) || TOURNAMENTS[0];
+        return `
+            <div class="animate-fade-in">
+                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> BACK
+                </button>
+
+                <div class="relative h-40 rounded-2xl overflow-hidden mb-6 bg-gray-800 border border-white/10">
+                    <img src="${ev.img}" class="w-full h-full object-cover opacity-60">
+                    <div class="absolute inset-0 flex flex-col justify-end p-5 bg-gradient-to-t from-bg to-transparent">
+                        <h2 class="text-2xl font-black text-white italic leading-none">${ev.title}</h2>
+                    </div>
+                </div>
+
+                <div id="task-card" class="bg-gradient-to-r from-blue-900 to-cyan-900 border border-cyan-500/50 rounded-xl p-5 mb-6 relative overflow-hidden group">
+                    <div class="absolute -right-5 -top-5 w-24 h-24 bg-cyan-500/20 rounded-full blur-xl group-hover:bg-cyan-400/30 transition"></div>
+                    <div class="flex justify-between items-start mb-2 relative z-10">
+                        <h3 class="text-sm font-bold text-cyan-300 flex items-center gap-2">
+                            <i data-lucide="monitor-play" class="w-4 h-4"></i> ${t('lbl_sponsor_task')}
+                        </h3>
+                        <span class="text-[10px] bg-black/30 px-2 py-0.5 rounded text-white border border-white/10">Free</span>
+                    </div>
+                    <p class="text-xs text-gray-200 mb-4 relative z-10">${t('task_desc')}</p>
+                    <button id="btn-boost" class="w-full py-2 bg-cyan-500 text-black font-black font-display text-sm rounded-lg hover:bg-cyan-400 transition shadow-lg flex justify-center items-center gap-2" onclick="activateBoost(this)">
+                        <i data-lucide="play" class="w-4 h-4 fill-current"></i> ${t('btn_watch_ad')}
+                    </button>
+                </div>
+
+                <div class="glass-panel p-5 rounded-xl mb-6">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i data-lucide="crosshair" class="w-5 h-5 text-primary"></i> ${t('title_predict')}
+                    </h3>
+                    <div class="space-y-3 mb-6">
+                        ${ev.players.map((p, i) => `
+                            <label class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10 cursor-pointer hover:border-primary transition group">
+                                <div class="flex items-center gap-3">
+                                    <input type="radio" name="pred" class="accent-primary w-4 h-4">
+                                    <span class="text-sm font-bold text-white group-hover:text-primary transition">${p}</span>
+                                </div>
+                                <span class="text-primary font-mono font-bold">x${(Math.random() * 5 + 1.5).toFixed(1)}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <button class="w-full py-3 rounded-xl bg-white/10 text-gray-400 font-bold text-sm cursor-not-allowed border border-white/5 transition hover:bg-primary hover:text-black hover:border-primary hover:shadow-neon" onclick="alert('Voted!')">
+                        ${t('btn_submit_vote')}
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    function activateBoost(btn) {
+        btn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Playing Ad...`;
+        setTimeout(() => {
+            isBoosted = true;
+            const taskCard = document.getElementById('task-card');
+            taskCard.classList.remove('from-blue-900', 'to-cyan-900', 'border-cyan-500/50');
+            taskCard.classList.add('from-accent/20', 'to-yellow-900/40', 'border-accent', 'boost-active');
+            taskCard.innerHTML = `
+                <div class="flex items-center justify-center gap-2 h-full py-4">
+                    <i data-lucide="zap" class="w-8 h-8 text-accent fill-current animate-bounce"></i>
+                    <div>
+                        <p class="text-xl font-black text-accent font-display">${t('boost_active')}</p>
+                        <p class="text-xs text-white">Win payout x2.0 applied!</p>
+                    </div>
+                </div>
+            `;
+            alert(t('alert_boost'));
+            if(window.lucide) window.lucide.createIcons();
+        }, 1500);
+    }
+
+    // 3. CREATE MATCH
+    function renderCreateComp() {
+        return `
+            <div class="animate-fade-in">
+                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
+                    <i data-lucide="x" class="w-4 h-4 mr-1"></i> CANCEL
+                </button>
+                <h2 class="text-2xl font-display font-black text-white mb-2">${t('title_create')}</h2>
+                <p class="text-xs text-gray-400 mb-6">${t('desc_create')}</p>
+                
+                <div class="glass-panel p-5 rounded-xl space-y-4">
+                    <div>
+                        <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_c_title')}</label>
+                        <input type="text" class="input-tech w-full p-3 rounded-lg" placeholder="ex: 第3回 下町ゴルフコンペ">
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_c_course')}</label>
+                        <div class="relative">
+                            <i data-lucide="map-pin" class="absolute left-3 top-3.5 w-4 h-4 text-gray-500"></i>
+                            <input type="text" class="input-tech w-full pl-9 p-3 rounded-lg" placeholder="Search golf course...">
+                        </div>
+                    </div>
+                    <button class="w-full py-3 rounded-xl bg-purple-600 text-white font-bold mt-2 shadow-neon-purple hover:bg-purple-500 transition" onclick="alert('${t('alert_created')}'); window.navigate('home')">
+                        ${t('btn_publish')}
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    // 4. RANKING
     function renderRank() {
         return `
             <div class="mb-6 text-center">
                 <h2 class="text-2xl font-display font-black text-white italic">${t('title_rank')}</h2>
                 <p class="text-xs text-gray-400">${t('desc_rank')}</p>
             </div>
-
             <div class="space-y-3">
                 ${PLAYER_RANKING.map((p, i) => {
                     let rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'bg-white/10 text-gray-400';
@@ -400,7 +567,7 @@
         `;
     }
 
-    // Improved Shop (Items + Rewards)
+    // 5. SHOP
     function renderShop() {
         return `
             <div class="mb-6">
@@ -428,9 +595,8 @@
                     `).join('')}
                 </div>
 
-                <!-- Rewards (Hidden by default) -->
+                <!-- Rewards -->
                 <div id="shop-rewards" class="hidden grid-cols-2 gap-3 animate-fade-in">
-                    <div class="col-span-2"><p class="text-xs text-gray-400 mb-2">${t('shop_reward_desc')}</p></div>
                     ${REWARDS.map(r => `
                         <div class="glass-panel p-3 rounded-xl flex flex-col h-full">
                             <img src="${r.img}" class="w-full h-24 object-cover rounded-lg mb-3 bg-gray-800">
@@ -448,87 +614,68 @@
         `;
     }
 
-    function renderEventDetail(id) {
-        const ev = TOURNAMENTS.find(e => e.id === id) || TOURNAMENTS[0];
-        
+    // 6. MY PAGE (Enhanced)
+    function renderMyPage() {
         return `
             <div class="animate-fade-in">
-                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
-                    <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> BACK
-                </button>
-
-                <div class="relative h-48 rounded-2xl overflow-hidden mb-6 bg-gray-800 border border-white/10">
-                    <img src="${ev.img}" class="w-full h-full object-cover opacity-60">
-                    <div class="absolute inset-0 flex flex-col justify-end p-5 bg-gradient-to-t from-bg to-transparent">
-                        <span class="bg-primary text-black text-[10px] font-bold px-2 py-1 rounded w-fit mb-2 uppercase">${ev.category}</span>
-                        <h2 class="text-2xl font-black text-white italic leading-none">${ev.title}</h2>
-                        <p class="text-xs text-gray-300 mt-1">${ev.host}</p>
+                <h2 class="text-xl font-display font-black text-white mb-6">${t('title_me')}</h2>
+                
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-20 h-20 rounded-full border-2 border-primary p-1">
+                        <img src="${userProfile.avatar}" class="w-full h-full rounded-full bg-gray-700">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">${userProfile.name}</h3>
+                        <p class="text-xs text-gray-400">ID: #8821 | <span class="text-primary">Premium Member</span></p>
                     </div>
                 </div>
 
-                <!-- 参加登録エリア (アマチュアのみ) -->
-                ${ev.canJoin ? `
-                <div class="bg-gradient-to-r from-purple-900/60 to-blue-900/60 border border-purple-500/50 rounded-xl p-5 mb-6 text-center">
-                    <h3 class="text-lg font-bold text-white mb-1 flex justify-center items-center gap-2">
-                        <i data-lucide="user-plus" class="w-5 h-5 text-accent"></i> ${t('lbl_entry')}
-                    </h3>
-                    <p class="text-xs text-purple-200 mb-4">${t('msg_host')}</p>
-                    <button class="w-full py-3 rounded-xl bg-accent text-black font-black font-display shadow-neon hover:scale-105 transition" onclick="window.navigate('entry-form', {id:'${ev.id}'})">
-                        ${t('btn_entry_form')}
-                    </button>
+                <!-- NEW: Home Course -->
+                <div class="glass-panel p-4 rounded-xl mb-4 flex items-center justify-between">
+                    <span class="text-xs text-gray-400 font-bold"><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> ${t('lbl_home_course')}</span>
+                    <input type="text" class="bg-transparent text-right text-sm text-white font-bold outline-none focus:border-b border-primary" value="${userProfile.homeCourse}">
                 </div>
-                ` : ''}
 
                 <div class="glass-panel p-5 rounded-xl mb-6">
-                    <h3 class="text-lg font-bold text-white mb-4">優勝予想</h3>
-                    <div class="space-y-3">
-                        ${ev.players.map((p, i) => `
-                            <label class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10 cursor-pointer hover:border-primary transition">
-                                <div class="flex items-center gap-3">
-                                    <input type="radio" name="pred" class="accent-primary w-4 h-4">
-                                    <span class="text-sm font-bold text-white">${p}</span>
-                                </div>
-                                <span class="text-primary font-mono font-bold">x${(Math.random() * 5 + 1.5).toFixed(1)}</span>
-                            </label>
-                        `).join('')}
+                    <h3 class="text-sm font-bold text-gray-400 mb-4 border-b border-white/10 pb-2">STATS</h3>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <p class="text-[10px] text-gray-500 mb-1">${t('lbl_avg')}</p>
+                            <input type="number" class="w-full bg-transparent text-center font-display font-bold text-xl text-white border-b border-white/20 focus:border-primary outline-none" value="${userProfile.avg}">
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-gray-500 mb-1">${t('lbl_best')}</p>
+                            <input type="number" class="w-full bg-transparent text-center font-display font-bold text-xl text-accent border-b border-white/20 focus:border-primary outline-none" value="${userProfile.best}">
+                        </div>
+                         <div>
+                            <p class="text-[10px] text-gray-500 mb-1">${t('lbl_hdcp')}</p>
+                            <input type="number" class="w-full bg-transparent text-center font-display font-bold text-xl text-white border-b border-white/20 focus:border-primary outline-none" value="${userProfile.hdcp}">
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
-    }
 
-    // Entry Form Page
-    function renderEntryForm(id) {
-        const ev = TOURNAMENTS.find(e => e.id === id) || TOURNAMENTS[0];
-        return `
-            <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('event-detail', {id:'${id}'})">
-                <i data-lucide="x" class="w-4 h-4 mr-1"></i> キャンセル
-            </button>
-            <h2 class="text-2xl font-display font-black text-white mb-2">${t('title_entry_form')}</h2>
-            <p class="text-xs text-gray-400 mb-6">${ev.title}</p>
-            
-            <div class="glass-panel p-5 rounded-xl space-y-4">
-                <div>
-                    <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_name')}</label>
-                    <input type="text" class="input-tech w-full p-3 rounded-lg" value="Golf Lover">
+                <div class="glass-panel p-5 rounded-xl mb-6">
+                    <h3 class="text-sm font-bold text-gray-400 mb-4 border-b border-white/10 pb-2">IN THE BAG</h3>
+                    <div class="mb-4">
+                        <label class="text-xs text-gray-500 block mb-1">${t('lbl_gear_driver')}</label>
+                        <input type="text" class="input-tech w-full p-2 rounded text-sm" value="${userProfile.driver}">
+                    </div>
+                    <div class="mb-4">
+                        <label class="text-xs text-gray-500 block mb-1">${t('lbl_gear_putter')}</label>
+                        <input type="text" class="input-tech w-full p-2 rounded text-sm" value="${userProfile.putter}">
+                    </div>
+                    <div class="mb-2">
+                        <label class="text-xs text-gray-500 block mb-1">${t('lbl_gear_ball')}</label>
+                        <input type="text" class="input-tech w-full p-2 rounded text-sm" value="${userProfile.ball}">
+                    </div>
                 </div>
-                <div>
-                    <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_avg')}</label>
-                    <input type="number" class="input-tech w-full p-3 rounded-lg" value="90">
-                </div>
-                <div>
-                    <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_msg')}</label>
-                    <textarea class="input-tech w-full p-3 rounded-lg" rows="3" placeholder="よろしくお願いします！"></textarea>
-                </div>
-                <button class="w-full py-3 rounded-xl bg-primary text-black font-bold mt-2 hover:shadow-neon transition" onclick="alert('${t('alert_entry')}'); window.navigate('event-detail', {id:'${id}'})">
-                    ${t('btn_confirm_entry')}
+
+                <button class="w-full py-3 rounded-xl bg-primary/20 border border-primary text-primary font-bold hover:bg-primary hover:text-black transition" onclick="alert('${t('alert_saved')}')">
+                    ${t('btn_save')}
                 </button>
             </div>
         `;
     }
-
-    // Placeholder
-    function renderMyPage() { return `<div class="text-center text-white mt-10">My Page Mockup</div>`; }
 
     // Init
     document.addEventListener('DOMContentLoaded', () => {
