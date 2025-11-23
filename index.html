@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GOLFIN | Play, Predict, Earn</title>
+    <title>GOLFIN | Play, Predict, Sponsor</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -31,11 +31,13 @@
                         accent: '#FACC15',  // Gold
                         pink: '#ec4899',
                         purple: '#8b5cf6',
+                        corp: '#3b82f6',    // Corporate Blue
                     },
                     boxShadow: {
                         'neon': '0 0 15px rgba(0, 255, 163, 0.3)',
                         'neon-pink': '0 0 15px rgba(236, 72, 153, 0.4)',
-                        'neon-purple': '0 0 20px rgba(139, 92, 246, 0.4)',
+                        'neon-corp': '0 0 15px rgba(59, 130, 246, 0.4)',
+                        'neon-purple': '0 0 15px rgba(139, 92, 246, 0.4)',
                     },
                     animation: {
                         'pulse-slow': 'pulse 3s infinite',
@@ -93,7 +95,7 @@
 
         .tab-active { border-bottom: 2px solid #00FFA3; color: white; }
         .tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }
-        
+
         /* Boost Effect */
         .boost-active {
             border: 1px solid #FACC15;
@@ -196,26 +198,40 @@
             tab_items: "応援アイテム",
             tab_rewards: "景品交換",
             shop_item_desc: "選手やコンペ主催者を応援しよう！",
+            shop_reward_desc: "ポイントを素敵な景品と交換申請。",
             btn_buy: "購入する",
             btn_exchange: "交換申請",
             item_rose: "応援のバラ",
             item_beer: "お疲れビール",
             item_trophy: "勝利のトロフィー",
-            // MyPage
+            // Me / In the bag
             title_me: "マイプロフィール",
             lbl_home_course: "ホームコース",
             lbl_avg: "平均スコア",
             lbl_best: "ベストスコア",
             lbl_hdcp: "ハンディキャップ",
-            lbl_gear_driver: "ドライバー",
-            lbl_gear_putter: "パター",
-            lbl_gear_ball: "使用ボール",
+            lbl_bag_title: "IN THE BAG (使用ギア)",
+            lbl_dr: "ドライバー",
+            lbl_fw: "FW/UT",
+            lbl_ir: "アイアン",
+            lbl_wg: "ウェッジ",
+            lbl_pt: "パター",
+            lbl_ball: "ボール",
             btn_save: "プロフィールを保存",
+            // Sponsorship
+            btn_sponsor_this: "このコンペに協賛する",
+            title_sponsor_form: "協賛申し込み",
+            desc_sponsor_form: "このコンペに賞品提供や資金援助を行い、企業PRをしませんか？",
+            lbl_sponsor_name: "企業名 / 団体名",
+            lbl_offer: "協賛内容 (例: 優勝賞品)",
+            btn_submit_sponsor: "協賛を申し込む",
             // Misc
+            alert_bought: "アイテムを購入しました！",
+            alert_exchange: "交換申請を受け付けました。",
+            alert_saved: "プロフィールを保存しました。",
+            alert_sponsor: "協賛申し込みを送信しました！主催者からの連絡をお待ちください。",
             alert_boost: "ブーストが適用されました！配当2倍チャンス！",
             alert_created: "コンペを作成しました！ホーム画面に表示されます。",
-            alert_saved: "プロフィールを更新しました。",
-            alert_bought: "アイテムを購入しました！",
         },
         en: {
             nav_home: "HOME",
@@ -249,59 +265,71 @@
             tab_items: "SUPPORT ITEMS",
             tab_rewards: "REWARDS",
             shop_item_desc: "Purchase items to support players!",
+            shop_reward_desc: "Exchange points for rewards.",
             btn_buy: "BUY",
             btn_exchange: "EXCHANGE",
             item_rose: "Rose",
             item_beer: "Beer",
             item_trophy: "Trophy",
-            // MyPage
+            // Me
             title_me: "MY PROFILE",
             lbl_home_course: "Home Course",
             lbl_avg: "Avg Score",
             lbl_best: "Best Score",
             lbl_hdcp: "Handicap",
-            lbl_gear_driver: "Driver",
-            lbl_gear_putter: "Putter",
-            lbl_gear_ball: "Ball",
+            lbl_bag_title: "IN THE BAG",
+            lbl_dr: "Driver",
+            lbl_fw: "FW/UT",
+            lbl_ir: "Irons",
+            lbl_wg: "Wedges",
+            lbl_pt: "Putter",
+            lbl_ball: "Ball",
             btn_save: "SAVE PROFILE",
+            // Sponsorship
+            btn_sponsor_this: "BECOME A SPONSOR",
+            title_sponsor_form: "Sponsorship Application",
+            desc_sponsor_form: "Support this event with prizes or funds and promote your brand.",
+            lbl_sponsor_name: "Company Name",
+            lbl_offer: "Offer (e.g. Prize)",
+            btn_submit_sponsor: "SUBMIT OFFER",
             // Misc
+            alert_bought: "Item purchased!",
+            alert_exchange: "Exchange request sent.",
+            alert_saved: "Profile Saved.",
+            alert_sponsor: "Application sent! Please wait for host approval.",
             alert_boost: "BOOST ACTIVATED! 2x Payout Chance!",
             alert_created: "Match Created!",
-            alert_saved: "Profile Saved.",
-            alert_bought: "Item purchased!",
         }
     };
 
     // ------------------------------------------------------------------------
     // MOCK DATA
     // ------------------------------------------------------------------------
-    const TOURNAMENTS = [
-        { 
-            id: 't1', category: 'pro', title: 'マスターズ 2025', host: 'Augusta National', date: 'NOV 25', status: 'live', 
-            img: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&w=600&q=80',
-            players: ['松山 英樹', 'S. Scheffler'],
-            sponsor: 'LEXUS'
-        },
-        { 
-            id: 't2', category: 'amateur', title: 'GOLFIN 月例杯 @成田', host: 'GOLFIN運営事務局', date: 'DEC 01', status: 'soon', 
-            img: 'https://images.unsplash.com/photo-1592919505780-30395071b483?auto=format&fit=crop&w=600&q=80',
-            players: ['T. Tanaka', 'K. Suzuki'],
-            canJoin: true,
-            sponsor: 'Golf5'
-        }
-    ];
-
+    let userPoints = 1500;
+    let isBoosted = false;
+    
     let userProfile = {
+        id: 'u1',
         name: "Golf Lover",
-        avg: 92,
-        best: 85,
-        hdcp: 18,
+        type: 'personal', 
+        avg: 92, best: 85, hdcp: 18,
         homeCourse: "成田ゴルフ倶楽部",
+        // In the bag data
         driver: "TaylorMade Qi10",
-        putter: "Scotty Cameron",
+        fw: "Callaway Paradym 3W",
+        irons: "Mizuno Pro 243",
+        wedges: "Vokey SM9 52/58",
+        putter: "Scotty Cameron Newport 2",
         ball: "Titleist Pro V1",
-        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=GolfLover"
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=GolfLover",
+        following: 42,
+        followers: 128
     };
+
+    const TOURNAMENTS = [
+        { id: 't1', category: 'pro', title: 'マスターズ 2025', host: 'Augusta National', date: 'NOV 25', status: 'live', img: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&w=600&q=80', sponsor: 'LEXUS', players: ['M. Matsuyama', 'S. Scheffler'] },
+        { id: 't2', category: 'amateur', title: 'GOLFIN 月例杯 @成田', host: 'GOLFIN運営事務局', date: 'DEC 01', status: 'soon', img: 'https://images.unsplash.com/photo-1592919505780-30395071b483?auto=format&fit=crop&w=600&q=80', sponsor: 'Golf5', players: ['T. Tanaka', 'K. Suzuki'] }
+    ];
 
     const PLAYER_RANKING = [
         { rank: 1, name: "T. Tanaka", wins: 5, gifts: 12500, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tanaka" },
@@ -319,6 +347,7 @@
     const REWARDS = [
         { id: 'r1', name: 'Amazon Gift Card (¥1,000)', cost: 1000, img: 'https://placehold.co/100?text=AMZN' },
         { id: 'r2', name: 'Pro V1 Balls (1 Dozen)', cost: 5000, img: 'https://placehold.co/100?text=BALLS' },
+        { id: 'r3', name: 'GOLFIN Original Cap', cost: 3000, img: 'https://placehold.co/100?text=CAP' },
     ];
 
     // ------------------------------------------------------------------------
@@ -326,9 +355,6 @@
     // ------------------------------------------------------------------------
     let currentLang = 'ja';
     let currentView = 'home';
-    let userPoints = 1500;
-    let isBoosted = false; // タスク完了状態
-
     const container = document.getElementById('view-container');
     const t = (key) => TRANSLATIONS[currentLang][key] || key;
 
@@ -339,11 +365,6 @@
         window.navigate(currentView, {}, false);
     }
 
-    function updatePoints(amount) {
-        userPoints += amount;
-        document.getElementById('header-points').innerText = userPoints.toLocaleString();
-    }
-
     function updateStaticText() {
         document.getElementById('nav-home').innerText = t('nav_home');
         document.getElementById('nav-rank').innerText = t('nav_rank');
@@ -351,6 +372,11 @@
         document.getElementById('nav-shop').innerText = t('nav_shop');
         document.getElementById('nav-me').innerText = t('nav_me');
         document.getElementById('lbl-header-pt').innerText = t('header_pt');
+    }
+
+    function updatePoints(amount) {
+        userPoints += amount;
+        document.getElementById('header-points').innerText = userPoints.toLocaleString();
     }
 
     window.navigate = (viewName, params = {}, scrollToTop = true) => {
@@ -364,11 +390,12 @@
 
         let html = '';
         if (viewName === 'home') html = renderHome();
-        else if (viewName === 'event-detail') html = renderEventDetail(params.id);
-        else if (viewName === 'create-comp') html = renderCreateComp();
-        else if (viewName === 'mypage') html = renderMyPage();
         else if (viewName === 'rank') html = renderRank();
         else if (viewName === 'shop') html = renderShop();
+        else if (viewName === 'mypage') html = renderMyPage();
+        else if (viewName === 'event-detail') html = renderEventDetail(params.id);
+        else if (viewName === 'sponsor-form') html = renderSponsorForm(params.id);
+        else if (viewName === 'create-comp') html = renderCreateComp();
         else html = `<div class="text-center p-10 text-gray-500">Page: ${viewName}</div>`;
 
         container.innerHTML = html;
@@ -380,163 +407,43 @@
     // RENDERERS
     // ------------------------------------------------------------------------
 
-    // 1. HOME SCREEN
+    // 1. HOME (Match List & Create)
     function renderHome() {
         return `
-            <!-- HOST MATCH BUTTON -->
-            <div class="mb-6">
-                <button class="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-900 to-indigo-900 border border-purple-500/50 shadow-neon-purple flex items-center justify-center gap-3 group relative overflow-hidden" onclick="window.navigate('create-comp')">
-                    <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition"></div>
-                    <div class="p-2 bg-purple-500 rounded-full text-white">
-                        <i data-lucide="plus" class="w-6 h-6"></i>
-                    </div>
+            <div class="mb-6 animate-fade-in">
+                <button class="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-900 to-indigo-900 border border-purple-500/50 shadow-neon-purple flex items-center justify-center gap-3 group" onclick="window.navigate('create-comp')">
+                    <div class="p-2 bg-purple-500 rounded-full text-white"><i data-lucide="plus" class="w-6 h-6"></i></div>
                     <div class="text-left">
                         <span class="block text-sm font-bold text-white tracking-wider">${t('btn_host_match')}</span>
-                        <span class="block text-[10px] text-purple-300">Create your own event</span>
                     </div>
                 </button>
             </div>
-
-            <div class="mb-6">
-                <h2 class="text-lg font-bold text-white mb-4 flex items-center"><i data-lucide="zap" class="w-4 h-4 text-primary mr-2"></i> LIVE EVENTS</h2>
-                <div class="space-y-4">
-                    ${TOURNAMENTS.map(ev => `
-                        <div class="glass-panel p-0 rounded-xl overflow-hidden cursor-pointer group hover:border-primary/50 transition" onclick="window.navigate('event-detail', {id: '${ev.id}'})">
-                            <div class="h-32 relative">
-                                <img src="${ev.img}" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent"></div>
-                                <div class="absolute top-3 right-3 flex gap-2">
-                                    <span class="px-2 py-1 rounded text-[10px] font-bold uppercase backdrop-blur-md bg-black/40 border border-white/20">${ev.category}</span>
-                                </div>
-                                <div class="absolute bottom-3 left-3">
-                                    <span class="text-[10px] bg-accent text-black px-2 py-0.5 rounded font-bold flex items-center gap-1">
-                                        SPONSOR: ${ev.sponsor}
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="p-4 relative z-10">
-                                <h3 class="text-lg font-bold text-white leading-tight mb-1">${ev.title}</h3>
-                                <p class="text-xs text-gray-400 mb-3"><i data-lucide="map-pin" class="inline w-3 h-3"></i> ${ev.host}</p>
-                                <div class="flex justify-between items-center border-t border-white/10 pt-3">
-                                    <span class="text-xs text-primary font-bold">VOTE NOW <i data-lucide="chevron-right" class="inline w-3 h-3"></i></span>
-                                    <span class="text-[10px] text-gray-500">${ev.date}</span>
-                                </div>
+            <div class="space-y-4">
+                ${TOURNAMENTS.map(ev => `
+                    <div class="glass-panel p-0 rounded-xl overflow-hidden cursor-pointer group hover:border-primary/50 transition" onclick="window.navigate('event-detail', {id: '${ev.id}'})">
+                        <div class="h-32 relative">
+                            <img src="${ev.img}" class="w-full h-full object-cover opacity-70">
+                            <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent"></div>
+                            <div class="absolute top-3 right-3"><span class="px-2 py-1 rounded text-[10px] font-bold uppercase backdrop-blur-md bg-black/40 border border-white/20">${ev.category}</span></div>
+                        </div>
+                        <div class="p-4 -mt-6 relative z-10">
+                            <h3 class="text-lg font-bold text-white mb-1">${ev.title}</h3>
+                            <p class="text-xs text-gray-400">${ev.host}</p>
+                            <div class="mt-2 flex items-center justify-between border-t border-white/10 pt-2">
+                                <span class="text-[10px] text-gray-500">SPONSOR: ${ev.sponsor}</span>
+                                <span class="text-xs font-bold text-primary">VOTE ></span>
                             </div>
                         </div>
-                    `).join('')}
-                </div>
+                    </div>
+                `).join('')}
             </div>
         `;
     }
 
-    // 2. EVENT DETAIL
-    function renderEventDetail(id) {
-        const ev = TOURNAMENTS.find(e => e.id === id) || TOURNAMENTS[0];
-        return `
-            <div class="animate-fade-in">
-                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
-                    <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> BACK
-                </button>
-
-                <div class="relative h-40 rounded-2xl overflow-hidden mb-6 bg-gray-800 border border-white/10">
-                    <img src="${ev.img}" class="w-full h-full object-cover opacity-60">
-                    <div class="absolute inset-0 flex flex-col justify-end p-5 bg-gradient-to-t from-bg to-transparent">
-                        <h2 class="text-2xl font-black text-white italic leading-none">${ev.title}</h2>
-                    </div>
-                </div>
-
-                <div id="task-card" class="bg-gradient-to-r from-blue-900 to-cyan-900 border border-cyan-500/50 rounded-xl p-5 mb-6 relative overflow-hidden group">
-                    <div class="absolute -right-5 -top-5 w-24 h-24 bg-cyan-500/20 rounded-full blur-xl group-hover:bg-cyan-400/30 transition"></div>
-                    <div class="flex justify-between items-start mb-2 relative z-10">
-                        <h3 class="text-sm font-bold text-cyan-300 flex items-center gap-2">
-                            <i data-lucide="monitor-play" class="w-4 h-4"></i> ${t('lbl_sponsor_task')}
-                        </h3>
-                        <span class="text-[10px] bg-black/30 px-2 py-0.5 rounded text-white border border-white/10">Free</span>
-                    </div>
-                    <p class="text-xs text-gray-200 mb-4 relative z-10">${t('task_desc')}</p>
-                    <button id="btn-boost" class="w-full py-2 bg-cyan-500 text-black font-black font-display text-sm rounded-lg hover:bg-cyan-400 transition shadow-lg flex justify-center items-center gap-2" onclick="activateBoost(this)">
-                        <i data-lucide="play" class="w-4 h-4 fill-current"></i> ${t('btn_watch_ad')}
-                    </button>
-                </div>
-
-                <div class="glass-panel p-5 rounded-xl mb-6">
-                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                        <i data-lucide="crosshair" class="w-5 h-5 text-primary"></i> ${t('title_predict')}
-                    </h3>
-                    <div class="space-y-3 mb-6">
-                        ${ev.players.map((p, i) => `
-                            <label class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10 cursor-pointer hover:border-primary transition group">
-                                <div class="flex items-center gap-3">
-                                    <input type="radio" name="pred" class="accent-primary w-4 h-4">
-                                    <span class="text-sm font-bold text-white group-hover:text-primary transition">${p}</span>
-                                </div>
-                                <span class="text-primary font-mono font-bold">x${(Math.random() * 5 + 1.5).toFixed(1)}</span>
-                            </label>
-                        `).join('')}
-                    </div>
-                    <button class="w-full py-3 rounded-xl bg-white/10 text-gray-400 font-bold text-sm cursor-not-allowed border border-white/5 transition hover:bg-primary hover:text-black hover:border-primary hover:shadow-neon" onclick="alert('Voted!')">
-                        ${t('btn_submit_vote')}
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-
-    function activateBoost(btn) {
-        btn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Playing Ad...`;
-        setTimeout(() => {
-            isBoosted = true;
-            const taskCard = document.getElementById('task-card');
-            taskCard.classList.remove('from-blue-900', 'to-cyan-900', 'border-cyan-500/50');
-            taskCard.classList.add('from-accent/20', 'to-yellow-900/40', 'border-accent', 'boost-active');
-            taskCard.innerHTML = `
-                <div class="flex items-center justify-center gap-2 h-full py-4">
-                    <i data-lucide="zap" class="w-8 h-8 text-accent fill-current animate-bounce"></i>
-                    <div>
-                        <p class="text-xl font-black text-accent font-display">${t('boost_active')}</p>
-                        <p class="text-xs text-white">Win payout x2.0 applied!</p>
-                    </div>
-                </div>
-            `;
-            alert(t('alert_boost'));
-            if(window.lucide) window.lucide.createIcons();
-        }, 1500);
-    }
-
-    // 3. CREATE MATCH
-    function renderCreateComp() {
-        return `
-            <div class="animate-fade-in">
-                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
-                    <i data-lucide="x" class="w-4 h-4 mr-1"></i> CANCEL
-                </button>
-                <h2 class="text-2xl font-display font-black text-white mb-2">${t('title_create')}</h2>
-                <p class="text-xs text-gray-400 mb-6">${t('desc_create')}</p>
-                
-                <div class="glass-panel p-5 rounded-xl space-y-4">
-                    <div>
-                        <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_c_title')}</label>
-                        <input type="text" class="input-tech w-full p-3 rounded-lg" placeholder="ex: 第3回 下町ゴルフコンペ">
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_c_course')}</label>
-                        <div class="relative">
-                            <i data-lucide="map-pin" class="absolute left-3 top-3.5 w-4 h-4 text-gray-500"></i>
-                            <input type="text" class="input-tech w-full pl-9 p-3 rounded-lg" placeholder="Search golf course...">
-                        </div>
-                    </div>
-                    <button class="w-full py-3 rounded-xl bg-purple-600 text-white font-bold mt-2 shadow-neon-purple hover:bg-purple-500 transition" onclick="alert('${t('alert_created')}'); window.navigate('home')">
-                        ${t('btn_publish')}
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-
-    // 4. RANKING
+    // 2. RANKING
     function renderRank() {
         return `
-            <div class="mb-6 text-center">
+            <div class="mb-6 text-center animate-fade-in">
                 <h2 class="text-2xl font-display font-black text-white italic">${t('title_rank')}</h2>
                 <p class="text-xs text-gray-400">${t('desc_rank')}</p>
             </div>
@@ -567,46 +474,171 @@
         `;
     }
 
-    // 5. SHOP
+    // 3. EVENT DETAIL (Vote + Boost + Sponsor Button)
+    function renderEventDetail(id) {
+        const ev = TOURNAMENTS.find(e => e.id === id) || TOURNAMENTS[0];
+        
+        return `
+            <div class="animate-fade-in">
+                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> BACK
+                </button>
+
+                <!-- Event Header -->
+                <div class="relative h-40 rounded-2xl overflow-hidden mb-4 bg-gray-800 border border-white/10">
+                    <img src="${ev.img}" class="w-full h-full object-cover opacity-60">
+                    <div class="absolute inset-0 flex flex-col justify-end p-5 bg-gradient-to-t from-bg to-transparent">
+                        <span class="bg-primary text-black text-[10px] font-bold px-2 py-1 rounded w-fit mb-2 uppercase">${ev.category}</span>
+                        <h2 class="text-2xl font-black text-white italic leading-none">${ev.title}</h2>
+                    </div>
+                </div>
+
+                <!-- TASK/BOOST CARD (Restored) -->
+                <div id="task-card" class="bg-gradient-to-r from-blue-900 to-cyan-900 border border-cyan-500/50 rounded-xl p-5 mb-6 relative overflow-hidden group">
+                    <div class="absolute -right-5 -top-5 w-24 h-24 bg-cyan-500/20 rounded-full blur-xl group-hover:bg-cyan-400/30 transition"></div>
+                    <div class="flex justify-between items-start mb-2 relative z-10">
+                        <h3 class="text-sm font-bold text-cyan-300 flex items-center gap-2">
+                            <i data-lucide="monitor-play" class="w-4 h-4"></i> ${t('lbl_sponsor_task')}
+                        </h3>
+                        <span class="text-[10px] bg-black/30 px-2 py-0.5 rounded text-white border border-white/10">Free</span>
+                    </div>
+                    <p class="text-xs text-gray-200 mb-4 relative z-10">${t('task_desc')}</p>
+                    <button id="btn-boost" class="w-full py-2 bg-cyan-500 text-black font-black font-display text-sm rounded-lg hover:bg-cyan-400 transition shadow-lg flex justify-center items-center gap-2" onclick="activateBoost(this)">
+                        <i data-lucide="play" class="w-4 h-4 fill-current"></i> ${t('btn_watch_ad')}
+                    </button>
+                </div>
+                
+                <!-- SPONSOR BUTTON -->
+                <button class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-900 to-indigo-900 border border-blue-500 text-white font-bold text-sm shadow-neon-corp flex items-center justify-center gap-2 mb-6 hover:scale-105 transition" onclick="window.navigate('sponsor-form', {id: '${ev.id}'})">
+                    <i data-lucide="handshake" class="w-5 h-5 text-blue-400"></i>
+                    ${t('btn_sponsor_this')}
+                </button>
+
+                <!-- Voting Section -->
+                <div class="glass-panel p-5 rounded-xl mb-6">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i data-lucide="crosshair" class="w-5 h-5 text-primary"></i> ${t('title_predict')}
+                    </h3>
+                    <div class="space-y-3 mb-6">
+                        ${ev.players.map((p, i) => `
+                            <label class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10 cursor-pointer hover:border-primary transition group">
+                                <div class="flex items-center gap-3">
+                                    <input type="radio" name="pred" class="accent-primary w-4 h-4">
+                                    <span class="text-sm font-bold text-white group-hover:text-primary transition">${p}</span>
+                                </div>
+                                <span class="text-primary font-mono font-bold">x${(Math.random() * 5 + 1.5).toFixed(1)}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <button class="w-full py-3 rounded-xl bg-white/10 text-gray-400 font-bold text-sm cursor-not-allowed border border-white/5 transition hover:bg-primary hover:text-black hover:border-primary hover:shadow-neon" onclick="alert('Voted!')">
+                        ${t('btn_submit_vote')}
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Boost Logic
+    function activateBoost(btn) {
+        btn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Playing Ad...`;
+        setTimeout(() => {
+            isBoosted = true;
+            const taskCard = document.getElementById('task-card');
+            taskCard.classList.remove('from-blue-900', 'to-cyan-900', 'border-cyan-500/50');
+            taskCard.classList.add('from-accent/20', 'to-yellow-900/40', 'border-accent', 'boost-active');
+            taskCard.innerHTML = `
+                <div class="flex items-center justify-center gap-2 h-full py-4">
+                    <i data-lucide="zap" class="w-8 h-8 text-accent fill-current animate-bounce"></i>
+                    <div>
+                        <p class="text-xl font-black text-accent font-display">${t('boost_active')}</p>
+                        <p class="text-xs text-white">Win payout x2.0 applied!</p>
+                    </div>
+                </div>
+            `;
+            alert(t('alert_boost'));
+            if(window.lucide) window.lucide.createIcons();
+        }, 1500);
+    }
+
+    // 4. SPONSOR FORM
+    function renderSponsorForm(id) {
+        const ev = TOURNAMENTS.find(e => e.id === id) || TOURNAMENTS[0];
+        return `
+            <div class="animate-fade-in">
+                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('event-detail', {id:'${id}'})">
+                    <i data-lucide="x" class="w-4 h-4 mr-1"></i> CANCEL
+                </button>
+                <h2 class="text-2xl font-display font-black text-white mb-2 flex items-center gap-2"><i data-lucide="handshake" class="text-corp"></i> ${t('title_sponsor_form')}</h2>
+                <p class="text-xs text-gray-400 mb-6">${t('desc_sponsor_form')}</p>
+                <div class="glass-panel p-5 rounded-xl space-y-4">
+                    <div>
+                        <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_sponsor_name')}</label>
+                        <input type="text" class="input-tech w-full p-3 rounded-lg" placeholder="Ex: GOLFIN Inc.">
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_offer')}</label>
+                        <textarea class="input-tech w-full p-3 rounded-lg" rows="3" placeholder="優勝賞品として..."></textarea>
+                    </div>
+                    <button class="w-full py-3 rounded-xl bg-corp text-white font-bold mt-2 shadow-neon-corp hover:bg-blue-500 transition" onclick="alert('${t('alert_sponsor')}'); window.navigate('event-detail', {id:'${id}'})">
+                        ${t('btn_submit_sponsor')}
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // 5. CREATE COMP
+    function renderCreateComp() {
+        return `
+            <div class="animate-fade-in">
+                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
+                    <i data-lucide="x" class="w-4 h-4 mr-1"></i> CANCEL
+                </button>
+                <h2 class="text-2xl font-display font-black text-white mb-2">${t('title_create')}</h2>
+                <p class="text-xs text-gray-400 mb-6">${t('desc_create')}</p>
+                <div class="glass-panel p-5 rounded-xl space-y-4">
+                    <div>
+                        <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_c_title')}</label>
+                        <input type="text" class="input-tech w-full p-3 rounded-lg" placeholder="ex: Sunday Golf">
+                    </div>
+                     <div>
+                        <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_c_course')}</label>
+                        <input type="text" class="input-tech w-full p-3 rounded-lg" placeholder="Search golf course...">
+                    </div>
+                    <button class="w-full py-3 rounded-xl bg-purple-600 text-white font-bold mt-2 shadow-neon-purple" onclick="alert('${t('alert_created')}'); window.navigate('home')">
+                        ${t('btn_publish')}
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    // 6. SHOP
     function renderShop() {
         return `
-            <div class="mb-6">
+            <div class="mb-6 animate-fade-in">
                 <div class="flex gap-4 border-b border-white/10 pb-2 mb-4">
                     <button class="text-sm font-bold tab-active" onclick="document.getElementById('shop-items').style.display='grid';document.getElementById('shop-rewards').style.display='none';this.classList.add('tab-active');this.nextElementSibling.classList.remove('tab-active');this.nextElementSibling.classList.add('tab-inactive');">${t('tab_items')}</button>
                     <button class="text-sm font-bold tab-inactive" onclick="document.getElementById('shop-items').style.display='none';document.getElementById('shop-rewards').style.display='grid';this.classList.add('tab-active');this.previousElementSibling.classList.remove('tab-active');this.previousElementSibling.classList.add('tab-inactive');">${t('tab_rewards')}</button>
                 </div>
-
-                <!-- Support Items -->
-                <div id="shop-items" class="grid grid-cols-1 gap-3 animate-fade-in">
+                <div id="shop-items" class="grid grid-cols-1 gap-3">
                     <p class="text-xs text-gray-400 mb-2">${t('shop_item_desc')}</p>
                     ${SHOP_ITEMS.map(i => `
                         <div class="glass-panel p-3 rounded-xl flex items-center justify-between">
                             <div class="flex items-center gap-4">
                                 <div class="text-3xl w-12 h-12 flex items-center justify-center bg-white/5 rounded-lg border border-white/10">${i.icon}</div>
-                                <div>
-                                    <h3 class="font-bold text-white text-sm">${t(i.nameKey)}</h3>
-                                    <p class="text-xs font-bold text-primary">${i.cost} pt</p>
-                                </div>
+                                <div><h3 class="font-bold text-white text-sm">${t(i.nameKey)}</h3><p class="text-xs font-bold text-primary">${i.cost} pt</p></div>
                             </div>
-                            <button class="px-4 py-2 rounded bg-white/10 hover:bg-primary hover:text-black border border-white/10 text-xs font-bold transition" onclick="updatePoints(-${i.cost}); alert('${t('alert_bought')}')">
-                                ${t('btn_buy')}
-                            </button>
+                            <button class="px-4 py-2 rounded bg-white/10 hover:bg-primary hover:text-black border border-white/10 text-xs font-bold transition" onclick="updatePoints(-${i.cost}); alert('${t('alert_bought')}')">${t('btn_buy')}</button>
                         </div>
                     `).join('')}
                 </div>
-
-                <!-- Rewards -->
-                <div id="shop-rewards" class="hidden grid-cols-2 gap-3 animate-fade-in">
+                <div id="shop-rewards" class="hidden grid-cols-2 gap-3">
                     ${REWARDS.map(r => `
                         <div class="glass-panel p-3 rounded-xl flex flex-col h-full">
                             <img src="${r.img}" class="w-full h-24 object-cover rounded-lg mb-3 bg-gray-800">
                             <h3 class="text-sm font-bold text-white mb-1 leading-tight">${r.name}</h3>
-                            <div class="mt-auto pt-2">
-                                <p class="text-accent font-bold font-display mb-2">${r.cost.toLocaleString()} pt</p>
-                                <button class="w-full py-2 rounded bg-white/10 border border-white/10 text-xs font-bold hover:bg-accent hover:text-black transition">
-                                    ${t('btn_exchange')}
-                                </button>
-                            </div>
+                            <div class="mt-auto pt-2"><p class="text-accent font-bold font-display mb-2">${r.cost.toLocaleString()} pt</p><button class="w-full py-2 rounded bg-white/10 border border-white/10 text-xs font-bold hover:bg-accent hover:text-black transition" onclick="alert('${t('alert_exchange')}')">${t('btn_exchange')}</button></div>
                         </div>
                     `).join('')}
                 </div>
@@ -614,65 +646,26 @@
         `;
     }
 
-    // 6. MY PAGE (Enhanced)
+    // 7. MY PAGE
     function renderMyPage() {
         return `
             <div class="animate-fade-in">
                 <h2 class="text-xl font-display font-black text-white mb-6">${t('title_me')}</h2>
-                
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="w-20 h-20 rounded-full border-2 border-primary p-1">
-                        <img src="${userProfile.avatar}" class="w-full h-full rounded-full bg-gray-700">
-                    </div>
-                    <div>
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="w-20 h-20 rounded-full border-2 border-primary p-1 flex-shrink-0"><img src="${userProfile.avatar}" class="w-full h-full rounded-full bg-gray-700"></div>
+                    <div class="flex-1">
                         <h3 class="text-xl font-bold text-white">${userProfile.name}</h3>
-                        <p class="text-xs text-gray-400">ID: #8821 | <span class="text-primary">Premium Member</span></p>
+                        <p class="text-xs text-gray-400 mb-3">ID: #8821 | Premium Member</p>
+                        <div class="flex gap-4"><div class="text-center"><span class="block text-sm font-bold text-white">${userProfile.following}</span><span class="text-[10px] text-gray-500">Following</span></div><div class="text-center"><span class="block text-sm font-bold text-white">${userProfile.followers}</span><span class="text-[10px] text-gray-500">Followers</span></div></div>
                     </div>
                 </div>
-
-                <!-- NEW: Home Course -->
-                <div class="glass-panel p-4 rounded-xl mb-4 flex items-center justify-between">
-                    <span class="text-xs text-gray-400 font-bold"><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> ${t('lbl_home_course')}</span>
-                    <input type="text" class="bg-transparent text-right text-sm text-white font-bold outline-none focus:border-b border-primary" value="${userProfile.homeCourse}">
+                <div class="glass-panel p-4 rounded-xl mb-4 flex items-center justify-between"><span class="text-xs text-gray-400 font-bold"><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> ${t('lbl_home_course')}</span><input type="text" class="bg-transparent text-right text-sm text-white font-bold outline-none border-b border-transparent focus:border-primary" value="${userProfile.homeCourse}"></div>
+                <div class="glass-panel p-5 rounded-xl mb-6"><div class="grid grid-cols-3 gap-4 text-center"><div><p class="text-[10px] text-gray-500 mb-1">${t('lbl_avg')}</p><p class="text-xl font-bold text-white">${userProfile.avg}</p></div><div><p class="text-[10px] text-gray-500 mb-1">${t('lbl_best')}</p><p class="text-xl font-bold text-accent">${userProfile.best}</p></div><div><p class="text-[10px] text-gray-500 mb-1">${t('lbl_hdcp')}</p><p class="text-xl font-bold text-white">${userProfile.hdcp}</p></div></div></div>
+                <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2"><i data-lucide="briefcase" class="w-4 h-4 text-primary"></i> ${t('lbl_bag_title')}</h3>
+                <div class="glass-panel p-5 rounded-xl mb-6 space-y-4">
+                    ${Object.keys(userProfile).filter(k => ['driver','fw','irons','wedges','putter','ball'].includes(k)).map(k => `<div><label class="text-xs text-gray-500 block mb-1 uppercase">${k}</label><input type="text" class="input-tech w-full p-2 rounded text-sm" value="${userProfile[k]}"></div>`).join('')}
                 </div>
-
-                <div class="glass-panel p-5 rounded-xl mb-6">
-                    <h3 class="text-sm font-bold text-gray-400 mb-4 border-b border-white/10 pb-2">STATS</h3>
-                    <div class="grid grid-cols-3 gap-4 text-center">
-                        <div>
-                            <p class="text-[10px] text-gray-500 mb-1">${t('lbl_avg')}</p>
-                            <input type="number" class="w-full bg-transparent text-center font-display font-bold text-xl text-white border-b border-white/20 focus:border-primary outline-none" value="${userProfile.avg}">
-                        </div>
-                        <div>
-                            <p class="text-[10px] text-gray-500 mb-1">${t('lbl_best')}</p>
-                            <input type="number" class="w-full bg-transparent text-center font-display font-bold text-xl text-accent border-b border-white/20 focus:border-primary outline-none" value="${userProfile.best}">
-                        </div>
-                         <div>
-                            <p class="text-[10px] text-gray-500 mb-1">${t('lbl_hdcp')}</p>
-                            <input type="number" class="w-full bg-transparent text-center font-display font-bold text-xl text-white border-b border-white/20 focus:border-primary outline-none" value="${userProfile.hdcp}">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass-panel p-5 rounded-xl mb-6">
-                    <h3 class="text-sm font-bold text-gray-400 mb-4 border-b border-white/10 pb-2">IN THE BAG</h3>
-                    <div class="mb-4">
-                        <label class="text-xs text-gray-500 block mb-1">${t('lbl_gear_driver')}</label>
-                        <input type="text" class="input-tech w-full p-2 rounded text-sm" value="${userProfile.driver}">
-                    </div>
-                    <div class="mb-4">
-                        <label class="text-xs text-gray-500 block mb-1">${t('lbl_gear_putter')}</label>
-                        <input type="text" class="input-tech w-full p-2 rounded text-sm" value="${userProfile.putter}">
-                    </div>
-                    <div class="mb-2">
-                        <label class="text-xs text-gray-500 block mb-1">${t('lbl_gear_ball')}</label>
-                        <input type="text" class="input-tech w-full p-2 rounded text-sm" value="${userProfile.ball}">
-                    </div>
-                </div>
-
-                <button class="w-full py-3 rounded-xl bg-primary/20 border border-primary text-primary font-bold hover:bg-primary hover:text-black transition" onclick="alert('${t('alert_saved')}')">
-                    ${t('btn_save')}
-                </button>
+                <button class="w-full py-3 rounded-xl bg-primary/20 border border-primary text-primary font-bold hover:bg-primary hover:text-black transition" onclick="alert('${t('alert_saved')}')">${t('btn_save')}</button>
             </div>
         `;
     }
