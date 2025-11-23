@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GOLFIN | Play, Predict, Sponsor</title>
+    <title>GOLFIN | Predict & Win</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -37,10 +37,10 @@
                         'neon': '0 0 15px rgba(0, 255, 163, 0.3)',
                         'neon-pink': '0 0 15px rgba(236, 72, 153, 0.4)',
                         'neon-corp': '0 0 15px rgba(59, 130, 246, 0.4)',
-                        'neon-purple': '0 0 15px rgba(139, 92, 246, 0.4)',
                     },
                     animation: {
                         'pulse-slow': 'pulse 3s infinite',
+                        'bounce-slow': 'bounce 2s infinite',
                     }
                 }
             }
@@ -96,7 +96,6 @@
         .tab-active { border-bottom: 2px solid #00FFA3; color: white; }
         .tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }
 
-        /* Boost Effect */
         .boost-active {
             border: 1px solid #FACC15;
             box-shadow: 0 0 20px rgba(250, 204, 21, 0.3);
@@ -143,7 +142,7 @@
                     <span class="text-[9px] font-bold tracking-wider font-display" id="nav-rank">RANK</span>
                 </button>
                 
-                <!-- Center VOTE Button -->
+                <!-- Vote Button -->
                 <button class="nav-item -mt-10 bg-black border-2 border-primary rounded-full w-16 h-16 flex flex-col items-center justify-center text-primary shadow-neon transform transition active:scale-95 group" onclick="window.navigate('home')">
                     <i data-lucide="ticket" class="h-7 w-7 group-hover:rotate-12 transition duration-300"></i>
                     <span class="text-[9px] font-black font-display" id="nav-vote">VOTE</span>
@@ -175,63 +174,46 @@
             header_pt: "ポイント",
             // Home
             btn_host_match: "コンペを主催・登録する",
-            // Event Detail (Vote)
+            // Event Detail
             title_predict: "優勝予想",
-            lbl_sponsor_task: "スポンサーミッション (任意)",
-            task_desc: "CM動画(30秒)を見ると、的中時の配当が2倍になります！",
-            btn_watch_ad: "動画を見て 2倍ブースト",
+            lbl_sponsor_task: "スポンサーミッション",
+            task_desc: "動画視聴(30s)で的中配当2倍！",
+            btn_watch_ad: "動画を見て2倍ブースト",
             boost_active: "2倍ブースト適用中！",
+            lbl_sponsor_gift: "協賛プレゼント",
+            gift_desc: "スポンサー提供の豪華賞品に応募しよう",
+            btn_apply_gift: "プレゼントに応募する",
+            applied: "応募済み",
             btn_submit_vote: "投票を確定する",
+            lbl_timeline: "タイムライン",
             // Create Match
             title_create: "コンペ作成",
-            desc_create: "あなたのコンペを登録して、参加者を募集したり予想を楽しもう。",
-            lbl_c_title: "コンペ名",
-            lbl_c_course: "ゴルフ場",
-            lbl_c_date: "開催日",
-            lbl_c_tags: "特徴 (タグ)",
+            desc_create: "コンペを登録して参加者を募集しよう。",
             btn_publish: "コンペを公開する",
-            // Rank
-            title_rank: "スタープレイヤー",
-            desc_rank: "コンペ勝利数と応援獲得数のランキング",
-            col_wins: "勝",
-            // Shop
+            // Rank (UPDATED)
+            title_rank: "予想マスター",
+            desc_rank: "予想的中率と的中回数のランキング",
+            col_accuracy: "的中率",
+            col_hits: "的中数",
+            // Shop (UPDATED)
             tab_items: "応援アイテム",
+            tab_sponsors: "協賛・スポンサー",
             tab_rewards: "景品交換",
             shop_item_desc: "選手やコンペ主催者を応援しよう！",
-            shop_reward_desc: "ポイントを素敵な景品と交換申請。",
+            shop_sponsor_desc: "企業提供の特別クーポンや限定賞品。",
+            shop_reward_desc: "ポイントを汎用ギフトと交換。",
             btn_buy: "購入する",
             btn_exchange: "交換申請",
-            item_rose: "応援のバラ",
-            item_beer: "お疲れビール",
-            item_trophy: "勝利のトロフィー",
             // Me / In the bag
             title_me: "マイプロフィール",
-            lbl_home_course: "ホームコース",
-            lbl_avg: "平均スコア",
-            lbl_best: "ベストスコア",
-            lbl_hdcp: "ハンディキャップ",
             lbl_bag_title: "IN THE BAG (使用ギア)",
-            lbl_dr: "ドライバー",
-            lbl_fw: "FW/UT",
-            lbl_ir: "アイアン",
-            lbl_wg: "ウェッジ",
-            lbl_pt: "パター",
-            lbl_ball: "ボール",
             btn_save: "プロフィールを保存",
-            // Sponsorship
-            btn_sponsor_this: "このコンペに協賛する",
-            title_sponsor_form: "協賛申し込み",
-            desc_sponsor_form: "このコンペに賞品提供や資金援助を行い、企業PRをしませんか？",
-            lbl_sponsor_name: "企業名 / 団体名",
-            lbl_offer: "協賛内容 (例: 優勝賞品)",
-            btn_submit_sponsor: "協賛を申し込む",
             // Misc
             alert_bought: "アイテムを購入しました！",
             alert_exchange: "交換申請を受け付けました。",
-            alert_saved: "プロフィールを保存しました。",
-            alert_sponsor: "協賛申し込みを送信しました！主催者からの連絡をお待ちください。",
-            alert_boost: "ブーストが適用されました！配当2倍チャンス！",
-            alert_created: "コンペを作成しました！ホーム画面に表示されます。",
+            alert_saved: "プロフィールを更新しました。",
+            alert_boost: "ブースト適用！配当2倍チャンス！",
+            alert_apply: "プレゼントに応募しました！",
         },
         en: {
             nav_home: "HOME",
@@ -240,65 +222,45 @@
             nav_shop: "SHOP",
             nav_me: "ME",
             header_pt: "POINTS",
-            // Home
             btn_host_match: "HOST A MATCH",
-            // Event Detail
             title_predict: "PREDICTION",
-            lbl_sponsor_task: "SPONSOR MISSION (Optional)",
-            task_desc: "Watch a 30s ad to DOUBLE your winning payout!",
+            lbl_sponsor_task: "SPONSOR MISSION",
+            task_desc: "Watch video for 2x Payout Boost!",
             btn_watch_ad: "WATCH & BOOST 2x",
             boost_active: "2x BOOST ACTIVE!",
+            lbl_sponsor_gift: "SPONSOR GIVEAWAY",
+            gift_desc: "Apply for sponsor prizes.",
+            btn_apply_gift: "APPLY NOW",
+            applied: "APPLIED",
             btn_submit_vote: "CONFIRM VOTE",
-            // Create Match
+            lbl_timeline: "TIMELINE",
             title_create: "HOST MATCH",
-            desc_create: "Create your competition and recruit players.",
-            lbl_c_title: "Title",
-            lbl_c_course: "Course",
-            lbl_c_date: "Date",
-            lbl_c_tags: "Tags",
+            desc_create: "Create competition and recruit players.",
             btn_publish: "PUBLISH MATCH",
-            // Rank
-            title_rank: "STAR PLAYERS",
-            desc_rank: "Ranking by wins and support received.",
-            col_wins: "Wins",
-            // Shop
+            // Rank (UPDATED)
+            title_rank: "PREDICTION MASTERS",
+            desc_rank: "Ranking by accuracy and hits.",
+            col_accuracy: "Accuracy",
+            col_hits: "Hits",
+            // Shop (UPDATED)
             tab_items: "SUPPORT ITEMS",
+            tab_sponsors: "SPONSORS",
             tab_rewards: "REWARDS",
             shop_item_desc: "Purchase items to support players!",
-            shop_reward_desc: "Exchange points for rewards.",
+            shop_sponsor_desc: "Exclusive coupons and items from partners.",
+            shop_reward_desc: "Exchange points for general rewards.",
             btn_buy: "BUY",
             btn_exchange: "EXCHANGE",
-            item_rose: "Rose",
-            item_beer: "Beer",
-            item_trophy: "Trophy",
             // Me
             title_me: "MY PROFILE",
-            lbl_home_course: "Home Course",
-            lbl_avg: "Avg Score",
-            lbl_best: "Best Score",
-            lbl_hdcp: "Handicap",
             lbl_bag_title: "IN THE BAG",
-            lbl_dr: "Driver",
-            lbl_fw: "FW/UT",
-            lbl_ir: "Irons",
-            lbl_wg: "Wedges",
-            lbl_pt: "Putter",
-            lbl_ball: "Ball",
             btn_save: "SAVE PROFILE",
-            // Sponsorship
-            btn_sponsor_this: "BECOME A SPONSOR",
-            title_sponsor_form: "Sponsorship Application",
-            desc_sponsor_form: "Support this event with prizes or funds and promote your brand.",
-            lbl_sponsor_name: "Company Name",
-            lbl_offer: "Offer (e.g. Prize)",
-            btn_submit_sponsor: "SUBMIT OFFER",
             // Misc
             alert_bought: "Item purchased!",
             alert_exchange: "Exchange request sent.",
             alert_saved: "Profile Saved.",
-            alert_sponsor: "Application sent! Please wait for host approval.",
-            alert_boost: "BOOST ACTIVATED! 2x Payout Chance!",
-            alert_created: "Match Created!",
+            alert_boost: "BOOST ACTIVATED!",
+            alert_apply: "Applied for prize!",
         }
     };
 
@@ -307,54 +269,58 @@
     // ------------------------------------------------------------------------
     let userPoints = 1500;
     let isBoosted = false;
-    
+    let isApplied = false;
+
     let userProfile = {
-        id: 'u1',
-        name: "Golf Lover",
-        type: 'personal', 
-        avg: 92, best: 85, hdcp: 18,
-        homeCourse: "成田ゴルフ倶楽部",
-        // In the bag data
-        driver: "TaylorMade Qi10",
-        fw: "Callaway Paradym 3W",
-        irons: "Mizuno Pro 243",
-        wedges: "Vokey SM9 52/58",
-        putter: "Scotty Cameron Newport 2",
-        ball: "Titleist Pro V1",
+        id: 'u1', name: "Golf Lover", type: 'personal', 
+        avg: 92, best: 85, hdcp: 18, homeCourse: "成田ゴルフ倶楽部",
+        driver: "TaylorMade Qi10", fw: "Callaway Paradym", irons: "Mizuno Pro 243", 
+        wedges: "Vokey SM9", putter: "Scotty Cameron", ball: "Titleist Pro V1",
         avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=GolfLover",
-        following: 42,
-        followers: 128
+        following: 42, followers: 128
     };
 
     const TOURNAMENTS = [
-        { id: 't1', category: 'pro', title: 'マスターズ 2025', host: 'Augusta National', date: 'NOV 25', status: 'live', img: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&w=600&q=80', sponsor: 'LEXUS', players: ['M. Matsuyama', 'S. Scheffler'] },
-        { id: 't2', category: 'amateur', title: 'GOLFIN 月例杯 @成田', host: 'GOLFIN運営事務局', date: 'DEC 01', status: 'soon', img: 'https://images.unsplash.com/photo-1592919505780-30395071b483?auto=format&fit=crop&w=600&q=80', sponsor: 'Golf5', players: ['T. Tanaka', 'K. Suzuki'] }
+        { id: 't1', category: 'pro', title: 'マスターズ 2025', host: 'Augusta National', date: 'NOV 25', status: 'live', img: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&w=600&q=80', sponsor: 'LEXUS', players: ['M. Matsuyama', 'S. Scheffler'], likes: 1240, comments: 85 },
+        { id: 't2', category: 'amateur', title: 'GOLFIN 月例杯 @成田', host: 'GOLFIN運営事務局', date: 'DEC 01', status: 'soon', img: 'https://images.unsplash.com/photo-1592919505780-30395071b483?auto=format&fit=crop&w=600&q=80', sponsor: 'Golf5', players: ['T. Tanaka', 'K. Suzuki'], likes: 320, comments: 12 }
     ];
 
-    const PLAYER_RANKING = [
-        { rank: 1, name: "T. Tanaka", wins: 5, gifts: 12500, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tanaka" },
-        { rank: 2, name: "Golf_Queen", wins: 4, gifts: 8900, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Queen" },
-        { rank: 3, name: "PowerHitter", wins: 4, gifts: 6200, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Power" },
-        { rank: 4, name: "S. Suzuki", wins: 3, gifts: 4500, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Suzuki" },
+    const COMMENTS = [
+        { user: "T.Sato", text: "松山選手、今年は絶対いける！🔥", time: "2m", icon: "TS" },
+        { user: "Golf_Fan", text: "配当高めのSchefflerに賭けた", time: "5m", icon: "GF" },
     ];
 
-    const SHOP_ITEMS = [
-        { id: 'i1', nameKey: 'item_rose', cost: 100, icon: '🌹', color: 'text-red-500' },
-        { id: 'i2', nameKey: 'item_beer', cost: 300, icon: '🍺', color: 'text-yellow-500' },
-        { id: 'i3', nameKey: 'item_trophy', cost: 1000, icon: '🏆', color: 'text-accent' },
+    // Ranking Data (Prediction Accuracy)
+    const PREDICTION_RANKING = [
+        { rank: 1, name: "Prediction_God", accuracy: "88%", hits: 142, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=God" },
+        { rank: 2, name: "Data_Analyst", accuracy: "82%", hits: 98, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Data" },
+        { rank: 3, name: "Lucky_Strike", accuracy: "79%", hits: 65, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lucky" },
+        { rank: 4, name: "Golf Lover (You)", accuracy: "65%", hits: 42, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=GolfLover" },
+        { rank: 5, name: "Rookie_A", accuracy: "60%", hits: 12, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rookie" },
     ];
 
-    const REWARDS = [
-        { id: 'r1', name: 'Amazon Gift Card (¥1,000)', cost: 1000, img: 'https://placehold.co/100?text=AMZN' },
-        { id: 'r2', name: 'Pro V1 Balls (1 Dozen)', cost: 5000, img: 'https://placehold.co/100?text=BALLS' },
-        { id: 'r3', name: 'GOLFIN Original Cap', cost: 3000, img: 'https://placehold.co/100?text=CAP' },
-    ];
+    // Shop Data
+    const SHOP_DATA = {
+        items: [ // 投げ銭
+            { id: 'i1', name: '応援のバラ', cost: 100, icon: '🌹' },
+            { id: 'i2', name: 'お疲れビール', cost: 300, icon: '🍺' },
+            { id: 'i3', name: '勝利のトロフィー', cost: 1000, icon: '🏆' },
+        ],
+        sponsors: [ // 協賛・企業
+            { id: 's1', name: 'Golf5 10%OFFクーポン', cost: 500, img: 'https://placehold.co/100/000000/ffffff?text=10%25', type: 'coupon' },
+            { id: 's2', name: 'LEXUS オリジナルタオル', cost: 1500, img: 'https://placehold.co/100/000000/ffffff?text=LEXUS', type: 'product' },
+            { id: 's3', name: '地元特産品セット', cost: 2000, img: 'https://placehold.co/100/22c55e/ffffff?text=FOOD', type: 'product' },
+        ],
+        rewards: [ // 汎用
+            { id: 'r1', name: 'Amazonギフト (¥1,000)', cost: 1000, img: 'https://placehold.co/100?text=AMZN' },
+            { id: 'r2', name: 'Pro V1 Balls (1 Dozen)', cost: 5000, img: 'https://placehold.co/100?text=BALLS' },
+        ]
+    };
 
     // ------------------------------------------------------------------------
-    // STATE & LOGIC
+    // LOGIC
     // ------------------------------------------------------------------------
     let currentLang = 'ja';
-    let currentView = 'home';
     const container = document.getElementById('view-container');
     const t = (key) => TRANSLATIONS[currentLang][key] || key;
 
@@ -362,7 +328,7 @@
         currentLang = currentLang === 'ja' ? 'en' : 'ja';
         document.getElementById('lang-btn').innerText = currentLang === 'ja' ? 'JP' : 'EN';
         updateStaticText();
-        window.navigate(currentView, {}, false);
+        window.navigate('home', {}, false);
     }
 
     function updateStaticText() {
@@ -380,9 +346,8 @@
     }
 
     window.navigate = (viewName, params = {}, scrollToTop = true) => {
-        currentView = viewName;
-        isBoosted = false; // Reset boost
-        
+        if(viewName !== 'event-detail') { isBoosted = false; isApplied = false; }
+
         document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
         if(viewName === 'home') document.getElementById('nav-vote').parentElement.classList.add('text-primary'); 
         const activeBtn = document.querySelector(`[data-view="${viewName}"]`);
@@ -394,7 +359,6 @@
         else if (viewName === 'shop') html = renderShop();
         else if (viewName === 'mypage') html = renderMyPage();
         else if (viewName === 'event-detail') html = renderEventDetail(params.id);
-        else if (viewName === 'sponsor-form') html = renderSponsorForm(params.id);
         else if (viewName === 'create-comp') html = renderCreateComp();
         else html = `<div class="text-center p-10 text-gray-500">Page: ${viewName}</div>`;
 
@@ -407,48 +371,25 @@
     // RENDERERS
     // ------------------------------------------------------------------------
 
-    // 1. HOME (Match List & Create)
-    function renderHome() {
-        return `
-            <div class="mb-6 animate-fade-in">
-                <button class="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-900 to-indigo-900 border border-purple-500/50 shadow-neon-purple flex items-center justify-center gap-3 group" onclick="window.navigate('create-comp')">
-                    <div class="p-2 bg-purple-500 rounded-full text-white"><i data-lucide="plus" class="w-6 h-6"></i></div>
-                    <div class="text-left">
-                        <span class="block text-sm font-bold text-white tracking-wider">${t('btn_host_match')}</span>
-                    </div>
-                </button>
-            </div>
-            <div class="space-y-4">
-                ${TOURNAMENTS.map(ev => `
-                    <div class="glass-panel p-0 rounded-xl overflow-hidden cursor-pointer group hover:border-primary/50 transition" onclick="window.navigate('event-detail', {id: '${ev.id}'})">
-                        <div class="h-32 relative">
-                            <img src="${ev.img}" class="w-full h-full object-cover opacity-70">
-                            <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent"></div>
-                            <div class="absolute top-3 right-3"><span class="px-2 py-1 rounded text-[10px] font-bold uppercase backdrop-blur-md bg-black/40 border border-white/20">${ev.category}</span></div>
-                        </div>
-                        <div class="p-4 -mt-6 relative z-10">
-                            <h3 class="text-lg font-bold text-white mb-1">${ev.title}</h3>
-                            <p class="text-xs text-gray-400">${ev.host}</p>
-                            <div class="mt-2 flex items-center justify-between border-t border-white/10 pt-2">
-                                <span class="text-[10px] text-gray-500">SPONSOR: ${ev.sponsor}</span>
-                                <span class="text-xs font-bold text-primary">VOTE ></span>
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    }
-
-    // 2. RANKING
+    // 1. RANKING (Prediction Accuracy)
     function renderRank() {
         return `
             <div class="mb-6 text-center animate-fade-in">
                 <h2 class="text-2xl font-display font-black text-white italic">${t('title_rank')}</h2>
                 <p class="text-xs text-gray-400">${t('desc_rank')}</p>
             </div>
+            
+            <!-- Header -->
+            <div class="flex justify-between px-4 text-[10px] text-gray-500 mb-2 font-bold uppercase">
+                <span>User</span>
+                <div class="flex gap-6">
+                    <span class="w-12 text-center">${t('col_accuracy')}</span>
+                    <span class="w-8 text-right">${t('col_hits')}</span>
+                </div>
+            </div>
+
             <div class="space-y-3">
-                ${PLAYER_RANKING.map((p, i) => {
+                ${PREDICTION_RANKING.map((p, i) => {
                     let rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'bg-white/10 text-gray-400';
                     let glow = i === 0 ? 'shadow-neon-pink' : '';
                     return `
@@ -459,14 +400,11 @@
                         </div>
                         <div class="flex-1">
                             <h3 class="text-sm font-bold text-white">${p.name}</h3>
-                            <p class="text-[10px] text-pink font-bold flex items-center"><i data-lucide="gift" class="w-3 h-3 mr-1"></i> ${p.gifts.toLocaleString()}</p>
                         </div>
-                        <div class="text-right mr-2">
-                            <p class="text-xs font-bold text-accent">${p.wins} ${t('col_wins')}</p>
+                        <div class="flex gap-6 items-center">
+                            <div class="w-12 text-center text-primary font-bold font-display">${p.accuracy}</div>
+                            <div class="w-8 text-right text-white font-bold">${p.hits}</div>
                         </div>
-                        <button class="p-2 rounded-full bg-pink/20 text-pink hover:bg-pink hover:text-white transition" onclick="alert('Sent Gift to ${p.name}!')">
-                            <i data-lucide="heart" class="w-4 h-4 fill-current"></i>
-                        </button>
                     </div>
                     `;
                 }).join('')}
@@ -474,170 +412,54 @@
         `;
     }
 
-    // 3. EVENT DETAIL (Vote + Boost + Sponsor Button)
-    function renderEventDetail(id) {
-        const ev = TOURNAMENTS.find(e => e.id === id) || TOURNAMENTS[0];
-        
-        return `
-            <div class="animate-fade-in">
-                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
-                    <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> BACK
-                </button>
-
-                <!-- Event Header -->
-                <div class="relative h-40 rounded-2xl overflow-hidden mb-4 bg-gray-800 border border-white/10">
-                    <img src="${ev.img}" class="w-full h-full object-cover opacity-60">
-                    <div class="absolute inset-0 flex flex-col justify-end p-5 bg-gradient-to-t from-bg to-transparent">
-                        <span class="bg-primary text-black text-[10px] font-bold px-2 py-1 rounded w-fit mb-2 uppercase">${ev.category}</span>
-                        <h2 class="text-2xl font-black text-white italic leading-none">${ev.title}</h2>
-                    </div>
-                </div>
-
-                <!-- TASK/BOOST CARD (Restored) -->
-                <div id="task-card" class="bg-gradient-to-r from-blue-900 to-cyan-900 border border-cyan-500/50 rounded-xl p-5 mb-6 relative overflow-hidden group">
-                    <div class="absolute -right-5 -top-5 w-24 h-24 bg-cyan-500/20 rounded-full blur-xl group-hover:bg-cyan-400/30 transition"></div>
-                    <div class="flex justify-between items-start mb-2 relative z-10">
-                        <h3 class="text-sm font-bold text-cyan-300 flex items-center gap-2">
-                            <i data-lucide="monitor-play" class="w-4 h-4"></i> ${t('lbl_sponsor_task')}
-                        </h3>
-                        <span class="text-[10px] bg-black/30 px-2 py-0.5 rounded text-white border border-white/10">Free</span>
-                    </div>
-                    <p class="text-xs text-gray-200 mb-4 relative z-10">${t('task_desc')}</p>
-                    <button id="btn-boost" class="w-full py-2 bg-cyan-500 text-black font-black font-display text-sm rounded-lg hover:bg-cyan-400 transition shadow-lg flex justify-center items-center gap-2" onclick="activateBoost(this)">
-                        <i data-lucide="play" class="w-4 h-4 fill-current"></i> ${t('btn_watch_ad')}
-                    </button>
-                </div>
-                
-                <!-- SPONSOR BUTTON -->
-                <button class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-900 to-indigo-900 border border-blue-500 text-white font-bold text-sm shadow-neon-corp flex items-center justify-center gap-2 mb-6 hover:scale-105 transition" onclick="window.navigate('sponsor-form', {id: '${ev.id}'})">
-                    <i data-lucide="handshake" class="w-5 h-5 text-blue-400"></i>
-                    ${t('btn_sponsor_this')}
-                </button>
-
-                <!-- Voting Section -->
-                <div class="glass-panel p-5 rounded-xl mb-6">
-                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                        <i data-lucide="crosshair" class="w-5 h-5 text-primary"></i> ${t('title_predict')}
-                    </h3>
-                    <div class="space-y-3 mb-6">
-                        ${ev.players.map((p, i) => `
-                            <label class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10 cursor-pointer hover:border-primary transition group">
-                                <div class="flex items-center gap-3">
-                                    <input type="radio" name="pred" class="accent-primary w-4 h-4">
-                                    <span class="text-sm font-bold text-white group-hover:text-primary transition">${p}</span>
-                                </div>
-                                <span class="text-primary font-mono font-bold">x${(Math.random() * 5 + 1.5).toFixed(1)}</span>
-                            </label>
-                        `).join('')}
-                    </div>
-                    <button class="w-full py-3 rounded-xl bg-white/10 text-gray-400 font-bold text-sm cursor-not-allowed border border-white/5 transition hover:bg-primary hover:text-black hover:border-primary hover:shadow-neon" onclick="alert('Voted!')">
-                        ${t('btn_submit_vote')}
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-    
-    // Boost Logic
-    function activateBoost(btn) {
-        btn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Playing Ad...`;
-        setTimeout(() => {
-            isBoosted = true;
-            const taskCard = document.getElementById('task-card');
-            taskCard.classList.remove('from-blue-900', 'to-cyan-900', 'border-cyan-500/50');
-            taskCard.classList.add('from-accent/20', 'to-yellow-900/40', 'border-accent', 'boost-active');
-            taskCard.innerHTML = `
-                <div class="flex items-center justify-center gap-2 h-full py-4">
-                    <i data-lucide="zap" class="w-8 h-8 text-accent fill-current animate-bounce"></i>
-                    <div>
-                        <p class="text-xl font-black text-accent font-display">${t('boost_active')}</p>
-                        <p class="text-xs text-white">Win payout x2.0 applied!</p>
-                    </div>
-                </div>
-            `;
-            alert(t('alert_boost'));
-            if(window.lucide) window.lucide.createIcons();
-        }, 1500);
-    }
-
-    // 4. SPONSOR FORM
-    function renderSponsorForm(id) {
-        const ev = TOURNAMENTS.find(e => e.id === id) || TOURNAMENTS[0];
-        return `
-            <div class="animate-fade-in">
-                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('event-detail', {id:'${id}'})">
-                    <i data-lucide="x" class="w-4 h-4 mr-1"></i> CANCEL
-                </button>
-                <h2 class="text-2xl font-display font-black text-white mb-2 flex items-center gap-2"><i data-lucide="handshake" class="text-corp"></i> ${t('title_sponsor_form')}</h2>
-                <p class="text-xs text-gray-400 mb-6">${t('desc_sponsor_form')}</p>
-                <div class="glass-panel p-5 rounded-xl space-y-4">
-                    <div>
-                        <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_sponsor_name')}</label>
-                        <input type="text" class="input-tech w-full p-3 rounded-lg" placeholder="Ex: GOLFIN Inc.">
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_offer')}</label>
-                        <textarea class="input-tech w-full p-3 rounded-lg" rows="3" placeholder="優勝賞品として..."></textarea>
-                    </div>
-                    <button class="w-full py-3 rounded-xl bg-corp text-white font-bold mt-2 shadow-neon-corp hover:bg-blue-500 transition" onclick="alert('${t('alert_sponsor')}'); window.navigate('event-detail', {id:'${id}'})">
-                        ${t('btn_submit_sponsor')}
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-    
-    // 5. CREATE COMP
-    function renderCreateComp() {
-        return `
-            <div class="animate-fade-in">
-                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
-                    <i data-lucide="x" class="w-4 h-4 mr-1"></i> CANCEL
-                </button>
-                <h2 class="text-2xl font-display font-black text-white mb-2">${t('title_create')}</h2>
-                <p class="text-xs text-gray-400 mb-6">${t('desc_create')}</p>
-                <div class="glass-panel p-5 rounded-xl space-y-4">
-                    <div>
-                        <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_c_title')}</label>
-                        <input type="text" class="input-tech w-full p-3 rounded-lg" placeholder="ex: Sunday Golf">
-                    </div>
-                     <div>
-                        <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_c_course')}</label>
-                        <input type="text" class="input-tech w-full p-3 rounded-lg" placeholder="Search golf course...">
-                    </div>
-                    <button class="w-full py-3 rounded-xl bg-purple-600 text-white font-bold mt-2 shadow-neon-purple" onclick="alert('${t('alert_created')}'); window.navigate('home')">
-                        ${t('btn_publish')}
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-
-    // 6. SHOP
+    // 2. SHOP (3 Tabs: Support, Sponsor, Rewards)
     function renderShop() {
         return `
             <div class="mb-6 animate-fade-in">
-                <div class="flex gap-4 border-b border-white/10 pb-2 mb-4">
-                    <button class="text-sm font-bold tab-active" onclick="document.getElementById('shop-items').style.display='grid';document.getElementById('shop-rewards').style.display='none';this.classList.add('tab-active');this.nextElementSibling.classList.remove('tab-active');this.nextElementSibling.classList.add('tab-inactive');">${t('tab_items')}</button>
-                    <button class="text-sm font-bold tab-inactive" onclick="document.getElementById('shop-items').style.display='none';document.getElementById('shop-rewards').style.display='grid';this.classList.add('tab-active');this.previousElementSibling.classList.remove('tab-active');this.previousElementSibling.classList.add('tab-inactive');">${t('tab_rewards')}</button>
+                <div class="flex gap-2 border-b border-white/10 pb-2 mb-4 overflow-x-auto">
+                    <button class="text-xs font-bold px-3 py-1 tab-active whitespace-nowrap" onclick="switchShopTab(this, 'shop-items')">${t('tab_items')}</button>
+                    <button class="text-xs font-bold px-3 py-1 tab-inactive whitespace-nowrap" onclick="switchShopTab(this, 'shop-sponsors')">${t('tab_sponsors')}</button>
+                    <button class="text-xs font-bold px-3 py-1 tab-inactive whitespace-nowrap" onclick="switchShopTab(this, 'shop-rewards')">${t('tab_rewards')}</button>
                 </div>
+
+                <!-- 1. Support Items (Throwing Money) -->
                 <div id="shop-items" class="grid grid-cols-1 gap-3">
                     <p class="text-xs text-gray-400 mb-2">${t('shop_item_desc')}</p>
-                    ${SHOP_ITEMS.map(i => `
+                    ${SHOP_DATA.items.map(i => `
                         <div class="glass-panel p-3 rounded-xl flex items-center justify-between">
                             <div class="flex items-center gap-4">
                                 <div class="text-3xl w-12 h-12 flex items-center justify-center bg-white/5 rounded-lg border border-white/10">${i.icon}</div>
-                                <div><h3 class="font-bold text-white text-sm">${t(i.nameKey)}</h3><p class="text-xs font-bold text-primary">${i.cost} pt</p></div>
+                                <div><h3 class="font-bold text-white text-sm">${i.name}</h3><p class="text-xs font-bold text-primary">${i.cost} pt</p></div>
                             </div>
                             <button class="px-4 py-2 rounded bg-white/10 hover:bg-primary hover:text-black border border-white/10 text-xs font-bold transition" onclick="updatePoints(-${i.cost}); alert('${t('alert_bought')}')">${t('btn_buy')}</button>
                         </div>
                     `).join('')}
                 </div>
+
+                <!-- 2. Sponsors (Coupons, Goods) -->
+                <div id="shop-sponsors" class="hidden grid-cols-1 gap-3">
+                    <p class="text-xs text-gray-400 mb-2">${t('shop_sponsor_desc')}</p>
+                    ${SHOP_DATA.sponsors.map(s => `
+                        <div class="glass-panel p-0 rounded-xl flex overflow-hidden border border-corp/30">
+                            <div class="w-20 bg-gray-800 flex-shrink-0"><img src="${s.img}" class="w-full h-full object-cover opacity-80"></div>
+                            <div class="p-3 flex-1 flex flex-col justify-between">
+                                <h3 class="font-bold text-white text-sm leading-tight">${s.name}</h3>
+                                <div class="flex justify-between items-end mt-2">
+                                    <p class="text-accent font-bold font-display">${s.cost} pt</p>
+                                    <button class="px-3 py-1 rounded bg-corp text-white text-[10px] font-bold hover:bg-blue-500" onclick="alert('${t('alert_exchange')}')">${t('btn_exchange')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <!-- 3. Rewards (Generic) -->
                 <div id="shop-rewards" class="hidden grid-cols-2 gap-3">
-                    ${REWARDS.map(r => `
+                    <div class="col-span-2"><p class="text-xs text-gray-400 mb-2">${t('shop_reward_desc')}</p></div>
+                    ${SHOP_DATA.rewards.map(r => `
                         <div class="glass-panel p-3 rounded-xl flex flex-col h-full">
-                            <img src="${r.img}" class="w-full h-24 object-cover rounded-lg mb-3 bg-gray-800">
-                            <h3 class="text-sm font-bold text-white mb-1 leading-tight">${r.name}</h3>
+                            <img src="${r.img}" class="w-full h-20 object-cover rounded-lg mb-2 bg-gray-800">
+                            <h3 class="text-xs font-bold text-white mb-1 leading-tight">${r.name}</h3>
                             <div class="mt-auto pt-2"><p class="text-accent font-bold font-display mb-2">${r.cost.toLocaleString()} pt</p><button class="w-full py-2 rounded bg-white/10 border border-white/10 text-xs font-bold hover:bg-accent hover:text-black transition" onclick="alert('${t('alert_exchange')}')">${t('btn_exchange')}</button></div>
                         </div>
                     `).join('')}
@@ -646,28 +468,118 @@
         `;
     }
 
-    // 7. MY PAGE
+    // Helper for Shop Tabs
+    window.switchShopTab = (btn, targetId) => {
+        btn.parentNode.querySelectorAll('button').forEach(b => { b.classList.remove('tab-active'); b.classList.add('tab-inactive'); });
+        btn.classList.remove('tab-inactive'); btn.classList.add('tab-active');
+        ['shop-items', 'shop-sponsors', 'shop-rewards'].forEach(id => {
+            document.getElementById(id).classList.add('hidden');
+            document.getElementById(id).classList.remove('grid');
+        });
+        document.getElementById(targetId).classList.remove('hidden');
+        document.getElementById(targetId).classList.add('grid');
+    }
+
+    // 3. HOME (Timeline Feed)
+    function renderHome() {
+        return `
+            <div class="mb-6 animate-fade-in">
+                <button class="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-900 to-indigo-900 border border-purple-500/50 shadow-neon-purple flex items-center justify-center gap-3 group" onclick="window.navigate('create-comp')">
+                    <div class="p-2 bg-purple-500 rounded-full text-white"><i data-lucide="plus" class="w-6 h-6"></i></div>
+                    <div class="text-left"><span class="block text-sm font-bold text-white tracking-wider">${t('btn_host_match')}</span></div>
+                </button>
+            </div>
+            <div class="space-y-6">
+                ${TOURNAMENTS.map(ev => `
+                    <div class="glass-panel p-0 rounded-xl overflow-hidden cursor-pointer group hover:border-primary/50 transition" onclick="window.navigate('event-detail', {id: '${ev.id}'})">
+                        <div class="h-36 relative">
+                            <img src="${ev.img}" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent"></div>
+                            <div class="absolute top-3 right-3"><span class="px-2 py-1 rounded text-[10px] font-bold uppercase backdrop-blur-md bg-black/40 border border-white/20">${ev.category}</span></div>
+                            <div class="absolute bottom-3 right-3 flex items-center gap-1 bg-black/50 px-2 py-1 rounded-full border border-white/10">
+                                <i data-lucide="heart" class="w-3 h-3 text-pink fill-current"></i><span class="text-[10px] text-white font-bold">${ev.likes}</span>
+                            </div>
+                        </div>
+                        <div class="p-4 -mt-2 relative z-10 bg-gradient-to-b from-transparent to-bg">
+                            <div class="flex justify-between items-start mb-2"><h3 class="text-lg font-bold text-white leading-tight w-3/4">${ev.title}</h3><span class="text-[10px] bg-white/10 px-2 py-1 rounded text-gray-300">${ev.status === 'live' ? 'LIVE' : 'Recruiting'}</span></div>
+                            <p class="text-xs text-gray-400 mb-3 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> ${ev.host}</p>
+                            <div class="flex justify-between items-center border-t border-white/10 pt-3">
+                                <div class="flex items-center gap-2"><span class="text-[10px] text-gray-500">${ev.comments} comments</span></div>
+                                <span class="text-xs font-bold text-primary flex items-center gap-1">DETAILS <i data-lucide="chevron-right" class="w-3 h-3"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    // 4. EVENT DETAIL (Boost, Gift, Vote, Timeline)
+    function renderEventDetail(id) {
+        const ev = TOURNAMENTS.find(e => e.id === id) || TOURNAMENTS[0];
+        return `
+            <div class="animate-fade-in">
+                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')"><i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> BACK</button>
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-2xl font-black text-white italic leading-none w-3/4">${ev.title}</h2>
+                    <div class="flex flex-col items-center cursor-pointer" onclick="this.classList.toggle('text-pink')"><i data-lucide="heart" class="w-6 h-6 text-gray-500 hover:text-pink transition"></i><span class="text-[10px] text-gray-400">${ev.likes}</span></div>
+                </div>
+
+                <!-- 1. BOOST -->
+                <div id="task-card" class="bg-gradient-to-r from-blue-900 to-cyan-900 border border-cyan-500/50 rounded-xl p-4 mb-4 relative overflow-hidden group ${isBoosted ? 'from-accent/20 to-yellow-900/40 border-accent boost-active' : ''}">
+                    ${isBoosted ? `<div class="flex items-center justify-center gap-2 h-full py-2"><i data-lucide="zap" class="w-6 h-6 text-accent fill-current animate-bounce"></i><p class="text-lg font-black text-accent font-display">${t('boost_active')}</p></div>` : `<div class="flex justify-between items-center relative z-10"><div><h3 class="text-xs font-bold text-cyan-300 flex items-center gap-1"><i data-lucide="monitor-play" class="w-3 h-3"></i> ${t('lbl_sponsor_task')}</h3><p class="text-[10px] text-gray-200">${t('task_desc')}</p></div><button class="px-4 py-2 bg-cyan-500 text-black font-bold text-xs rounded-lg hover:bg-cyan-400 transition shadow-lg" onclick="activateBoost(this)">${t('btn_watch_ad')}</button></div>`}
+                </div>
+
+                <!-- 2. GIFT APPLY -->
+                <div class="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 flex items-center justify-between">
+                    <div><h3 class="text-xs font-bold text-pink flex items-center gap-1"><i data-lucide="gift" class="w-3 h-3"></i> ${t('lbl_sponsor_gift')}</h3><p class="text-[10px] text-gray-400">${t('gift_desc')}</p></div>
+                    <button class="px-4 py-2 rounded-lg text-xs font-bold transition ${isApplied ? 'bg-gray-600 text-gray-400' : 'bg-pink text-white shadow-neon-pink'}" onclick="applyGift(this)">${isApplied ? t('applied') : t('btn_apply_gift')}</button>
+                </div>
+
+                <!-- 3. VOTE -->
+                <div class="glass-panel p-5 rounded-xl mb-8">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="crosshair" class="w-5 h-5 text-primary"></i> ${t('title_predict')}</h3>
+                    <div class="space-y-3 mb-6">${ev.players.map(p => `<label class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10 cursor-pointer hover:border-primary transition group"><div class="flex items-center gap-3"><input type="radio" name="pred" class="accent-primary w-4 h-4"><span class="text-sm font-bold text-white group-hover:text-primary transition">${p}</span></div><span class="text-primary font-mono font-bold">x${(Math.random() * 5 + 1.5).toFixed(1)}</span></label>`).join('')}</div>
+                    <button class="w-full py-3 rounded-xl bg-primary/20 text-primary font-bold text-sm border border-primary hover:bg-primary hover:text-black transition" onclick="alert('Voted!')">${t('btn_submit_vote')}</button>
+                </div>
+
+                <!-- 4. TIMELINE -->
+                <div class="border-t border-white/10 pt-6">
+                    <h3 class="text-sm font-bold text-gray-400 mb-4 flex items-center gap-2"><i data-lucide="message-circle" class="w-4 h-4"></i> ${t('lbl_timeline')}</h3>
+                    <div class="space-y-4">${COMMENTS.map(c => `<div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-gray-700 border border-white/20 flex items-center justify-center text-[10px] font-bold text-gray-400">${c.icon}</div><div><p class="text-xs font-bold text-white mb-0.5">${c.user} <span class="text-[10px] text-gray-600 ml-2">${c.time}</span></p><p class="text-xs text-gray-300 bg-white/5 p-2 rounded-r-lg rounded-bl-lg inline-block">${c.text}</p></div></div>`).join('')}</div>
+                    <div class="mt-4 flex gap-2"><input type="text" placeholder="Comment..." class="input-tech w-full p-2 rounded-lg text-xs"><button class="bg-white/10 p-2 rounded-lg text-white"><i data-lucide="send" class="w-4 h-4"></i></button></div>
+                </div>
+            </div>
+        `;
+    }
+
+    function activateBoost(btn) { btn.innerText = "Loading..."; setTimeout(() => { isBoosted = true; window.navigate('event-detail', {id: 't1'}, false); alert(t('alert_boost')); }, 1000); }
+    function applyGift(btn) { if(isApplied) return; isApplied = true; btn.innerText = t('applied'); btn.classList.remove('bg-pink', 'shadow-neon-pink', 'text-white'); btn.classList.add('bg-gray-600', 'text-gray-400'); alert(t('alert_apply')); }
+
+    // 5. ME PAGE (In The Bag)
     function renderMyPage() {
         return `
             <div class="animate-fade-in">
                 <h2 class="text-xl font-display font-black text-white mb-6">${t('title_me')}</h2>
                 <div class="flex items-start gap-4 mb-6">
                     <div class="w-20 h-20 rounded-full border-2 border-primary p-1 flex-shrink-0"><img src="${userProfile.avatar}" class="w-full h-full rounded-full bg-gray-700"></div>
-                    <div class="flex-1">
-                        <h3 class="text-xl font-bold text-white">${userProfile.name}</h3>
-                        <p class="text-xs text-gray-400 mb-3">ID: #8821 | Premium Member</p>
-                        <div class="flex gap-4"><div class="text-center"><span class="block text-sm font-bold text-white">${userProfile.following}</span><span class="text-[10px] text-gray-500">Following</span></div><div class="text-center"><span class="block text-sm font-bold text-white">${userProfile.followers}</span><span class="text-[10px] text-gray-500">Followers</span></div></div>
-                    </div>
+                    <div class="flex-1"><h3 class="text-xl font-bold text-white">${userProfile.name}</h3><p class="text-xs text-gray-400 mb-3">ID: #8821</p><div class="flex gap-4"><div class="text-center"><span class="block text-sm font-bold text-white">${userProfile.following}</span><span class="text-[10px] text-gray-500">Following</span></div><div class="text-center"><span class="block text-sm font-bold text-white">${userProfile.followers}</span><span class="text-[10px] text-gray-500">Followers</span></div></div></div>
                 </div>
-                <div class="glass-panel p-4 rounded-xl mb-4 flex items-center justify-between"><span class="text-xs text-gray-400 font-bold"><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> ${t('lbl_home_course')}</span><input type="text" class="bg-transparent text-right text-sm text-white font-bold outline-none border-b border-transparent focus:border-primary" value="${userProfile.homeCourse}"></div>
                 <div class="glass-panel p-5 rounded-xl mb-6"><div class="grid grid-cols-3 gap-4 text-center"><div><p class="text-[10px] text-gray-500 mb-1">${t('lbl_avg')}</p><p class="text-xl font-bold text-white">${userProfile.avg}</p></div><div><p class="text-[10px] text-gray-500 mb-1">${t('lbl_best')}</p><p class="text-xl font-bold text-accent">${userProfile.best}</p></div><div><p class="text-[10px] text-gray-500 mb-1">${t('lbl_hdcp')}</p><p class="text-xl font-bold text-white">${userProfile.hdcp}</p></div></div></div>
                 <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2"><i data-lucide="briefcase" class="w-4 h-4 text-primary"></i> ${t('lbl_bag_title')}</h3>
                 <div class="glass-panel p-5 rounded-xl mb-6 space-y-4">
-                    ${Object.keys(userProfile).filter(k => ['driver','fw','irons','wedges','putter','ball'].includes(k)).map(k => `<div><label class="text-xs text-gray-500 block mb-1 uppercase">${k}</label><input type="text" class="input-tech w-full p-2 rounded text-sm" value="${userProfile[k]}"></div>`).join('')}
+                    <div><label class="text-xs text-gray-500 block mb-1">${t('lbl_dr')}</label><input type="text" class="input-tech w-full p-2 rounded text-sm" value="${userProfile.driver}"></div>
+                    <div><label class="text-xs text-gray-500 block mb-1">${t('lbl_ir')}</label><input type="text" class="input-tech w-full p-2 rounded text-sm" value="${userProfile.irons}"></div>
+                    <div><label class="text-xs text-gray-500 block mb-1">${t('lbl_ball')}</label><input type="text" class="input-tech w-full p-2 rounded text-sm" value="${userProfile.ball}"></div>
                 </div>
                 <button class="w-full py-3 rounded-xl bg-primary/20 border border-primary text-primary font-bold hover:bg-primary hover:text-black transition" onclick="alert('${t('alert_saved')}')">${t('btn_save')}</button>
             </div>
         `;
+    }
+
+    // 6. CREATE COMP
+    function renderCreateComp() {
+        return `<div class="animate-fade-in"><button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')"><i data-lucide="x" class="w-4 h-4 mr-1"></i> CANCEL</button><h2 class="text-2xl font-display font-black text-white mb-2">${t('title_create')}</h2><p class="text-xs text-gray-400 mb-6">${t('desc_create')}</p><div class="glass-panel p-5 rounded-xl space-y-4"><div><label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_c_title')}</label><input type="text" class="input-tech w-full p-3 rounded-lg" placeholder="ex: Sunday Golf"></div><button class="w-full py-3 rounded-xl bg-purple-600 text-white font-bold mt-2 shadow-neon-purple" onclick="alert('Created!'); window.navigate('home')">${t('btn_publish')}</button></div></div>`;
     }
 
     // Init
