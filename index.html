@@ -1,16 +1,9 @@
-<!-- 
-================================================================================
-GOLFIN Predict - GLOBAL EDITION (Multi-Language Support)
-目的: 英語(Cool/Global) と 日本語(Friendly/Local) を
-      ワンタップで切り替えられる機能を搭載した最終形態プロトタイプ。
-================================================================================
--->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GOLFIN | Global</title>
+    <title>GOLFIN | Play & Support</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +20,7 @@ GOLFIN Predict - GLOBAL EDITION (Multi-Language Support)
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'], // 日本語フォント追加
+                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
                         display: ['Orbitron', 'sans-serif'],
                     },
                     colors: {
@@ -36,13 +29,14 @@ GOLFIN Predict - GLOBAL EDITION (Multi-Language Support)
                         primary: '#00FFA3', // Neon Green
                         secondary: '#10B981', 
                         accent: '#FACC15',  // Gold
-                        danger: '#ef4444',
+                        pink: '#ec4899',    // Neon Pink for Gifts
                     },
                     boxShadow: {
                         'neon': '0 0 15px rgba(0, 255, 163, 0.3)',
+                        'neon-pink': '0 0 15px rgba(236, 72, 153, 0.4)',
                     },
                     animation: {
-                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'pulse-slow': 'pulse 3s infinite',
                     }
                 }
             }
@@ -55,7 +49,7 @@ GOLFIN Predict - GLOBAL EDITION (Multi-Language Support)
             color: #e2e8f0;
             -ms-overflow-style: none;  
             scrollbar-width: none;  
-            padding-bottom: 90px;
+            padding-bottom: 100px;
         }
         body::-webkit-scrollbar { display: none; }
 
@@ -85,16 +79,9 @@ GOLFIN Predict - GLOBAL EDITION (Multi-Language Support)
         }
         .nav-item.active i { transform: scale(1.1); transition: transform 0.2s; }
 
-        .btn-neon {
-            background: linear-gradient(90deg, #00FFA3 0%, #10B981 100%);
-            color: #000;
-            box-shadow: 0 0 20px rgba(0, 255, 163, 0.4);
-        }
-        
         .tab-active { border-bottom: 2px solid #00FFA3; color: white; }
         .tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }
-        
-        /* Lang Switcher */
+
         .lang-switch {
             font-size: 10px;
             font-weight: 800;
@@ -103,9 +90,12 @@ GOLFIN Predict - GLOBAL EDITION (Multi-Language Support)
             padding: 4px 8px;
             border-radius: 20px;
             cursor: pointer;
-            transition: all 0.2s;
         }
-        .lang-switch:hover { background: rgba(255,255,255,0.2); }
+
+        /* ランクバッジ */
+        .rank-1 { background: linear-gradient(135deg, #FFD700, #FDB931); color: black; border: 1px solid #fff; }
+        .rank-2 { background: linear-gradient(135deg, #E0E0E0, #BDBDBD); color: black; border: 1px solid #fff; }
+        .rank-3 { background: linear-gradient(135deg, #CD7F32, #A0522D); color: white; border: 1px solid #fff; }
     </style>
 </head>
 <body>
@@ -118,12 +108,8 @@ GOLFIN Predict - GLOBAL EDITION (Multi-Language Support)
                 <h1 class="text-xl font-bold tracking-tight text-white font-display italic">GOLFIN</h1>
             </div>
             <div class="flex items-center space-x-3">
-                <!-- 言語切り替えボタン -->
-                <button class="lang-switch text-primary font-display tracking-widest" onclick="toggleLanguage()" id="lang-btn">
-                    JP
-                </button>
-                
-                <div class="flex flex-col items-end cursor-pointer" onclick="window.navigate('reward-store')">
+                <button class="lang-switch text-primary font-display tracking-widest" onclick="toggleLanguage()" id="lang-btn">JP</button>
+                <div class="flex flex-col items-end cursor-pointer" onclick="window.navigate('shop')">
                     <span class="text-[10px] text-primary font-mono tracking-widest" id="lbl-header-pt">POINTS</span>
                     <span class="text-sm font-bold font-display text-white" id="header-points">1,500</span>
                 </div>
@@ -131,7 +117,7 @@ GOLFIN Predict - GLOBAL EDITION (Multi-Language Support)
         </header>
         
         <!-- メインコンテンツ -->
-        <div id="view-container" class="p-5"></div>
+        <div id="view-container" class="p-4"></div>
 
         <!-- ナビゲーションフッター -->
         <footer class="fixed bottom-6 left-4 right-4 z-50 pointer-events-none">
@@ -141,19 +127,19 @@ GOLFIN Predict - GLOBAL EDITION (Multi-Language Support)
                     <span class="text-[9px] font-bold tracking-wider font-display" id="nav-home">HOME</span>
                 </button>
                 
-                <button class="nav-item flex flex-col items-center gap-1 w-12 text-gray-500" data-view="matching" onclick="window.navigate('matching')">
-                    <i data-lucide="users" class="h-5 w-5"></i>
-                    <span class="text-[9px] font-bold tracking-wider font-display" id="nav-match">MATCH</span>
+                <button class="nav-item flex flex-col items-center gap-1 w-12 text-gray-500" data-view="rank" onclick="window.navigate('rank')">
+                    <i data-lucide="trophy" class="h-5 w-5"></i>
+                    <span class="text-[9px] font-bold tracking-wider font-display" id="nav-rank">RANK</span>
                 </button>
                 
-                <!-- Center Play Button -->
-                <button class="nav-item -mt-10 bg-black border-2 border-primary rounded-full w-16 h-16 flex flex-col items-center justify-center text-primary shadow-neon transform transition active:scale-95 group" onclick="window.navigate('create-match')">
-                    <i data-lucide="plus" class="h-8 w-8 group-hover:rotate-90 transition duration-300"></i>
-                    <span class="text-[9px] font-black font-display" id="nav-play">PLAY</span>
+                <!-- Center VOTE Button -->
+                <button class="nav-item -mt-10 bg-black border-2 border-primary rounded-full w-16 h-16 flex flex-col items-center justify-center text-primary shadow-neon transform transition active:scale-95 group" onclick="window.navigate('home')">
+                    <i data-lucide="ticket" class="h-7 w-7 group-hover:rotate-12 transition duration-300"></i>
+                    <span class="text-[9px] font-black font-display" id="nav-vote">VOTE</span>
                 </button>
 
-                <button class="nav-item flex flex-col items-center gap-1 w-12 text-gray-500" data-view="reward-store" onclick="window.navigate('reward-store')">
-                    <i data-lucide="shopping-bag" class="h-5 w-5"></i>
+                <button class="nav-item flex flex-col items-center gap-1 w-12 text-gray-500" data-view="shop" onclick="window.navigate('shop')">
+                    <i data-lucide="gift" class="h-5 w-5"></i>
                     <span class="text-[9px] font-bold tracking-wider font-display" id="nav-shop">SHOP</span>
                 </button>
                 <button class="nav-item flex flex-col items-center gap-1 w-12 text-gray-500" data-view="mypage" onclick="window.navigate('mypage')">
@@ -166,547 +152,388 @@ GOLFIN Predict - GLOBAL EDITION (Multi-Language Support)
 
 <script>
     // ------------------------------------------------------------------------
-    // TRANSLATION DICTIONARY (多言語辞書)
+    // TRANSLATIONS
     // ------------------------------------------------------------------------
     const TRANSLATIONS = {
         ja: {
-            // Nav & Header
             nav_home: "ホーム",
-            nav_match: "マッチ",
-            nav_play: "プレイ",
+            nav_rank: "順位",
+            nav_vote: "投票",
             nav_shop: "ショップ",
             nav_me: "マイページ",
             header_pt: "ポイント",
-            btn_admin: "管理",
-            back: "戻る",
-            cancel: "キャンセル",
-            
-            // Home
-            next_match: "次回のマッチ",
-            btn_entry: "エントリー",
-            tab_all: "全イベント",
-            tab_near: "近隣",
-            lbl_participate: "参加受付中",
-            lbl_predict: "予想のみ",
-            
-            // Matching
-            title_rival: "ライバルを探す",
-            desc_rival: "実力の近いプレイヤーや近隣のゴルファーとマッチング。",
-            btn_skill: "実力重視",
-            btn_near: "距離重視",
-            scanning: "プレイヤーを検索中...",
-            
-            // Event Detail
-            lbl_sponsor_mission: "スポンサーミッション",
-            lbl_bonus: "動画視聴でポイント",
-            lbl_bonus_val: "2倍",
-            title_join: "選手として参加",
-            desc_join: "スコアを登録して競い合います。参加費は無料。",
-            btn_join_now: "今すぐ参加",
-            title_predict: "優勝者を予想",
-            desc_predict: "勝利するプレイヤーに投票してポイントGET。",
-            btn_submit_pred: "予想を投票する",
-            lbl_timeline: "タイムライン",
-            btn_send_gift: "ギフトを贈る",
-            
             // Shop
+            tab_items: "応援アイテム",
             tab_rewards: "景品交換",
-            tab_items: "アイテム",
-            balance: "残高",
-            btn_exchange: "交換する",
-            note_legal: "※ポイントの現金化はできません。",
-            title_items: "応援アイテム",
-            desc_items: "選手やスポンサーに贈るデジタルギフト。",
-            
-            // Create Match
-            title_create: "マッチ作成",
-            lbl_m_title: "マッチ名",
-            lbl_m_date: "開催日",
-            btn_publish: "公開する",
-            
-            // MyPage
-            hit_rate: "的中率",
-            history: "履歴",
-            hist_win: "的中",
-            hist_pending: "開催前",
-            
+            shop_item_desc: "選手やコンペ主催者を応援しよう！",
+            shop_reward_desc: "ポイントを素敵な景品と交換。",
+            btn_buy: "購入する",
+            btn_exchange: "交換申請",
+            item_rose: "応援のバラ",
+            item_beer: "お疲れビール",
+            item_trophy: "勝利のトロフィー",
+            // Rank
+            title_rank: "スタープレイヤー",
+            desc_rank: "コンペ勝利数と応援獲得数のランキング",
+            col_wins: "勝",
+            btn_support: "応援する",
+            // Event Detail
+            lbl_entry: "参加者募集中！",
+            btn_entry_form: "このコンペに参加登録する",
+            msg_host: "初参加の方も大歓迎です！一緒に楽しみましょう。",
+            title_entry_form: "コンペ参加登録",
+            lbl_name: "参加者名",
+            lbl_avg: "平均スコア",
+            lbl_msg: "主催者へのメッセージ",
+            btn_confirm_entry: "登録を送信する",
             // Misc
-            alert_exchange: "交換申請を受け付けました。",
-            alert_bought: "購入しました！",
-            alert_entry: "エントリーしました！",
+            alert_bought: "アイテムを購入しました！",
+            alert_entry: "参加登録を送信しました！主催者からの連絡をお待ちください。",
         },
         en: {
-            // Nav & Header
             nav_home: "HOME",
-            nav_match: "MATCH",
-            nav_play: "PLAY",
+            nav_rank: "RANK",
+            nav_vote: "VOTE",
             nav_shop: "SHOP",
             nav_me: "ME",
             header_pt: "POINTS",
-            btn_admin: "ADMIN",
-            back: "BACK",
-            cancel: "CANCEL",
-            
-            // Home
-            next_match: "NEXT MATCH",
-            btn_entry: "ENTRY",
-            tab_all: "ALL EVENTS",
-            tab_near: "NEARBY",
-            lbl_participate: "PARTICIPATE",
-            lbl_predict: "PREDICT ONLY",
-            
-            // Matching
-            title_rival: "RIVAL FINDER",
-            desc_rival: "Find golfers with similar skill levels for a match.",
-            btn_skill: "Skill Match",
-            btn_near: "Near Me",
-            scanning: "Scanning for players...",
-            
-            // Event Detail
-            lbl_sponsor_mission: "SPONSOR MISSION",
-            lbl_bonus: "Watch video for",
-            lbl_bonus_val: "2x Boost",
-            title_join: "JOIN AS PLAYER",
-            desc_join: "Register your score and compete. Free entry.",
-            btn_join_now: "ENTRY NOW",
-            title_predict: "PREDICT WINNER",
-            desc_predict: "Vote for the winner and earn points.",
-            btn_submit_pred: "SUBMIT PREDICTION",
-            lbl_timeline: "TIMELINE",
-            btn_send_gift: "Send Gift",
-            
             // Shop
+            tab_items: "SUPPORT ITEMS",
             tab_rewards: "REWARDS",
-            tab_items: "ITEM SHOP",
-            balance: "BALANCE",
+            shop_item_desc: "Purchase items to support players!",
+            shop_reward_desc: "Exchange points for prizes.",
+            btn_buy: "BUY",
             btn_exchange: "EXCHANGE",
-            note_legal: "*Points cannot be exchanged for cash.",
-            title_items: "SUPPORT ITEMS",
-            desc_items: "Purchase items to tip players and sponsors.",
-            
-            // Create Match
-            title_create: "CREATE MATCH",
-            lbl_m_title: "TITLE",
-            lbl_m_date: "DATE",
-            btn_publish: "PUBLISH",
-            
-            // MyPage
-            hit_rate: "HIT RATE",
-            history: "HISTORY",
-            hist_win: "Win",
-            hist_pending: "Pending",
-            
+            item_rose: "Rose",
+            item_beer: "Beer",
+            item_trophy: "Trophy",
+            // Rank
+            title_rank: "STAR PLAYERS",
+            desc_rank: "Ranking by wins and support received.",
+            col_wins: "Wins",
+            btn_support: "Support",
+            // Event Detail
+            lbl_entry: "RECRUITING PLAYERS!",
+            btn_entry_form: "JOIN THIS COMPETITION",
+            msg_host: "Newcomers welcome! Let's have fun.",
+            title_entry_form: "COMPETITION ENTRY",
+            lbl_name: "Player Name",
+            lbl_avg: "Avg Score",
+            lbl_msg: "Message to Host",
+            btn_confirm_entry: "SUBMIT ENTRY",
             // Misc
-            alert_exchange: "Request sent successfully.",
             alert_bought: "Item purchased!",
-            alert_entry: "Entry confirmed!",
+            alert_entry: "Entry submitted! Please wait for host approval.",
         }
     };
 
     // ------------------------------------------------------------------------
-    // GLOBAL STATE
+    // MOCK DATA
     // ------------------------------------------------------------------------
-    let currentLang = 'ja'; // デフォルトは日本語
+    // Events
+    const TOURNAMENTS = [
+        { 
+            id: 't1', category: 'pro', title: 'マスターズ 2025', host: 'Augusta National', date: 'NOV 25', status: 'live', 
+            img: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&w=600&q=80',
+            players: ['松山 英樹', 'S. Scheffler']
+        },
+        { 
+            id: 't2', category: 'amateur', title: 'GOLFIN 月例杯 @成田', host: 'GOLFIN運営事務局', date: 'DEC 01', status: 'soon', 
+            img: 'https://images.unsplash.com/photo-1592919505780-30395071b483?auto=format&fit=crop&w=600&q=80',
+            players: ['T. Tanaka', 'K. Suzuki'],
+            canJoin: true 
+        },
+        { 
+            id: 't3', category: 'event', title: 'ドラコン日本選手権', host: 'JPDA', date: 'DEC 05', status: 'soon', 
+            img: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=600&q=80',
+            players: ['飛ばし屋ケン', 'MAX鈴木']
+        },
+        { 
+            id: 't4', category: 'amateur', title: '第5回 企業対抗ゴルフ', host: '(株)SportsTech', date: 'DEC 15', status: 'soon', 
+            img: 'https://images.unsplash.com/photo-1560155016-015842858546?auto=format&fit=crop&w=600&q=80',
+            players: ['Team A', 'Team B'],
+            canJoin: true 
+        }
+    ];
+
+    // Shop Items
+    const SHOP_ITEMS = [
+        { id: 'i1', nameKey: 'item_rose', cost: 100, icon: '🌹', color: 'text-red-500' },
+        { id: 'i2', nameKey: 'item_beer', cost: 300, icon: '🍺', color: 'text-yellow-500' },
+        { id: 'i3', nameKey: 'item_trophy', cost: 1000, icon: '🏆', color: 'text-accent' },
+    ];
+
+    const REWARDS = [
+        { id: 'r1', name: 'Amazon Gift Card (¥1,000)', cost: 1000, img: 'https://placehold.co/100?text=AMZN' },
+        { id: 'r2', name: 'Pro V1 Balls (1 Dozen)', cost: 5000, img: 'https://placehold.co/100?text=BALLS' },
+    ];
+
+    // Ranking Data (Players)
+    const PLAYER_RANKING = [
+        { rank: 1, name: "T. Tanaka", wins: 5, gifts: 12500, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tanaka" },
+        { rank: 2, name: "Golf_Queen", wins: 4, gifts: 8900, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Queen" },
+        { rank: 3, name: "PowerHitter", wins: 4, gifts: 6200, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Power" },
+        { rank: 4, name: "S. Suzuki", wins: 3, gifts: 4500, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Suzuki" },
+        { rank: 5, name: "(株)GOLFIN", wins: 2, gifts: 12000, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Corp" },
+    ];
+
+    // ------------------------------------------------------------------------
+    // LOGIC
+    // ------------------------------------------------------------------------
+    let currentLang = 'ja';
     let currentView = 'home';
-    let currentParams = {};
-    
-    // 翻訳ヘルパー関数
+    let userPoints = 1500;
+    const container = document.getElementById('view-container');
+
     const t = (key) => TRANSLATIONS[currentLang][key] || key;
 
-    // 言語切り替え関数
     function toggleLanguage() {
         currentLang = currentLang === 'ja' ? 'en' : 'ja';
+        document.getElementById('lang-btn').innerText = currentLang === 'ja' ? 'JP' : 'EN';
         
-        // ボタンの表示更新
-        const btn = document.getElementById('lang-btn');
-        btn.innerText = currentLang === 'ja' ? 'JP' : 'EN';
-        
-        // フッターナビの更新（静的要素）
+        // Static Nav Update
         document.getElementById('nav-home').innerText = t('nav_home');
-        document.getElementById('nav-match').innerText = t('nav_match');
-        document.getElementById('nav-play').innerText = t('nav_play');
+        document.getElementById('nav-rank').innerText = t('nav_rank');
+        document.getElementById('nav-vote').innerText = t('nav_vote');
         document.getElementById('nav-shop').innerText = t('nav_shop');
         document.getElementById('nav-me').innerText = t('nav_me');
         document.getElementById('lbl-header-pt').innerText = t('header_pt');
 
-        // 現在のビューを再描画
-        window.navigate(currentView, currentParams, false);
+        window.navigate(currentView, {}, false);
     }
 
-    const currentUser = {
-        name: "Golf Lover",
-        id: "U001",
-        points: 1500,
-        handicap: 18,
-    };
-
-    // MOCK DATA
-    const TOURNAMENTS = [
-        { id: 't1', title: 'WEEKEND OPEN', host: 'Narita G.C.', date: '2025-11-25', type: 'COMPETITION' },
-        { id: 't2', title: 'PRO TOUR FINAL', host: 'Official', date: '2025-12-01', type: 'PREDICT_ONLY' },
-    ];
-    const RIVALS = [
-        { id: 'r1', name: 'T. Suzuki', handicap: 15, location: 'Tokyo', similarity: 92 },
-        { id: 'r2', name: 'M. Sato', handicap: 20, location: 'Chiba', similarity: 88 },
-    ];
-    const REWARDS = [
-        { id: 'rew1', name: 'Amazon Gift Card (¥1,000)', cost: 1000, img: 'https://placehold.co/100?text=AMZN' },
-        { id: 'rew2', name: 'Pro V1 Balls (1 Dozen)', cost: 5000, img: 'https://placehold.co/100?text=BALLS' },
-    ];
-    const ITEMS = [
-        { id: 'itm1', name: 'Rose', cost: 100, icon: '🌹', desc: 'Cheer' },
-        { id: 'itm2', name: 'Beer', cost: 300, icon: '🍺', desc: 'Nice Shot' },
-        { id: 'itm3', name: 'Trophy', cost: 1000, icon: '🏆', desc: 'Congrats' },
-    ];
-
-    // ------------------------------------------------------------------------
-    // NAVIGATION LOGIC
-    // ------------------------------------------------------------------------
-    const container = document.getElementById('view-container');
-    const headerPoints = document.getElementById('header-points');
+    function updatePoints(amount) {
+        userPoints += amount;
+        document.getElementById('header-points').innerText = userPoints.toLocaleString();
+    }
 
     window.navigate = (viewName, params = {}, scrollToTop = true) => {
         currentView = viewName;
-        currentParams = params;
-
-        // Footer Active State
         document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+        if(viewName === 'home') document.getElementById('nav-vote').parentElement.classList.add('text-primary'); 
         const activeBtn = document.querySelector(`[data-view="${viewName}"]`);
         if (activeBtn) activeBtn.classList.add('active');
 
-        // Render View
         let html = '';
-        switch(viewName) {
-            case 'home': html = renderHomeView(); break;
-            case 'event-detail': html = renderEventDetail(params.id); break;
-            case 'sponsor-page': html = renderSponsorPage(); break;
-            case 'mypage': html = renderMyPage(); break;
-            case 'matching': html = renderMatchingView(); break;
-            case 'reward-store': html = renderRewardStore(); break;
-            case 'item-store': html = renderItemStore(); break;
-            case 'create-match': html = renderCreateMatch(); break;
-            default: html = renderHomeView();
-        }
-        
+        if (viewName === 'home') html = renderHome();
+        else if (viewName === 'event-detail') html = renderEventDetail(params.id);
+        else if (viewName === 'entry-form') html = renderEntryForm(params.id);
+        else if (viewName === 'shop') html = renderShop();
+        else if (viewName === 'rank') html = renderRank();
+        else html = `<div class="text-center p-10 text-gray-500">Page: ${viewName}</div>`;
+
         container.innerHTML = html;
         if(window.lucide) window.lucide.createIcons();
         if(scrollToTop) window.scrollTo(0,0);
-        updatePointsDisplay();
     };
 
-    function updatePointsDisplay() {
-        headerPoints.innerText = currentUser.points.toLocaleString();
-    }
-
     // ------------------------------------------------------------------------
-    // VIEW FUNCTIONS (With Translations)
+    // RENDERERS
     // ------------------------------------------------------------------------
-
-    function renderHomeView() {
+    function renderHome() {
         return `
-            <div class="animate-pulse-fast mb-6">
-                <div class="bg-gradient-to-r from-primary/20 to-transparent p-4 rounded-xl border border-primary/30 flex justify-between items-center">
-                    <div>
-                        <p class="text-primary font-bold text-xs tracking-widest">${t('next_match')}</p>
-                        <p class="text-white font-bold text-lg">Saturday Cup @ Chiba</p>
-                    </div>
-                    <button class="bg-primary text-black font-bold px-4 py-2 rounded-lg text-xs hover:scale-105 transition" onclick="window.navigate('create-match')">
-                        ${t('btn_entry')}
-                    </button>
-                </div>
-            </div>
-
             <div class="mb-6">
-                <div class="flex gap-4 border-b border-white/10 pb-2 mb-4">
-                    <button class="text-sm font-bold tab-active">${t('tab_all')}</button>
-                    <button class="text-sm font-bold tab-inactive">${t('tab_near')}</button>
+                <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
+                    <button class="px-3 py-1 rounded-full bg-primary text-black text-xs font-bold border border-primary whitespace-nowrap">ALL</button>
+                    <button class="px-3 py-1 rounded-full bg-white/5 text-gray-400 text-xs font-bold border border-white/10 whitespace-nowrap">PRO TOUR</button>
+                    <button class="px-3 py-1 rounded-full bg-white/5 text-gray-400 text-xs font-bold border border-white/10 whitespace-nowrap">AMATEUR</button>
                 </div>
 
-                ${TOURNAMENTS.map(tr => `
-                    <div class="glass-panel p-4 rounded-xl mb-4 cursor-pointer hover:border-primary/50 transition relative overflow-hidden" onclick="window.navigate('event-detail', {id: '${tr.id}'})">
-                        <div class="flex justify-between items-start relative z-10">
-                            <div>
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-white/10 text-gray-300 mb-2 inline-block">
-                                    ${tr.type === 'COMPETITION' ? t('lbl_participate') : t('lbl_predict')}
-                                </span>
-                                <h3 class="text-lg font-bold text-white">${tr.title}</h3>
-                                <p class="text-xs text-gray-400"><i data-lucide="map-pin" class="inline w-3 h-3"></i> ${tr.host}</p>
+                <div class="space-y-4">
+                    ${TOURNAMENTS.map(ev => `
+                        <div class="glass-panel p-0 rounded-xl overflow-hidden cursor-pointer group hover:border-primary/50 transition" onclick="window.navigate('event-detail', {id: '${ev.id}'})">
+                            <div class="h-32 relative">
+                                <img src="${ev.img}" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent"></div>
+                                <div class="absolute top-3 right-3 flex gap-2">
+                                    <span class="px-2 py-1 rounded text-[10px] font-bold uppercase backdrop-blur-md bg-black/40 border border-white/20">${ev.category}</span>
+                                    ${ev.canJoin ? `<span class="px-2 py-1 rounded bg-accent text-black text-[10px] font-bold animate-pulse">ENTRY OPEN</span>` : ''}
+                                </div>
                             </div>
-                            <div class="text-center">
-                                <span class="block text-2xl font-display font-bold text-primary">${tr.date.split('-')[2]}</span>
-                                <span class="block text-[10px] text-gray-500 uppercase">NOV</span>
+                            <div class="p-4 -mt-6 relative z-10">
+                                <h3 class="text-lg font-bold text-white leading-tight mb-1">${ev.title}</h3>
+                                <p class="text-xs text-gray-400 mb-3"><i data-lucide="map-pin" class="inline w-3 h-3"></i> ${ev.host}</p>
+                                <div class="flex justify-between items-center border-t border-white/10 pt-3">
+                                    <span class="text-xs text-primary font-bold">VOTE NOW <i data-lucide="chevron-right" class="inline w-3 h-3"></i></span>
+                                    <span class="text-[10px] text-gray-500">${ev.date}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `).join('')}
+                    `).join('')}
+                </div>
             </div>
         `;
     }
 
-    function renderMatchingView() {
+    // New Ranking View (Support Focus)
+    function renderRank() {
         return `
-            <h2 class="text-2xl font-display font-black text-white mb-2">${t('title_rival')}</h2>
-            <p class="text-xs text-gray-400 mb-6">${t('desc_rival')}</p>
-
-            <div class="flex gap-2 mb-6 overflow-x-auto">
-                <button class="px-4 py-2 rounded-full bg-primary/20 border border-primary text-primary text-xs font-bold whitespace-nowrap">${t('btn_skill')}</button>
-                <button class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-400 text-xs font-bold whitespace-nowrap">${t('btn_near')}</button>
+            <div class="mb-6 text-center">
+                <h2 class="text-2xl font-display font-black text-white italic">${t('title_rank')}</h2>
+                <p class="text-xs text-gray-400">${t('desc_rank')}</p>
             </div>
 
-            <div class="space-y-4">
-                ${RIVALS.map(r => `
-                    <div class="glass-panel p-4 rounded-xl flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center border-2 border-primary relative">
-                                <span class="font-bold text-white">${r.name.charAt(0)}</span>
-                                <div class="absolute -bottom-1 -right-1 bg-black text-primary text-[9px] font-bold px-1 rounded border border-primary">${r.similarity}%</div>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-white text-sm">${r.name}</h3>
-                                <p class="text-xs text-gray-400">HDCP: ${r.handicap} | ${r.location}</p>
-                            </div>
+            <div class="space-y-3">
+                ${PLAYER_RANKING.map((p, i) => {
+                    let rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'bg-white/10 text-gray-400';
+                    let glow = i === 0 ? 'shadow-neon-pink' : '';
+                    return `
+                    <div class="glass-panel p-3 rounded-xl flex items-center gap-3 ${glow}">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${rankClass}">${p.rank}</div>
+                        <div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden border border-white/20">
+                            <img src="${p.avatar}" class="w-full h-full">
                         </div>
-                        <div class="flex gap-2">
-                            <button class="p-2 rounded-lg bg-white/5 hover:bg-white/10"><i data-lucide="message-square" class="w-4 h-4 text-gray-300"></i></button>
-                            <button class="p-2 rounded-lg bg-primary/20 hover:bg-primary/30 text-primary" onclick="alert('Challenge sent!')"><i data-lucide="sword" class="w-4 h-4"></i></button>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-bold text-white">${p.name}</h3>
+                            <p class="text-[10px] text-pink font-bold flex items-center"><i data-lucide="gift" class="w-3 h-3 mr-1"></i> ${p.gifts.toLocaleString()}</p>
                         </div>
+                        <div class="text-right mr-2">
+                            <p class="text-xs font-bold text-accent">${p.wins} ${t('col_wins')}</p>
+                        </div>
+                        <button class="p-2 rounded-full bg-pink/20 text-pink hover:bg-pink hover:text-white transition" onclick="alert('Sent Gift to ${p.name}!')">
+                            <i data-lucide="heart" class="w-4 h-4 fill-current"></i>
+                        </button>
                     </div>
-                `).join('')}
+                    `;
+                }).join('')}
             </div>
-            
-            <div class="mt-8 p-6 text-center border border-dashed border-gray-700 rounded-xl">
-                <i data-lucide="radar" class="w-8 h-8 text-gray-500 mx-auto mb-2"></i>
-                <p class="text-gray-500 text-xs">${t('scanning')}</p>
+        `;
+    }
+
+    // Improved Shop (Items + Rewards)
+    function renderShop() {
+        return `
+            <div class="mb-6">
+                <div class="flex gap-4 border-b border-white/10 pb-2 mb-4">
+                    <button class="text-sm font-bold tab-active" onclick="document.getElementById('shop-items').style.display='grid';document.getElementById('shop-rewards').style.display='none';this.classList.add('tab-active');this.nextElementSibling.classList.remove('tab-active');this.nextElementSibling.classList.add('tab-inactive');">${t('tab_items')}</button>
+                    <button class="text-sm font-bold tab-inactive" onclick="document.getElementById('shop-items').style.display='none';document.getElementById('shop-rewards').style.display='grid';this.classList.add('tab-active');this.previousElementSibling.classList.remove('tab-active');this.previousElementSibling.classList.add('tab-inactive');">${t('tab_rewards')}</button>
+                </div>
+
+                <!-- Support Items -->
+                <div id="shop-items" class="grid grid-cols-1 gap-3 animate-fade-in">
+                    <p class="text-xs text-gray-400 mb-2">${t('shop_item_desc')}</p>
+                    ${SHOP_ITEMS.map(i => `
+                        <div class="glass-panel p-3 rounded-xl flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="text-3xl w-12 h-12 flex items-center justify-center bg-white/5 rounded-lg border border-white/10">${i.icon}</div>
+                                <div>
+                                    <h3 class="font-bold text-white text-sm">${t(i.nameKey)}</h3>
+                                    <p class="text-xs font-bold text-primary">${i.cost} pt</p>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 rounded bg-white/10 hover:bg-primary hover:text-black border border-white/10 text-xs font-bold transition" onclick="updatePoints(-${i.cost}); alert('${t('alert_bought')}')">
+                                ${t('btn_buy')}
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <!-- Rewards (Hidden by default) -->
+                <div id="shop-rewards" class="hidden grid-cols-2 gap-3 animate-fade-in">
+                    <div class="col-span-2"><p class="text-xs text-gray-400 mb-2">${t('shop_reward_desc')}</p></div>
+                    ${REWARDS.map(r => `
+                        <div class="glass-panel p-3 rounded-xl flex flex-col h-full">
+                            <img src="${r.img}" class="w-full h-24 object-cover rounded-lg mb-3 bg-gray-800">
+                            <h3 class="text-sm font-bold text-white mb-1 leading-tight">${r.name}</h3>
+                            <div class="mt-auto pt-2">
+                                <p class="text-accent font-bold font-display mb-2">${r.cost.toLocaleString()} pt</p>
+                                <button class="w-full py-2 rounded bg-white/10 border border-white/10 text-xs font-bold hover:bg-accent hover:text-black transition">
+                                    ${t('btn_exchange')}
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
             </div>
         `;
     }
 
     function renderEventDetail(id) {
-        const tr = TOURNAMENTS.find(ev => ev.id === id) || TOURNAMENTS[0];
+        const ev = TOURNAMENTS.find(e => e.id === id) || TOURNAMENTS[0];
         
         return `
-            <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
-                <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> ${t('back')}
-            </button>
-
-            <div class="relative h-48 rounded-2xl overflow-hidden mb-6 bg-gray-800">
-                <div class="absolute inset-0 bg-black/40 flex flex-col justify-end p-5">
-                    <span class="bg-primary text-black text-[10px] font-bold px-2 py-1 rounded w-fit mb-2">${tr.type}</span>
-                    <h2 class="text-2xl font-black text-white italic leading-none">${tr.title}</h2>
-                    <p class="text-xs text-gray-300 mt-1">Sponsor: GolfGear Pro</p>
-                </div>
-            </div>
-
-            <div class="mb-6 p-4 rounded-xl bg-gradient-to-r from-blue-900/40 to-indigo-900/40 border border-blue-500/30 flex justify-between items-center cursor-pointer" onclick="window.navigate('sponsor-page')">
-                <div>
-                    <p class="text-blue-300 text-xs font-bold">${t('lbl_sponsor_mission')}</p>
-                    <p class="text-white font-bold text-sm">${t('lbl_bonus')} <span class="text-accent text-lg">${t('lbl_bonus_val')}</span></p>
-                </div>
-                <i data-lucide="play-circle" class="w-6 h-6 text-blue-400"></i>
-            </div>
-
-            <div class="glass-panel p-5 rounded-xl mb-6">
-                ${tr.type === 'COMPETITION' ? `
-                    <h3 class="text-lg font-bold text-white mb-2">${t('title_join')}</h3>
-                    <p class="text-xs text-gray-400 mb-4">${t('desc_join')}</p>
-                    <button class="btn-neon w-full py-3 rounded-lg font-bold text-sm flex justify-center items-center gap-2 mb-4" onclick="alert('${t('alert_entry')}')">
-                        <i data-lucide="user-plus" class="w-4 h-4"></i> ${t('btn_join_now')}
-                    </button>
-                    <div class="text-center text-xs text-gray-500 border-t border-white/5 pt-4 mt-2"></div>
-                ` : ''}
-                
-                <h3 class="text-lg font-bold text-white mb-2 mt-2">${t('title_predict')}</h3>
-                <p class="text-xs text-gray-400 mb-4">${t('desc_predict')}</p>
-                
-                <div class="space-y-2 mb-4">
-                    <label class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10 cursor-pointer hover:border-primary">
-                        <div class="flex items-center gap-3">
-                            <input type="radio" name="pred" class="accent-primary">
-                            <span class="text-sm font-bold">Player A</span>
-                        </div>
-                        <span class="text-primary font-mono">3.5x</span>
-                    </label>
-                    <label class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10 cursor-pointer hover:border-primary">
-                        <div class="flex items-center gap-3">
-                            <input type="radio" name="pred" class="accent-primary">
-                            <span class="text-sm font-bold">Player B</span>
-                        </div>
-                        <span class="text-primary font-mono">2.1x</span>
-                    </label>
-                </div>
-                <button class="w-full py-3 rounded-lg border border-primary text-primary font-bold text-sm hover:bg-primary hover:text-black transition" onclick="alert('${t('btn_submit_pred')}')">
-                    ${t('btn_submit_pred')}
+            <div class="animate-fade-in">
+                <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> BACK
                 </button>
-            </div>
 
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="font-bold text-white">${t('lbl_timeline')}</h3>
-                <button class="text-xs text-primary" onclick="window.navigate('item-store')">${t('btn_send_gift')}</button>
-            </div>
-            <div class="glass-panel p-4 rounded-xl">
-                <div class="flex gap-3 mb-2">
-                    <div class="w-8 h-8 rounded-full bg-gray-600"></div>
-                    <div>
-                        <p class="text-xs font-bold text-white">User123 <span class="text-gray-500 font-normal">sent 🌹</span></p>
-                        <p class="text-xs text-gray-300">Player A, good luck!</p>
+                <div class="relative h-48 rounded-2xl overflow-hidden mb-6 bg-gray-800 border border-white/10">
+                    <img src="${ev.img}" class="w-full h-full object-cover opacity-60">
+                    <div class="absolute inset-0 flex flex-col justify-end p-5 bg-gradient-to-t from-bg to-transparent">
+                        <span class="bg-primary text-black text-[10px] font-bold px-2 py-1 rounded w-fit mb-2 uppercase">${ev.category}</span>
+                        <h2 class="text-2xl font-black text-white italic leading-none">${ev.title}</h2>
+                        <p class="text-xs text-gray-300 mt-1">${ev.host}</p>
+                    </div>
+                </div>
+
+                <!-- 参加登録エリア (アマチュアのみ) -->
+                ${ev.canJoin ? `
+                <div class="bg-gradient-to-r from-purple-900/60 to-blue-900/60 border border-purple-500/50 rounded-xl p-5 mb-6 text-center">
+                    <h3 class="text-lg font-bold text-white mb-1 flex justify-center items-center gap-2">
+                        <i data-lucide="user-plus" class="w-5 h-5 text-accent"></i> ${t('lbl_entry')}
+                    </h3>
+                    <p class="text-xs text-purple-200 mb-4">${t('msg_host')}</p>
+                    <button class="w-full py-3 rounded-xl bg-accent text-black font-black font-display shadow-neon hover:scale-105 transition" onclick="window.navigate('entry-form', {id:'${ev.id}'})">
+                        ${t('btn_entry_form')}
+                    </button>
+                </div>
+                ` : ''}
+
+                <div class="glass-panel p-5 rounded-xl mb-6">
+                    <h3 class="text-lg font-bold text-white mb-4">優勝予想</h3>
+                    <div class="space-y-3">
+                        ${ev.players.map((p, i) => `
+                            <label class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10 cursor-pointer hover:border-primary transition">
+                                <div class="flex items-center gap-3">
+                                    <input type="radio" name="pred" class="accent-primary w-4 h-4">
+                                    <span class="text-sm font-bold text-white">${p}</span>
+                                </div>
+                                <span class="text-primary font-mono font-bold">x${(Math.random() * 5 + 1.5).toFixed(1)}</span>
+                            </label>
+                        `).join('')}
                     </div>
                 </div>
             </div>
         `;
     }
 
-    function renderRewardStore() {
+    // Entry Form Page
+    function renderEntryForm(id) {
+        const ev = TOURNAMENTS.find(e => e.id === id) || TOURNAMENTS[0];
         return `
-            <div class="flex gap-4 border-b border-white/10 pb-2 mb-6">
-                <button class="text-sm font-bold tab-active" onclick="window.navigate('reward-store')">${t('tab_rewards')}</button>
-                <button class="text-sm font-bold tab-inactive" onclick="window.navigate('item-store')">${t('tab_items')}</button>
-            </div>
-
-            <div class="flex justify-between items-center mb-6 px-2">
-                <h2 class="text-xl font-display font-bold text-white">${t('tab_rewards')}</h2>
-                <div class="text-right">
-                    <span class="text-[10px] text-gray-400">${t('balance')}</span>
-                    <p class="text-xl font-bold text-primary">${currentUser.points.toLocaleString()} <span class="text-xs">pt</span></p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                ${REWARDS.map(r => `
-                    <div class="glass-panel p-3 rounded-xl flex flex-col h-full">
-                        <img src="${r.img}" class="w-full h-24 object-cover rounded-lg mb-3 bg-gray-800">
-                        <h3 class="text-sm font-bold text-white mb-1 leading-tight">${r.name}</h3>
-                        <div class="mt-auto pt-2">
-                            <p class="text-accent font-bold font-display mb-2">${r.cost.toLocaleString()} pt</p>
-                            <button class="w-full py-2 rounded bg-white/10 border border-white/10 text-xs font-bold hover:bg-primary hover:text-black transition" onclick="exchangeReward('${r.name}', ${r.cost})">
-                                ${t('btn_exchange')}
-                            </button>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-            
-            <p class="mt-8 text-[10px] text-gray-600 text-center">
-                ${t('note_legal')}
-            </p>
-        `;
-    }
-
-    function renderItemStore() {
-        return `
-            <div class="flex gap-4 border-b border-white/10 pb-2 mb-6">
-                <button class="text-sm font-bold tab-inactive" onclick="window.navigate('reward-store')">${t('tab_rewards')}</button>
-                <button class="text-sm font-bold tab-active" onclick="window.navigate('item-store')">${t('tab_items')}</button>
-            </div>
-
-            <h2 class="text-xl font-display font-bold text-white mb-4">${t('title_items')}</h2>
-            <p class="text-xs text-gray-400 mb-6">${t('desc_items')}</p>
-
-            <div class="space-y-3">
-                ${ITEMS.map(i => `
-                    <div class="glass-panel p-3 rounded-xl flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <div class="text-2xl w-10 h-10 flex items-center justify-center bg-white/5 rounded-lg">${i.icon}</div>
-                            <div>
-                                <h3 class="font-bold text-white text-sm">${i.name}</h3>
-                                <p class="text-[10px] text-gray-400">${i.desc}</p>
-                            </div>
-                        </div>
-                        <button class="px-4 py-2 rounded bg-primary/20 text-primary font-bold text-xs hover:bg-primary hover:text-black transition" onclick="buyItem('${i.name}', ${i.cost})">
-                            ${i.cost} pt
-                        </button>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    }
-
-    function renderCreateMatch() {
-        return `
-            <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('home')">
-                <i data-lucide="x" class="w-4 h-4 mr-1"></i> ${t('cancel')}
+            <button class="text-gray-400 mb-4 flex items-center text-xs" onclick="window.navigate('event-detail', {id:'${id}'})">
+                <i data-lucide="x" class="w-4 h-4 mr-1"></i> キャンセル
             </button>
-            <h2 class="text-2xl font-display font-black text-white mb-6">${t('title_create')}</h2>
+            <h2 class="text-2xl font-display font-black text-white mb-2">${t('title_entry_form')}</h2>
+            <p class="text-xs text-gray-400 mb-6">${ev.title}</p>
+            
             <div class="glass-panel p-5 rounded-xl space-y-4">
                 <div>
-                    <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_m_title')}</label>
-                    <input type="text" class="input-tech w-full p-3 rounded-lg" placeholder="ex: Sunday Challenge">
+                    <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_name')}</label>
+                    <input type="text" class="input-tech w-full p-3 rounded-lg" value="Golf Lover">
                 </div>
                 <div>
-                    <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_m_date')}</label>
-                    <input type="date" class="input-tech w-full p-3 rounded-lg">
+                    <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_avg')}</label>
+                    <input type="number" class="input-tech w-full p-3 rounded-lg" value="90">
                 </div>
-                <button class="btn-neon w-full py-3 rounded-xl font-bold mt-4" onclick="alert('Match Created!'); window.navigate('home')">
-                    ${t('btn_publish')}
+                <div>
+                    <label class="text-xs text-gray-400 font-bold block mb-1">${t('lbl_msg')}</label>
+                    <textarea class="input-tech w-full p-3 rounded-lg" rows="3" placeholder="よろしくお願いします！"></textarea>
+                </div>
+                <button class="w-full py-3 rounded-xl bg-primary text-black font-bold mt-2 hover:shadow-neon transition" onclick="alert('${t('alert_entry')}'); window.navigate('event-detail', {id:'${id}'})">
+                    ${t('btn_confirm_entry')}
                 </button>
             </div>
         `;
     }
-    
-    function renderMyPage() {
-        return `
-            <div class="text-center mb-6">
-                <div class="w-24 h-24 mx-auto rounded-full border-2 border-primary p-1 mb-3">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Golfer1" class="w-full h-full rounded-full bg-gray-700">
-                </div>
-                <h2 class="text-xl font-bold text-white">${currentUser.name}</h2>
-                <p class="text-xs text-gray-400">ID: ${currentUser.id} | HDCP: ${currentUser.handicap}</p>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="glass-panel p-4 rounded-xl text-center">
-                    <p class="text-[10px] text-gray-400">${t('header_pt')}</p>
-                    <p class="text-xl font-bold text-primary">${currentUser.points.toLocaleString()}</p>
-                </div>
-                <div class="glass-panel p-4 rounded-xl text-center">
-                    <p class="text-[10px] text-gray-400">${t('hit_rate')}</p>
-                    <p class="text-xl font-bold text-accent">42%</p>
-                </div>
-            </div>
 
-            <h3 class="font-bold text-white text-sm mb-3">${t('history')}</h3>
-            <div class="space-y-2">
-                <div class="glass-panel p-3 rounded-lg flex justify-between">
-                    <span class="text-xs text-white">Prediction: Player A (${t('hist_win')})</span>
-                    <span class="text-xs text-primary">+500 pt</span>
-                </div>
-                <div class="glass-panel p-3 rounded-lg flex justify-between">
-                    <span class="text-xs text-white">Entered: Weekend Open</span>
-                    <span class="text-xs text-gray-400">${t('hist_pending')}</span>
-                </div>
-            </div>
-        `;
-    }
-    
-    // Placeholder functions
-    function renderSponsorPage() { return renderEventDetail('t1'); }
-    function exchangeReward(name, cost) {
-        if(currentUser.points >= cost) {
-            currentUser.points -= cost;
-            alert(t('alert_exchange'));
-            window.navigate('reward-store');
-        } else alert("Not enough points");
-    }
-    function buyItem(name, cost) {
-        if(currentUser.points >= cost) {
-            currentUser.points -= cost;
-            alert(t('alert_bought'));
-            updatePointsDisplay();
-        } else alert("Not enough points");
-    }
+    // Placeholder
+    function renderMyPage() { return `<div class="text-center text-white mt-10">My Page Mockup</div>`; }
 
     // Init
     document.addEventListener('DOMContentLoaded', () => {
-        // デフォルトを日本語で初期化
-        document.getElementById('nav-home').innerText = t('nav_home');
-        document.getElementById('nav-match').innerText = t('nav_match');
-        document.getElementById('nav-play').innerText = t('nav_play');
-        document.getElementById('nav-shop').innerText = t('nav_shop');
-        document.getElementById('nav-me').innerText = t('nav_me');
-        document.getElementById('lbl-header-pt').innerText = t('header_pt');
-        
         window.navigate('home');
     });
-
 </script>
 </body>
 </html>
